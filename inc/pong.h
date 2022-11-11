@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:26:11 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/11 01:03:17 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/11 09:28:11 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@
 
 # define DELAY_TO_START	2
 
-# define PONG_DATA_PATH "/mnt/nfs/homes/sloquet/Documents/truc/com"	
-// # define PONG_DATA_PATH "/home/sylvain/Documents/42Pong/data"
-// # define PONG_PHOTO_PATH "/home/sylvain/Documents/42Pong/data_photo/"
+// # define PONG_DATA_PATH "/mnt/nfs/homes/sloquet/Documents/truc/com"	
+# define PONG_DATA_PATH "/home/sylvain/Documents/truc/dcom"
+# define GDIR_BASE "/home/sylvain/Documents/truc"	
+# define GDIR_ASSETS "/home/sylvain/Documents/truc/assets"	
 
 # define PONG_STR_START	"Game will start in  s"
 # define PONG_STR_WAIT	"Waiting for an opponent"

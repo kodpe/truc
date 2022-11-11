@@ -1,6 +1,0 @@
-#!/bin/bash
-./update_makefile.sh
-make -j
-valgrind --leak-check=full ./yokai &
-sleep 1
-valgrind --leak-check=full ./yokai &

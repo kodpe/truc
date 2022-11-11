@@ -1,0 +1,9 @@
+#!/bin/bash
+rm -rf dcom
+mkdir dcom
+./update_makefile.sh
+clear
+make -j && valgrind --leak-check=full ./yokai &
+sleep 1
+make -j && valgrind --leak-check=full ./yokai &
+
