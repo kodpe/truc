@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#if 0
 #include "pong.h"
 
 void	pong_exit(t_m *m)
@@ -80,3 +81,4 @@ int	main(void)
 	pong_exit(&m);
 	return (1);
 }
+#endif

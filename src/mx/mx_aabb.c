@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/11 18:45:49 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 00:21:01 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ bool	mx_coll_xy_aabb(int x, int y, t_aabb box)
 		return (false);
 	if (y < box.origin.y || y > box.origin.y + box.lenght.y)
 		return (false);
+	return (true);
 }
 
 bool	mx_coll_pt_aabb(t_2Dpt pt, t_aabb box)

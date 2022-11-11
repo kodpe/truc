@@ -1,8 +1,9 @@
 # TODO-LIST
 
-## MVP
+### MVP
+- [ ] game checkboard
 
-## ADD-ONS
+### ADD-ONS
 - [ ] Multijoueur
 - [ ] Trouver un nom pour le jeu
 - [ ] Passer les structures mx em ptr c'est mieux

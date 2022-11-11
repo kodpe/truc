@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/11 18:11:14 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 00:27:10 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ typedef struct s_bham_line
 static void	bresenham_line(t_img *img, t_bham_line *ham, int hexcolor)
 {
 	int	error;
-	int	step;
 
-	step = 0;
 	error = ham->x_delta + ham->y_delta;
 	while (1)
 	{
@@ -70,10 +68,12 @@ void	mx_draw_line(t_img *img, t_line ln, int hexcolor)
 {
 	t_bham_line	ham;
 
-	if (mx_sc_pixel_outside_img(ln.a.x, ln.a.y, img))
+	if (mx_sc_pixel_outside_img(img, ln.a.x, ln.a.y))
 		mx_log_line("err outside img", ln);
-	if (mx_sc_pixel_outside_img(ln.b.x, ln.b.y, img))
+	if (mx_sc_pixel_outside_img(img, ln.b.x, ln.b.y))
 		mx_log_line("err outside img", ln);
+	ham.a = ln.a;
+	ham.b = ln.b;
 	if (ln.a.x < ln.b.x)
 		ham.x_slope = 1;
 	else

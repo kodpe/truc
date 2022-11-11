@@ -9,18 +9,22 @@ e_src	=	$(shell ls $(SRC_DIR)/*.c 2>/dev/null | wc -l | tr -d '\n')" sources"
 e_obj	=	$(shell ls $(OBJ_DIR)/*.o 2>/dev/null | wc -l | tr -d '\n')" objects"
 grepr	=	$(shell grep -nH --color printf $(SRC_DIR)/*.c | grep -v "ft_printf")
 grepgc	=	$(shell grep -nH --color getchar $(SRC_DIR)/*.c)
-#-auto-sources-##############510935111122#
+#-auto-sources-##############060040121122#
 SRC = $(addsuffix .c, \
-	game/game_room \
-	com/pong_com \
-	com/waiting_room \
-	com/smlx \
-	com/dir \
-	com/starting_room \
-	com/ball \
-	main \
+	mx/mx_circle \
+	mx/mx__log \
+	mx/_mx_maintest \
+	mx/mx_aabb \
+	mx/mx_pt \
+	mx/_mx_template \
+	mx/mx_mlx_ptr \
+	mx/mx_window \
+	mx/mx_image \
+	mx/mx_line \
+	mx/mx_vec \
+	mx/mx_draw_pixel \
 	)
-#-auto-sources-##############510935111122#
+#-auto-sources-##############060040121122#
 
 INC_DIR	=	inc
 SRC_DIR	=	src

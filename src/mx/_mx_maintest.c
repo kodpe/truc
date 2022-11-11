@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mx_mlx_ptr.c                                       :+:      :+:    :+:   */
+/*   _mx_maintest.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 19:29:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/11 23:38:59 by sloquet          ###   ########.fr       */
+/*   Created: 2022/11/11 23:03:15 by sloquet           #+#    #+#             */
+/*   Updated: 2022/11/12 00:40:04 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mx.h"
 
-#undef MX_NAME
-#define MX_NAME "mx_init_mlx()"
-
-int	mx_init_mlx(void *mlx_ptr)
+typedef struct s_mxtest
 {
-	mlx_ptr = mlx_init();
-	if (!mlx_ptr)
-		return (1);
-	mx_log_ptr(MX_NAME, mlx_ptr);
-	return (0);
-}
+	void	*mlx_ptr;
+}	t_mx_test;
 
-#undef MX_NAME
-#define MX_NAME "mx_end_mlx()"
-
-void	mx_end_mlx(void *mlx_ptr)
+#if 1
+int	main(void)
 {
-	mx_log_ptr(MX_NAME, mlx_ptr);
-	free(mlx_ptr);
-	mlx_ptr = NULL;
+	t_mx_test	m;
+
+	LOG
+
+	m.mlx_ptr = mlx_init();
+	assert(m.mlx_ptr);
+	free(m.mlx_ptr);
+	// mx_end_mlx(&m.mlx_ptr);
 }
+#endif
