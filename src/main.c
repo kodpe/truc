@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:50:42 by chsimon           #+#    #+#             */
-/*   Updated: 2022/11/06 13:3 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/06 13:3 by sloquet          ###   ########.fr       	  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,17 @@ void	game_init_specs(t_m *m)
 	m->box.persistance_time = 50;
 	m->box.border = 20;
 
+	m->box2.color = WHITE;
+
 	m->g_max.x = SMLX_WIN_SIZE_X;
 	m->g_max.y = SMLX_WIN_SIZE_Y;
 	m->g_center.x = m->g_max.x / 2;
 	m->g_center.y = m->g_max.y / 2;
 
-	m->ball.color = WHITE;
-	m->ball.x = m->g_center.x;
-	m->ball.y = m->g_center.y;
-	if (rand() % 2)
-		m->ball.y_pad = 0.5;
-	else
-		m->ball.y_pad = -0.5;
-	m->ball.x_pad = 0;
-
-	m->g_racket_size = 100;
-	m->g_racket_pad = 10;
-	m->g_racket_color = WHITE;
-
-	m->r1.x_size = m->g_racket_size;
-	m->r1.x_pad = m->g_racket_pad;
-	m->r1.color = m->g_racket_color;
-	m->r1.x = m->g_center.x - (m->r1.x_size / 2);
-	m->r1.y = m->box.border + 20;
-
-	m->r2.x_size = m->g_racket_size;
-	m->r2.x_pad = m->g_racket_pad;
-	m->r2.color = m->g_racket_color;
-	m->r2.x = m->g_center.x - (m->r2.x_size / 2);
-	m->r2.y = m->g_max.y - (m->box.border + 20);
+	m->gm_origin.x = 200;
+	m->gm_origin.y = 100;
+	m->gm_lenght.x = 800;
+	m->gm_lenght.y = 800;
 }
 
 void	log_data(t_m *m)
@@ -88,6 +70,7 @@ int	main(void)
 	ft_memset(&m, 0, sizeof(t_m));
 	srand(time(&m.t));
 	game_init_specs(&m);
+
 	if (server_exist())
 		create_client(&m);
 	else

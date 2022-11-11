@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 02:06:56 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/06 18:17:43 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/11 01:32:40 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define SMLX_WIN_SIZE_X 500
-# define SMLX_WIN_SIZE_Y 500
-# define SMLX_WIN_NAME "42Pong"
+# define SMLX_WIN_SIZE_X 1920
+# define SMLX_WIN_SIZE_Y 1080
+// # define SMLX_WIN_SIZE_X 1400
+// # define SMLX_WIN_SIZE_Y 1200
+# define SMLX_WIN_NAME "Yama-Uba"
 
 typedef struct s_2Dpnt
 {
@@ -73,5 +75,10 @@ void	smlx_box_img(t_img *img, t_2Dpnt origin, int hexcolor);
 void	smlx_box_max(t_img *img, t_2Dpnt origin, t_2Dpnt max, int hexcolor);
 void	smlx_box_len(t_img *img, t_2Dpnt origin, t_2Dpnt len, int hexcolor);
 void	smlx_hline(t_img *img, t_2Dpnt origin, int len, int hexcolor);
+void	smlx_vline(t_img *img, t_2Dpnt origin, int len, int hexcolor);
+void	smlx_screen_filler(t_img *img, int hexcolor);
+void	smlx_grid(t_img *img, t_2Dpnt origin, t_2Dpnt len, t_2Dpnt nbcases, int hexcolor);
+void	smlx_circle_center(t_img *img, t_2Dpnt center , int radius, int hexcolor);
+void	smlx_circle_topleft(t_img *img, t_2Dpnt origin , int radius, int hexcolor);
 
 #endif

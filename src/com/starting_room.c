@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 12:33:21 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/06 15:03:39 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/10 23:53:43 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	display_starting_room(t_m *m)
 static int	loop_chrono_st(t_m *m)
 {
 	if (m->starting_delay == 0)
-		m->starting_delay = 10 * 5;
+		m->starting_delay = DELAY_TO_START * 5;
 	usleep(200000);
 	if (smlx_reset_image(&m->mlx, 0))
 		pong_exit(m);

@@ -6,12 +6,13 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 15:41:55 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/06 19:42:19 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/11 00:05:38 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pong.h"
 
+#if 0
 static double	get_ball_angle(void)
 {
 	double	v;
@@ -70,6 +71,7 @@ static void	ball_collision_rackets(t_m *m)
 		b->x_pad = get_ball_angle();
 	}
 }
+#endif
 
 static void	sc_check_outwindow(t_m *m)
 {
@@ -108,15 +110,15 @@ void	update_ball(t_m *m)
 {
 	if (m->server)
 	{
-		ball_collision_box(m);
-		ball_collision_rackets(m);
+		// ball_collision_box(m);
+		// ball_collision_rackets(m);
 		m->ball.x += m->ball.x_pad;
 		m->ball.y += m->ball.y_pad;
 
 		int	bxy = m->ball.x * 10000 + m->ball.y;
 		char	*s = ft_itoa(bxy);
 		char	*msg = ft_strjoin("b ", s);
-		send(m, msg);
+		// send(m, msg);
 		free(s);
 		free(msg);
 	}

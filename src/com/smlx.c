@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 02:39:42 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/06 18:17:37 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/11 01:32:25 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,5 +244,121 @@ void	smlx_hline(t_img *img, t_2Dpnt origin, int len, int hexcolor)
 	{
 		smlx_pixel(img, origin.x + i, origin.y, hexcolor);
 		i++;
+	}
+}
+
+void	smlx_vline(t_img *img, t_2Dpnt origin, int len, int hexcolor)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		smlx_pixel(img, origin.x, origin.y + i, hexcolor);
+		i++;
+	}
+}
+
+void	smlx_screen_filler(t_img *img, int hexcolor)
+{
+	for (int y = 0; y < img->height; y++)
+		for (int x = 0; x < img->width; x++)
+			smlx_pixel(img, x, y, hexcolor);
+}
+
+void	smlx_grid(t_img *img, t_2Dpnt origin, t_2Dpnt len, t_2Dpnt nbcases, int hexcolor)
+{
+	t_2Dpnt	ln_origin;
+
+	for (int i = 0; i <= nbcases.y; i++)
+	{
+		ln_origin.x = origin.x;
+		ln_origin.y = origin.y + len.y / nbcases.y * i;
+		smlx_hline(img, ln_origin, len.x, hexcolor);
+	}
+	for (int i = 0; i <= nbcases.x; i++)
+	{
+		ln_origin.x = origin.x + len.x / nbcases.x * i;
+		ln_origin.y = origin.y;
+		smlx_vline(img, ln_origin, len.y, hexcolor);
+	}
+}
+void	smlx_circle_center(t_img *img, t_2Dpnt center , int radius, int hexcolor)
+{
+	int		x;
+	int		y;
+	int		d;
+
+	x = 0;
+	y = radius;
+	d = radius - 1;
+	while (y >= x)
+	{
+		smlx_pixel(img, center.x + x, center.y + y, hexcolor);
+		smlx_pixel(img, center.x + y, center.y + x, hexcolor);
+		smlx_pixel(img, center.x - x, center.y + y, hexcolor);
+		smlx_pixel(img, center.x - y, center.y + x, hexcolor);
+		smlx_pixel(img, center.x + x, center.y - y, hexcolor);
+		smlx_pixel(img, center.x + y, center.y - x, hexcolor);
+		smlx_pixel(img, center.x - x, center.y - y, hexcolor);
+		smlx_pixel(img, center.x - y, center.y - x, hexcolor);
+		if (d >= 2 * x)
+		{
+			d = d - 2 * x - 1;
+			x++;
+		}
+		else if (d < 2 * (radius - y))
+		{
+			d = d + 2 * y - 1;
+			y--;
+		}
+		else
+		{
+			d = d + 2 * (y - x - 1);
+			y--;
+			x++;
+		}
+	}
+}
+
+
+void	smlx_circle_topleft(t_img *img, t_2Dpnt origin , int radius, int hexcolor)
+{
+	t_2Dpnt	center;
+	int		x;
+	int		y;
+	int		d;
+
+	center.x = origin.x + radius;
+	center.y = origin.y + radius;
+	x = 0;
+	y = radius;
+	d = radius - 1;
+	while (y >= x)
+	{
+		smlx_pixel(img, center.x + x, center.y + y, hexcolor);
+		smlx_pixel(img, center.x + y, center.y + x, hexcolor);
+		smlx_pixel(img, center.x - x, center.y + y, hexcolor);
+		smlx_pixel(img, center.x - y, center.y + x, hexcolor);
+		smlx_pixel(img, center.x + x, center.y - y, hexcolor);
+		smlx_pixel(img, center.x + y, center.y - x, hexcolor);
+		smlx_pixel(img, center.x - x, center.y - y, hexcolor);
+		smlx_pixel(img, center.x - y, center.y - x, hexcolor);
+		if (d >= 2 * x)
+		{
+			d = d - 2 * x - 1;
+			x++;
+		}
+		else if (d < 2 * (radius - y))
+		{
+			d = d + 2 * y - 1;
+			y--;
+		}
+		else
+		{
+			d = d + 2 * (y - x - 1);
+			y--;
+			x++;
+		}
 	}
 }
