@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 19:05:27 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, t_uint hexcolor)
 			gap.x++;
 		}
 	}
+}
+
+void	mx_grid_circle(t_img *img, t_ccl cl, t_2Dvec nb_tiles, t_uint hexcolor)
+{
+	t_2Dpt	topleft = mx_pt(cl.center.x - cl.radius, cl.center.y - cl.radius);
+
+	mx_draw_aabb(img, mx_aabb(topleft, mx_vec(cl.radius * 2, cl.radius * 2)), WHITE);
+
+	mx_draw_cl(img, cl, LIME);
+
+	(void)nb_tiles;
+	(void)hexcolor;
 }
 
 t_ccl	mx_circle(t_2Dpt center, int radius)
@@ -106,7 +118,7 @@ void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor)
 		c_reset();
 		return ;
 	}
-	i = 1;
+	i = 0;
 	while (i <= radius)
 	{
 		mx_draw_circle(img, center, i, hexcolor);

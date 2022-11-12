@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 05:07:15 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 17:04:38 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	mx_log_circle(const char *msg, t_ccl cl)
 	fprintf(stderr, "\n");
 	fprintf(stderr, "%s:circle: center [%i],[%i] radius [%i]\n", \
 					msg, cl.center.x, cl.center.y, cl.radius);
+}
+
+void	mx_log_triangle(const char *msg, t_tri tr)
+{
+	fprintf(stderr, "\n");
+	fprintf(stderr, "%s:triangle:[%i],[%i] [%i],[%i] [%i],[%i]\n", \
+		msg, tr.a.x, tr.a.y, tr.b.x, tr.b.y, tr.c.x, tr.c.y);
 }
 
 void	mx_log_aabb(const char *msg, t_aabb box)

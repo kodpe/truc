@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 08:00:11 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 18:08:40 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	hook_mouse_move(int x, int y, t_test *m)
 }
 int	hook_frame(t_test *m)
 {
-	// sleep(1);
+	sleep(0.1);
 	return (0);
 	(void)m;
 }

@@ -2,11 +2,15 @@
 
 ### MVP
 - [ ] game checkboard
-- [ ] basic events
+- [x] basic events
 - [ ] charger les xpm
-- [ ] position mouse
-- [ ] event mouse
-- [ ] event Keyboard
+- [x] position mouse
+- [x] event mouse
+- [x] event Keyboard
+- [x] triangle struct
+- [x] point - triangle intersection
+- [x] square grid
+- [ ] circular grid
 
 
 ### ADD-ONS

@@ -18,6 +18,7 @@
 # include "mx_color.h"
 # include <stdbool.h>
 # include <assert.h>
+# include <math.h>
 
 # define LOG		c_magenta();\
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
@@ -48,6 +49,13 @@ typedef struct s_ccl
 	t_2Dpt	center;
 	int		radius;
 }	t_ccl;
+
+typedef struct s_tri
+{
+	t_2Dpt	a;
+	t_2Dpt	b;
+	t_2Dpt	c;
+}	t_tri;
 
 typedef struct s_aabb
 {
@@ -150,12 +158,21 @@ bool	mx_coll_xy_ccl(int x, int y, t_ccl cl);
 bool	mx_coll_pt_ccl(t_2Dpt pt, t_ccl cl);
 bool	mx_coll_ccl(t_ccl cc1, t_ccl cc2);
 bool	mx_ccl_in_ccl(t_ccl cc1, t_ccl cc2);
+void	mx_grid_circle(t_img *img, t_ccl cl, t_2Dvec nb_tiles, t_uint hexcolor);
+
+/* TRIANGLE */
+t_tri	mx_triangle(t_2Dpt a, t_2Dpt b, t_2Dpt c);
+void	mx_log_triangle(const char *msg, t_tri tr);
+void	mx_draw_triangle(t_img *img, t_tri tr, t_uint hexcolor);
+bool	mx_coll_pt_triangle(t_2Dpt pt, t_tri tr);
+bool	mx_coll_xy_triangle(int x, int y, t_tri tr);
 
 /* AABB AXIS ALIGNED BOUNDING BOX */
 t_aabb	mx_aabb(t_2Dpt origin, t_2Dvec lenght);
 void	mx_log_aabb(const char *msg, t_aabb box);
 void	mx_draw_aabb(t_img *img, t_aabb box, t_uint hexcolor);
 void	mx_fill_aabb(t_img *img, t_aabb box, t_uint hexcolor);
+void	mx_grid_aabb(t_img *img, t_aabb box, t_2Dvec nb_tiles, t_uint hexcolor);
 bool	mx_coll_xy_aabb(int x, int y, t_aabb box);
 bool	mx_coll_pt_aabb(t_2Dpt pt, t_aabb box);
 bool	mx_coll_aabb(t_aabb box1, t_aabb box2);

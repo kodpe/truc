@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 18:50:46 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,37 @@ void	mx_fill_aabb(t_img *img, t_aabb box, t_uint hexcolor)
 	{
 		mx_draw_line(img, mx_line(mx_pt(ori.x, y), mx_pt(max.x, y)), hexcolor);
 		y++;
+	}
+}
+
+void	mx_grid_aabb(t_img *img, t_aabb box, t_2Dvec nb_tiles, t_uint hexcolor)
+{
+	t_2Dpt	a;
+	t_2Dpt	b;
+	int		i;
+
+	if (false == mx_aabb_in_aabb(box, img->box_rel))
+	{
+		c_red();
+		mx_log_aabb("mx_grid_aabb() err outside img", box);
+		c_reset();
+		return ;
+	}
+	i = 1;
+	while (i < nb_tiles.x)
+	{
+		a = mx_pt(box.origin.x + i * box.lenght.x / nb_tiles.x, box.origin.y);
+		b = mx_pt(a.x, box.origin.y + box.lenght.y);
+		mx_draw_line(img, mx_line(a, b), hexcolor);
+		i++;
+	}
+	i = 1;
+	while (i < nb_tiles.y)
+	{
+		a = mx_pt(box.origin.x, box.origin.y + i * box.lenght.y / nb_tiles.y);
+		b = mx_pt(box.origin.x + box.lenght.x, a.y);
+		mx_draw_line(img, mx_line(a, b), hexcolor);
+		i++;
 	}
 }
 
