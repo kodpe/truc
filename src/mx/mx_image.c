@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:15:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 05:08:47 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	mx_draw_img(t_img *img)
 #undef MX_NAME
 #define MX_NAME "mx_fill_img()"
 
-void	mx_fill_img(t_img *img, int hexcolor)
+void	mx_fill_img(t_img *img, t_uint hexcolor)
 {
 	mx_log_img(MX_NAME, img);
 	mx_fill_aabb(img, img->box_rel, hexcolor);

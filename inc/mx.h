@@ -23,6 +23,8 @@
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
 					c_reset();
 
+typedef unsigned int	t_uint;
+
 typedef struct s_2Dpt
 {
 	int	x;
@@ -97,11 +99,11 @@ void	mx_destroy_img(t_img *img);
 void	mx_move_xy_img(t_img *img, int x, int y);
 void	mx_move_pt_img(t_img *img, t_2Dpt new_origin);
 void	mx_draw_img(t_img *img);
-void	mx_fill_img(t_img *img, int hexcolor);
+void	mx_fill_img(t_img *img, t_uint hexcolor);
 
 /* PIXEL */
 bool	mx_sc_pixel_outside_img(t_img *img, int x, int y);
-void	mx_draw_pixel(t_img *img, int x, int y, int hex_color);
+void	mx_draw_pixel(t_img *img, int x, int y, t_uint hexcolor);
 
 /* 	LOG */
 void	mx_log_msg(const char *msg);
@@ -117,7 +119,7 @@ void	mx_log_win(const char *msg, t_win *win);
 /* POINT */
 t_2Dpt	mx_pt(int x, int y);
 void	mx_log_pt(const char *msg, t_2Dpt pt);
-void	mx_draw_pt(t_img *img, t_2Dpt pt, int hexcolor);
+void	mx_draw_pt(t_img *img, t_2Dpt pt, t_uint hexcolor);
 bool	mx_same_pt(t_2Dpt pt_a, t_2Dpt pt_b);
 
 /* VECTOR */
@@ -134,16 +136,16 @@ bool	mx_same_vec(t_2Dvec vec_a, t_2Dvec vec_b);
 /* LINE */
 t_line	mx_line(t_2Dpt pt_a, t_2Dpt pt_b);
 void	mx_log_line(const char *msg, t_line ln);
-void	mx_draw_line(t_img *img, t_line ln, int hexcolor);
+void	mx_draw_line(t_img *img, t_line ln, t_uint hexcolor);
 bool	mx_same_line(t_line ln_k, t_line ln_q);
 
 /* CIRCLE */
 t_ccl	mx_circle(t_2Dpt center, int radius);
 void	mx_log_circle(const char *msg, t_ccl cl);
-void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, int hexcolor);
-void	mx_draw_cl(t_img *img, t_ccl cl, int hexcolor);
-void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor);
-void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor);
+void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, t_uint hexcolor);
+void	mx_draw_cl(t_img *img, t_ccl cl, t_uint hexcolor);
+void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor);
+void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor);
 bool	mx_coll_xy_ccl(int x, int y, t_ccl cl);
 bool	mx_coll_pt_ccl(t_2Dpt pt, t_ccl cl);
 bool	mx_coll_ccl(t_ccl cc1, t_ccl cc2);
@@ -152,8 +154,8 @@ bool	mx_ccl_in_ccl(t_ccl cc1, t_ccl cc2);
 /* AABB AXIS ALIGNED BOUNDING BOX */
 t_aabb	mx_aabb(t_2Dpt origin, t_2Dvec lenght);
 void	mx_log_aabb(const char *msg, t_aabb box);
-void	mx_draw_aabb(t_img *img, t_aabb box, int hexcolor);
-void	mx_fill_aabb(t_img *img, t_aabb box, int hexcolor);
+void	mx_draw_aabb(t_img *img, t_aabb box, t_uint hexcolor);
+void	mx_fill_aabb(t_img *img, t_aabb box, t_uint hexcolor);
 bool	mx_coll_xy_aabb(int x, int y, t_aabb box);
 bool	mx_coll_pt_aabb(t_2Dpt pt, t_aabb box);
 bool	mx_coll_aabb(t_aabb box1, t_aabb box2);

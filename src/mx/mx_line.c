@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 03:56:30 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_bham_line
 	int		len;
 }		t_bham_line;
 
-static void	bresenham_line(t_img *img, t_bham_line *ham, int hexcolor)
+static void	bresenham_line(t_img *img, t_bham_line *ham, t_uint hexcolor)
 {
 	int	error;
 
@@ -64,7 +64,7 @@ bool	mx_same_line(t_line ln_k, t_line ln_q)
 	return (mx_same_pt(ln_k.a, ln_q.a) && mx_same_pt(ln_k.b, ln_q.b));
 }
 
-void	mx_draw_line(t_img *img, t_line ln, int hexcolor)
+void	mx_draw_line(t_img *img, t_line ln, t_uint hexcolor)
 {
 	t_bham_line	ham;
 

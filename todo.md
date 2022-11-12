@@ -4,6 +4,10 @@
 - [ ] game checkboard
 - [ ] basic events
 - [ ] charger les xpm
+- [ ] position mouse
+- [ ] event mouse
+- [ ] event Keyboard
+
 
 ### ADD-ONS
 - [ ] Multijoueur

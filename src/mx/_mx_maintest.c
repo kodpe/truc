@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 23:03:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 07:05:43 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 08:05:06 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,9 @@ int	main(void)
 	mx_draw_circle_topleft(&all.img, mx_pt(0, 0), 200, LIME);
 	mx_draw_circle_topleft(&all.img, mx_pt(0, 100), 70, RED);
 	mx_fill_circle_topleft(&all.img, mx_pt(0, 100), 70, BLUE_VIOLET);
+	mx_fill_circle_topleft(&all.img, mx_pt(0, 100), 70, 0x0100FF00);
+	mx_fill_circle_topleft(&all.img, mx_pt(100, 100), 70, 0xEF00FF00);
+	mx_fill_circle_topleft(&all.img, mx_pt(200, 100), 70, 0xAA00FF00);
 	mx_draw_img(&all.img);
 
 	main_loop(&all);

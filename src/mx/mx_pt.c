@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/11 15:04:28 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_2Dpt	mx_pt(int x, int y)
 	return (pt);
 }
 
-void	mx_draw_pt(t_img *img, t_2Dpt pt, int hexcolor)
+void	mx_draw_pt(t_img *img, t_2Dpt pt, t_uint hexcolor)
 {
 	mx_draw_pixel(img, pt.x, pt.y, hexcolor);
 }

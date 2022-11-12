@@ -6,13 +6,13 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 05:54:12 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mx.h"
 
-static void	mx_cl_pixel(t_img *img, t_2Dpt center, t_2Dvec	gap, int hexcolor)
+static void	mx_cl_pixel(t_img *img, t_2Dpt center, t_2Dvec	gap, t_uint hexcolor)
 {
 	mx_draw_pixel(img, center.x + gap.x, center.y + gap.y, hexcolor);
 	mx_draw_pixel(img, center.x + gap.y, center.y + gap.x, hexcolor);
@@ -24,7 +24,7 @@ static void	mx_cl_pixel(t_img *img, t_2Dpt center, t_2Dvec	gap, int hexcolor)
 	mx_draw_pixel(img, center.x - gap.y, center.y - gap.x, hexcolor);
 }
 
-void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, int hexcolor)
+void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, t_uint hexcolor)
 {
 	t_2Dvec	gap;
 	int		d;
@@ -62,7 +62,7 @@ t_ccl	mx_circle(t_2Dpt center, int radius)
 	return (new_cl);
 }
 
-void	mx_draw_cl(t_img *img, t_ccl cl, int hexcolor)
+void	mx_draw_cl(t_img *img, t_ccl cl, t_uint hexcolor)
 {
 	if (false == mx_ccl_in_aabb(cl, img->box_rel))
 	{
@@ -74,7 +74,7 @@ void	mx_draw_cl(t_img *img, t_ccl cl, int hexcolor)
 	mx_draw_circle(img, cl.center, cl.radius, hexcolor);
 }
 
-void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor)
+void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor)
 {
 	t_2Dpt	center;
 
@@ -91,7 +91,7 @@ void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor)
 	mx_draw_circle(img, center, radius, hexcolor);
 }
 
-void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor)
+void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor)
 {
 	t_2Dpt	center;
 	int		i;

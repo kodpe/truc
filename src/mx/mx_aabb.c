@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 05:02:04 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_aabb	mx_aabb(t_2Dpt origin, t_2Dvec lenght)
 	return (box);
 }
 
-void	mx_draw_aabb(t_img *img, t_aabb box, int hexcolor)
+void	mx_draw_aabb(t_img *img, t_aabb box, t_uint hexcolor)
 {
 	t_2Dpt	max;
 	t_2Dpt	ori;
@@ -41,7 +41,7 @@ void	mx_draw_aabb(t_img *img, t_aabb box, int hexcolor)
 	mx_draw_line(img, mx_line(max, mx_pt(ori.x, max.y)), hexcolor);
 }
 
-void	mx_fill_aabb(t_img *img, t_aabb box, int hexcolor)
+void	mx_fill_aabb(t_img *img, t_aabb box, t_uint hexcolor)
 {
 	t_2Dpt	max;
 	t_2Dpt	ori;

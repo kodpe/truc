@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:50:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 04:16:12 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 08:22:06 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,14 @@ bool	mx_sc_pixel_outside_img(t_img *img, int x, int y)
 	return (true);
 }
 
-void	mx_draw_pixel(t_img *img, int x, int y, int hex_color)
+void	mx_draw_pixel(t_img *img, int x, int y, t_uint hexcolor)
 {
-	char			*dest;
-	int				offset;
-	unsigned int	color;
+	char	*dest;
+	int		offset;
 
 	if (mx_sc_pixel_outside_img(img, x, y))
 		abort();
-	color = hex_color;
 	offset = y * img->size_line + x * (img->bits_per_pixel / 8);
 	dest = img->addr + offset;
-	*(unsigned int *)dest = color;
+	*(t_uint *)dest = hexcolor;
 }
