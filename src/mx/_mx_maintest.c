@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 23:03:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 19:07:41 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 21:11:47 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 #ifdef MX_TEST
 
-// # define MX_TEST_1
-// # define MX_TEST_2
-// # define MX_TEST_3
-// # define MX_TEST_4
-// # define MX_TEST_5
-// # define MX_TEST_6
-// # define MX_TEST_7
-// # define MX_TEST_8
+# define MX_TEST_1
+# define MX_TEST_2
+# define MX_TEST_3
+# define MX_TEST_4
+# define MX_TEST_5
+# define MX_TEST_6
+# define MX_TEST_7
+# define MX_TEST_8
 # define MX_TEST_9
 # define MX_TEST_10
 # define MX_TEST_11
@@ -296,21 +296,19 @@ int	main(void)
 # ifdef MX_TEST_11
 /* CIRCLE GRID */
 	all.mlx_ptr = mx_init_mlx();
-	all.win = mx_init_win(all.mlx_ptr, 500, 500);
+	all.win = mx_init_win(all.mlx_ptr, 1200, 1200);
 	if (mx_create_win(&all.win, "mx test"))
 		abort();
-	all.img = mx_init_img(all.mlx_ptr, &all.win, mx_pt(0, 0), mx_vec(500, 500));
+	all.img = mx_init_img(all.mlx_ptr, &all.win, mx_pt(0, 0), mx_vec(1200, 1200));
 	if (mx_create_img(&all.img, "mx image"))
 		abort();
-	mx_draw_aabb(&all.img, mx_aabb(mx_pt(10, 10), mx_vec(480, 480)), LIME);
+	// mx_draw_aabb(&all.img, mx_aabb(mx_pt(10, 10), mx_vec(480, 480)), LIME);
 
-	mx_draw_aabb(&all.img, mx_aabb(mx_pt(40, 40), mx_vec(320, 320)), BLUE);
+	// mx_draw_aabb(&all.img, mx_aabb(mx_pt(40, 40), mx_vec(320, 320)), BLUE);
 
-	mx_grid_aabb(&all.img, mx_aabb(mx_pt(50, 50), mx_vec(400, 400)), \
-		mx_vec(2, 2), LIME);
 
-	t_ccl	cl = mx_circle(mx_pt(100, 100), 50);
-	mx_grid_circle(&all.img, cl, mx_vec(2, 2), CYAN);
+	t_ccl	cl = mx_circle(mx_pt(600, 600), 300);
+	mx_grid_circle(&all.img, cl, mx_vec(2, 4), GREEN);
 
 	mx_draw_img(&all.img);
 

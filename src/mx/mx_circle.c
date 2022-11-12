@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 19:05:27 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 20:08:07by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,69 @@ void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, t_uint hexcolor)
 
 void	mx_grid_circle(t_img *img, t_ccl cl, t_2Dvec nb_tiles, t_uint hexcolor)
 {
-	t_2Dpt	topleft = mx_pt(cl.center.x - cl.radius, cl.center.y - cl.radius);
+	int		boxlen = cl.radius * 1.42;
 
-	mx_draw_aabb(img, mx_aabb(topleft, mx_vec(cl.radius * 2, cl.radius * 2)), WHITE);
+	t_2Dpt	topleft = mx_pt(cl.center.x - boxlen, cl.center.y - boxlen);
+
+	mx_draw_aabb(img, mx_aabb(topleft, mx_vec(boxlen * 2, boxlen * 2)), DARK_GRAY);
+	mx_grid_aabb(img, mx_aabb(topleft, mx_vec(boxlen * 2, boxlen * 2)), mx_vec(2, 2), DARK_GRAY);
 
 	mx_draw_cl(img, cl, LIME);
+	//tmp
+	t_aabb	box = mx_aabb(mx_pt(cl.center.x, cl.center.y - boxlen), mx_vec(boxlen, boxlen));
 
-	(void)nb_tiles;
-	(void)hexcolor;
+	mx_draw_line(img, mx_line(mx_pt(box.origin.x, box.origin.y + box.lenght.y), \
+		mx_pt(box.origin.x + box.lenght.x, box.origin.y)), DARK_GRAY);
+	mx_draw_line(img, mx_line(box.origin, mx_pt_add_vec(box.origin, box.lenght)), WHITE);
+
+	int	i;
+
+	i = 1;
+	while (i < nb_tiles.y)
+	{
+		mx_draw_circle(img, cl.center, i * cl.radius / nb_tiles.y, hexcolor);
+		i++;
+	}
+
+	int		gap = boxlen * 2 / nb_tiles.x;
+	t_2Dpt	pos = mx_pt(cl.center.x, cl.center.y - boxlen);
+
+	i = 1;
+	while (i < nb_tiles.x)
+	{
+		if (pos.x + gap <= cl.center.x + boxlen)
+			pos.x += gap;
+		else
+		{
+			pos.x = cl.center.x + boxlen;
+			// pos.y = i * gap - gap;
+		}
+		// mx_draw_line(img, mx_line(cl.center, pos), CYAN);
+		i++;
+	}
+
+	int	trlen = cl.radius * 1.42;
+
+	gap = trlen * 1.42 / nb_tiles.x;
+
+	t_tri	tr = mx_triangle(cl.center, \
+		mx_pt(cl.center.x, cl.center.y - trlen), mx_pt(cl.center.x + trlen, cl.center.y));
+	mx_draw_triangle(img, tr, DARK_GRAY);
+
+	mx_draw_line(img, mx_line(mx_pt(800, 175), mx_pt(800 + gap, 175 + gap)), RED);
+
+	i = 1;
+	pos = tr.b;
+	while (pos.y <= cl.center.y)
+	{
+		if (i % gap == 0)
+			mx_draw_line(img, mx_line(cl.center, pos), CYAN);
+		mx_draw_pt(img, pos, RED);
+		pos.x++;
+		pos.y++;
+		i++;
+	}
+
 }
 
 t_ccl	mx_circle(t_2Dpt center, int radius)
