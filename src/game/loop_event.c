@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 07:16:20 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 07:32:14 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,13 @@ int	hook_mouse_move(int button, int x, int y, t_test *m)
 {
 	t_2Dpt	mouse;
 
-	if (mlx_mouse_get_pos(m->mlx_ptr, m->win.ptr, &mouse.x, &mouse.y))
-		return (0);
+	mouse.x = 0;
+	mouse.y = 0;
+	// if (mlx_mouse_get_pos(m->mlx_ptr, m->win.ptr, &mouse.x, &mouse.y))
+		// return (0);
 	fprintf(stderr, "mouse [%i, %i]\n", mouse.x, mouse.y);
+	// mlx_mouse_move()
+	// fprintf(stderr, "mouse [%i, %i]\n", x, y);
 	return (0);
 	(void)m;
 	(void)button;
@@ -74,7 +78,7 @@ int	hook_mouse_move(int button, int x, int y, t_test *m)
 }
 int	hook_frame(t_test *m)
 {
-	sleep(1);
+	// sleep(1);
 	return (0);
 	(void)m;
 }
@@ -82,7 +86,7 @@ int	hook_frame(t_test *m)
 #if 1
 void	main_loop(t_test *m)
 {
-	// mlx_loop_hook(m->mlx_ptr, &hook_frame, m);
+	mlx_loop_hook(m->mlx_ptr, &hook_frame, m);
 	mlx_hook(m->win.ptr, MX_EVENT_KEYDOWN, 1L << 0, &hook_key_press, m);
 	mlx_hook(m->win.ptr, MX_EVENT_KEYUP, 1L << 1, &hook_key_release, m);
 	mlx_hook(m->win.ptr, MX_EVENT_MOUSEMOVE, 1L << 6, &hook_mouse_move, m);
