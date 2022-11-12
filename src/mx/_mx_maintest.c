@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 23:03:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 00:40:04 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 01:29:40 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 
 	LOG
 
-	m.mlx_ptr = mlx_init();
+	// m.mlx_ptr = mlx_init();
 	assert(m.mlx_ptr);
 	free(m.mlx_ptr);
 	// mx_end_mlx(&m.mlx_ptr);
