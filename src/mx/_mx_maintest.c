@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 23:03:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 21:11:47 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/13 00:44:47 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 
 #ifdef MX_TEST
 
-# define MX_TEST_1
-# define MX_TEST_2
-# define MX_TEST_3
-# define MX_TEST_4
-# define MX_TEST_5
-# define MX_TEST_6
-# define MX_TEST_7
-# define MX_TEST_8
-# define MX_TEST_9
-# define MX_TEST_10
+// # define MX_TEST_1
+// # define MX_TEST_2
+// # define MX_TEST_3
+// # define MX_TEST_4
+// # define MX_TEST_5
+// # define MX_TEST_6
+// # define MX_TEST_7
+// # define MX_TEST_8
+// # define MX_TEST_9
+// # define MX_TEST_10
 # define MX_TEST_11
 
 
@@ -307,8 +307,8 @@ int	main(void)
 	// mx_draw_aabb(&all.img, mx_aabb(mx_pt(40, 40), mx_vec(320, 320)), BLUE);
 
 
-	t_ccl	cl = mx_circle(mx_pt(600, 600), 300);
-	mx_grid_circle(&all.img, cl, mx_vec(2, 4), GREEN);
+	t_ccl	cl = mx_circle(mx_pt(600, 600), 20);
+	mx_grid_circle(&all.img, cl, mx_vec(3, 2), GREEN);
 
 	mx_draw_img(&all.img);
 

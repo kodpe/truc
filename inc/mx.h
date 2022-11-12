@@ -159,6 +159,7 @@ bool	mx_coll_pt_ccl(t_2Dpt pt, t_ccl cl);
 bool	mx_coll_ccl(t_ccl cc1, t_ccl cc2);
 bool	mx_ccl_in_ccl(t_ccl cc1, t_ccl cc2);
 void	mx_grid_circle(t_img *img, t_ccl cl, t_2Dvec nb_tiles, t_uint hexcolor);
+void	mx_draw_line_in_ccl(t_img *img, t_line ln, t_ccl cl, t_uint hexcolor);
 
 /* TRIANGLE */
 t_tri	mx_triangle(t_2Dpt a, t_2Dpt b, t_2Dpt c);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mx_line.c                                          :+:      :+:    :+:   */
+/*   mx_line_in_ccl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 00:25:35 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/13 00:30:38 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mx.h"
 
-typedef struct s_bham_line
+typedef struct s_bham_line_ccl
 {
 	t_2Dpt	a;
 	t_2Dpt	b;
@@ -21,16 +21,18 @@ typedef struct s_bham_line
 	int		x_delta;
 	int		y_delta;
 	int		len;
-}		t_bham_line;
+	t_ccl	circle;
+}		t_bham_line_ccl;
 
-static void	bresenham_line(t_img *img, t_bham_line *ham, t_uint hexcolor)
+static void	bresenham_line(t_img *img, t_bham_line_ccl *ham, t_uint hexcolor)
 {
 	int	error;
 
 	error = ham->x_delta + ham->y_delta;
 	while (1)
 	{
-		mx_draw_pt(img, ham->a, hexcolor);
+		if (mx_coll_pt_ccl(ham->a, ham->circle))
+			mx_draw_pt(img, ham->a, hexcolor);
 		if (mx_same_pt(ham->a, ham->b))
 			break ;
 		if (2 * error >= ham->y_delta)
@@ -50,23 +52,9 @@ static void	bresenham_line(t_img *img, t_bham_line *ham, t_uint hexcolor)
 	}
 }
 
-t_line	mx_line(t_2Dpt pt_a, t_2Dpt pt_b)
+void	mx_draw_line_in_ccl(t_img *img, t_line ln, t_ccl cl, t_uint hexcolor)
 {
-	t_line	ln;
-
-	ln.a = pt_a;
-	ln.b = pt_b;
-	return (ln);
-}
-
-bool	mx_same_line(t_line ln_k, t_line ln_q)
-{
-	return (mx_same_pt(ln_k.a, ln_q.a) && mx_same_pt(ln_k.b, ln_q.b));
-}
-
-void	mx_draw_line(t_img *img, t_line ln, t_uint hexcolor)
-{
-	t_bham_line	ham;
+	t_bham_line_ccl	ham;
 
 	if (mx_sc_pixel_outside_img(img, ln.a.x, ln.a.y) \
 		|| mx_sc_pixel_outside_img(img, ln.b.x, ln.b.y))
@@ -88,5 +76,6 @@ void	mx_draw_line(t_img *img, t_line ln, t_uint hexcolor)
 		ham.y_slope = -1;
 	ham.x_delta = abs(ln.b.x - ln.a.x);
 	ham.y_delta = -abs(ln.b.y - ln.a.y);
+	ham.circle = cl;
 	bresenham_line(img, &ham, hexcolor);
 }
