@@ -163,11 +163,15 @@ bool	mx_ccl_in_aabb(t_ccl cl, t_aabb box_around);
 /* OBB ORIENTED BOUNDING BOX */
 //todo
 
+typedef struct	s_test
+{
+	void	*mlx_ptr;
+	t_win	win;
+	t_img	img;
+
+}	t_test;
+
 /*	EVENTS	*/
-int		hook_crossdestroy(void *m);
-int		hook_key_press(int keycode, void *m);
-int		hook_key_release(int keycode, void *m);
-int		hook_mouse_move(int button, int x, int y, void *m);
-// void	main_loop(void *data);
+void	main_loop(t_test *m);
 
 #endif /* MX_H */

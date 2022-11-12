@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 23:03:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 06:52:15 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 06:57:39 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@
 // # define MX_TEST_7
 # define MX_TEST_8
 
-typedef struct	s_test
-{
-	void	*mlx_ptr;
-	t_win	win;
-	t_img	img;
-
-}	t_test;
 
 int	main(void)
 {
@@ -218,18 +211,10 @@ int	main(void)
 	mx_destroy_mlx(all.mlx_ptr);
 #if 1
 
-void	main_loop(t_test *m)
-{
-	// mlx_loop_hook(m->mlx.ptr, &hook_chrono, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_KEYDOWN,		0, &hook_key_press, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_KEYUP, 		0, &hook_key_release, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_MOUSEMOVE,	0, &hook_mouse_move, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_CROSSDESTROY,	0, &hook_crossdestroy, m);
-	mlx_loop(m.mlx.win.ptr);
+	main_loop(&all);
 	mx_destroy_img(&all.img);
 	mx_destroy_win(&all.win);
 	mx_destroy_mlx(all.mlx_ptr);
-}
 #endif
 
 # endif

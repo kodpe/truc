@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 06:53:05 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 07:03:32 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@
 int	hook_crossdestroy(t_test *m)
 {
 	exit(0);
-	mlx_loop_end(m.)
+	mlx_loop_end(m->mlx_ptr);
 	return (0);
 }
 
-int	hook_key_press(int keycode, void *m)
+int	hook_key_press(int keycode, t_test *m)
 {
 	fprintf(stderr, "key press %i \n", keycode);
 	if (keycode == KEY_ESCAPE)
@@ -54,28 +54,35 @@ int	hook_key_press(int keycode, void *m)
 	(void)m;
 }
 
-int	hook_key_release(int keycode, void *m)
+int	hook_key_release(int keycode, t_test *m)
 {
 	fprintf(stderr, "key release %i \n", keycode);
 	return (0);
 	(void)m;
 }
 
-int	hook_mouse_move(int button, int x, int y, void *m)
+int	hook_mouse_move(int button, int x, int y, t_test *m)
 {
-	fprintf(stderr, "mouse [%i, %i]\n", x, y);
+	fprintf(stderr, "mouse [%i, %i] button [%i]\n", x, y, button);
+	return (0);
+	(void)m;
+}
+int	hook_frame(t_test *m)
+{
+	sleep(1);
 	return (0);
 	(void)m;
 }
 
-#if 0
-void	main_loop(void *m)
+#if 1
+void	main_loop(t_test *m)
 {
-	// mlx_loop_hook(m->mlx.ptr, &hook_chrono, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_KEYDOWN,		0, &hook_key_press, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_KEYUP, 		0, &hook_key_release, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_MOUSEMOVE,	0, &hook_mouse_move, m);
-	mlx_hook(m->mlx.win.ptr, MX_EVENT_CROSSDESTROY,	0, &hook_crossdestroy, m);
-	mlx_loop(m->mlx.ptr);
+	mlx_loop_hook(m->mlx_ptr, &hook_frame, m);
+	mlx_hook(m->win.ptr, MX_EVENT_KEYDOWN,		0L, &hook_key_press, m);
+	mlx_hook(m->win.ptr, MX_EVENT_KEYUP, 		0L, &hook_key_release, m);
+	mlx_hook(m->win.ptr, MX_EVENT_MOUSEMOVE,	0L, &hook_mouse_move, m);
+	mlx_hook(m->win.ptr, MX_EVENT_CROSSDESTROY,	0, &hook_crossdestroy, m);
+	mlx_loop(m->mlx_ptr);
+	return ;
 }
 #endif
