@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 03:44:11 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/11 13:38:25 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 04:42:50 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@
 # define LIGHT_GRAY		0xd3d3d3
 # define GRAY			0x808080	
 # define SLATE_GRAY		0x708090	
+# define DARK_GRAY		0x222222	
 
 #endif /* MX_COLOR_H */

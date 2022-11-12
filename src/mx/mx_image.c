@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:15:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 00:23:51 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 05:08:47 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 #undef MX_NAME
 #define MX_NAME "mx_init_img()"
 
-t_img	mx_init_img(void *mlx_ptr, t_win *win, int width, int height)
+t_img	mx_init_img(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size)
 {
 	t_img	img;
 
 	ft_memset(&img, 0, sizeof(t_img));
-	img.width = width;
-	img.height = height;
+	img.origin.x = origin.x;
+	img.origin.y = origin.y;
+	img.width = size.x;
+	img.height = size.y;
 	img.mlx_ptr = mlx_ptr;
 	img.win = win;
 	mx_log_img(MX_NAME, &img);
@@ -46,7 +48,9 @@ int	mx_create_img(t_img *img, char *name)
 		&img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
 		return (1);
-	img->box = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
+	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
+		mx_vec(img->width, img->height));
+	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
 	mx_log_img(MX_NAME, img);
 	return (0);
 }
@@ -68,7 +72,8 @@ int	mx_create_xpm_img(t_img *img, char *file)
 		&img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
 		return (1);
-	img->box = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
+	img->box_abs = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
+	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
 	mx_log_img(MX_NAME, img);
 	return (0);
 }
@@ -89,20 +94,40 @@ void	mx_destroy_img(t_img *img)
 }
 
 #undef MX_NAME
+#define MX_NAME "mx_move_xy_img() box_abs"
+
+void	mx_move_xy_img(t_img *img, int x, int y)
+{
+	img->box_abs = mx_aabb(mx_pt(x, y), img->box_abs.lenght);
+	mx_log_aabb(MX_NAME, img->box_abs);
+}
+
+#undef MX_NAME
+#define MX_NAME "mx_move_pt_img() box_abs"
+
+void	mx_move_pt_img(t_img *img, t_2Dpt new_origin)
+{
+	img->box_abs = mx_aabb(new_origin, img->box_abs.lenght);
+	mx_log_aabb(MX_NAME, img->box_abs);
+}
+
+#undef MX_NAME
 #define MX_NAME "mx_draw_img()"
 
 void	mx_draw_img(t_img *img)
 {
 	mx_log_img(MX_NAME, img);
-	if (false == mx_aabb_in_aabb(img->box, img->win->box))
+	if (false == mx_aabb_in_aabb(img->box_abs, img->win->box))
 	{
 		mx_log_win(MX_NAME, img->win);
 		mx_log_img(MX_NAME, img);
+		c_red();
 		mx_log_msg("ERROR image outside window");
-		abort();
+		c_reset();
+		return ;
 	}
 	mlx_put_image_to_window(img->mlx_ptr, img->win->ptr, img->ptr, \
-		img->box.origin.x, img->box.origin.y);
+		img->box_abs.origin.x, img->box_abs.origin.y);
 }
 
 #undef MX_NAME
@@ -111,5 +136,5 @@ void	mx_draw_img(t_img *img)
 void	mx_fill_img(t_img *img, int hexcolor)
 {
 	mx_log_img(MX_NAME, img);
-	mx_fill_aabb(img, img->box, hexcolor);
+	mx_fill_aabb(img, img->box_rel, hexcolor);
 }

@@ -53,7 +53,7 @@ void	dbg_cmd(char *_FI, int _LN, int mark)
 	free(cmd);
 }
 
-void	dbg_assert(int value, int correct_value)
+void	dbg_asserti(int value, int correct_value)
 {
 	ft_putx_fd(2, 7, " ");
 	ft_putstr_fd("\e[0m", 2);
@@ -61,4 +61,15 @@ void	dbg_assert(int value, int correct_value)
 		ft_dprintf(2, "\e[0;32mOK %d == %d\n\e[0m", value, correct_value);
 	else
 		ft_dprintf(2, "\e[0;31mKO %d != %d\n\e[0m", value, correct_value);
+}
+
+void	dbg_assert(void *p, void *a)
+{
+	if (p == a)
+		ft_dprintf(2, "\033[0;32mOK %d == %d\n\033[0m", p, a);
+	else
+	{
+		ft_dprintf(2, "\033[0;31mKO %d != %d\n\033[0m", p, a);
+		exit(1);
+	}
 }

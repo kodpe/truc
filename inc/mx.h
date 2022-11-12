@@ -73,14 +73,16 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-	t_aabb	box;
+	t_2Dpt	origin;
+	t_aabb	box_abs;
+	t_aabb	box_rel;
 	void	*mlx_ptr;
 	t_win	*win;
 }	t_img;
 
 /* MLX_PTR */
-int		mx_init_mlx(void *mlx_ptr);
-void	mx_end_mlx(void *mlx_ptr);
+void	*mx_init_mlx(void);
+void	mx_destroy_mlx(void *mlx_ptr);
 
 /* WINDOW */
 t_win	mx_init_win(void *mlx_ptr, int width, int height);
@@ -88,10 +90,12 @@ int		mx_create_win(t_win *win, char *name);
 void	mx_destroy_win(t_win *win);
 
 /* IMAGE */
-t_img	mx_init_img(void *mlx_ptr, t_win *win, int width, int height);
+t_img	mx_init_img(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size);
 int		mx_create_img(t_img *img, char *name);
 int		mx_create_xpm_img(t_img *img, char *file);
 void	mx_destroy_img(t_img *img);
+void	mx_move_xy_img(t_img *img, int x, int y);
+void	mx_move_pt_img(t_img *img, t_2Dpt new_origin);
 void	mx_draw_img(t_img *img);
 void	mx_fill_img(t_img *img, int hexcolor);
 
@@ -139,6 +143,7 @@ void	mx_log_circle(const char *msg, t_ccl cl);
 void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, int hexcolor);
 void	mx_draw_cl(t_img *img, t_ccl cl, int hexcolor);
 void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor);
+void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor);
 bool	mx_coll_xy_ccl(int x, int y, t_ccl cl);
 bool	mx_coll_pt_ccl(t_2Dpt pt, t_ccl cl);
 bool	mx_coll_ccl(t_ccl cc1, t_ccl cc2);
@@ -157,5 +162,12 @@ bool	mx_ccl_in_aabb(t_ccl cl, t_aabb box_around);
 
 /* OBB ORIENTED BOUNDING BOX */
 //todo
+
+/*	EVENTS	*/
+int		hook_crossdestroy(void *m);
+int		hook_key_press(int keycode, void *m);
+int		hook_key_release(int keycode, void *m);
+int		hook_mouse_move(int button, int x, int y, void *m);
+// void	main_loop(void *data);
 
 #endif /* MX_H */

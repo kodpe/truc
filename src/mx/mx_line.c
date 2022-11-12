@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 00:27:10 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 03:56:30 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,14 @@ void	mx_draw_line(t_img *img, t_line ln, int hexcolor)
 {
 	t_bham_line	ham;
 
-	if (mx_sc_pixel_outside_img(img, ln.a.x, ln.a.y))
+	if (mx_sc_pixel_outside_img(img, ln.a.x, ln.a.y) \
+		|| mx_sc_pixel_outside_img(img, ln.b.x, ln.b.y))
+	{
+		c_red();
 		mx_log_line("err outside img", ln);
-	if (mx_sc_pixel_outside_img(img, ln.b.x, ln.b.y))
-		mx_log_line("err outside img", ln);
+		c_reset();
+		return ;
+	}
 	ham.a = ln.a;
 	ham.b = ln.b;
 	if (ln.a.x < ln.b.x)

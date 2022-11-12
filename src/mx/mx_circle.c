@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/11 18:13:21 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/12 05:54:12 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ t_ccl	mx_circle(t_2Dpt center, int radius)
 
 void	mx_draw_cl(t_img *img, t_ccl cl, int hexcolor)
 {
+	if (false == mx_ccl_in_aabb(cl, img->box_rel))
+	{
+		c_red();
+		mx_log_circle("mx_draw_circle_topleft() err outside img", cl);
+		c_reset();
+		return ;
+	}
 	mx_draw_circle(img, cl.center, cl.radius, hexcolor);
 }
 
@@ -73,7 +80,38 @@ void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor)
 
 	center.x = pt.x + radius;
 	center.y = pt.y + radius;
+	if (false == mx_ccl_in_aabb(mx_circle(center, radius), img->box_rel))
+	{
+		c_red();
+		mx_log_circle("mx_draw_circle_topleft() err outside img", \
+			mx_circle(pt, radius));
+		c_reset();
+		return ;
+	}
 	mx_draw_circle(img, center, radius, hexcolor);
+}
+
+void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, int hexcolor)
+{
+	t_2Dpt	center;
+	int		i;
+
+	center.x = pt.x + radius;
+	center.y = pt.y + radius;
+	if (false == mx_ccl_in_aabb(mx_circle(center, radius), img->box_rel))
+	{
+		c_red();
+		mx_log_circle("mx_draw_circle_topleft() err outside img", \
+			mx_circle(pt, radius));
+		c_reset();
+		return ;
+	}
+	i = 1;
+	while (i <= radius)
+	{
+		mx_draw_circle(img, center, i, hexcolor);
+		i++;
+	}
 }
 
 bool	mx_coll_xy_ccl(int x, int y, t_ccl cl)

@@ -52,7 +52,7 @@ void	dba(char *_FI, int _LN, int variable, int correct_value)
 		i--;
 	}
 	dbg_cmd(_FI, _LN, 1);
-	dbg_assert(variable, correct_value);
+	dbg_asserti(variable, correct_value);
 	while (i < 3)
 	{
 		dbg_cmd(_FI, _LN + i, 0);
