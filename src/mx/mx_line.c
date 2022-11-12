@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 00:25:35 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/13 00:57:36 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,9 @@ void	mx_draw_line(t_img *img, t_line ln, t_uint hexcolor)
 	ham.x_delta = abs(ln.b.x - ln.a.x);
 	ham.y_delta = -abs(ln.b.y - ln.a.y);
 	bresenham_line(img, &ham, hexcolor);
+}
+
+void	mx_draw_line(t_img *img, t_line ln, t_uint hexcolor)
+{
+	
 }

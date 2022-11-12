@@ -9,9 +9,10 @@ e_src	=	$(shell ls $(SRC_DIR)/*.c 2>/dev/null | wc -l | tr -d '\n')" sources"
 e_obj	=	$(shell ls $(OBJ_DIR)/*.o 2>/dev/null | wc -l | tr -d '\n')" objects"
 grepr	=	$(shell grep -nH --color printf $(SRC_DIR)/*.c | grep -v "ft_printf")
 grepgc	=	$(shell grep -nH --color getchar $(SRC_DIR)/*.c)
-#-auto-sources-##############480044131122#
+#-auto-sources-##############400056131122#
 SRC = $(addsuffix .c, \
 	game/loop_event \
+	mx/mx_grid_circle \
 	mx/mx_circle \
 	mx/mx__log \
 	mx/_mx_maintest \
@@ -27,7 +28,7 @@ SRC = $(addsuffix .c, \
 	mx/mx_vec \
 	mx/mx_draw_pixel \
 	)
-#-auto-sources-##############480044131122#
+#-auto-sources-##############400056131122#
 
 INC_DIR	=	inc
 SRC_DIR	=	src
