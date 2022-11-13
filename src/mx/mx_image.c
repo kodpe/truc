@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:15:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 08:09:02 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/13 11:48:48 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	mx_create_xpm_img(t_img *img, char *file)
 		&img->bits_per_pixel, &img->size_line, &img->endian);
 	if (!img->addr)
 		return (1);
-	img->box_abs = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
+	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
+		mx_vec(img->width, img->height));
 	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
 	mx_log_img(MX_NAME, img);
 	return (0);

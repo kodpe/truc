@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 23:03:15 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 00:56:59 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/13 11:49:33by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 // # define MX_TEST_8
 // # define MX_TEST_9
 // # define MX_TEST_10
-# define MX_TEST_11
+// # define MX_TEST_11
+# define MX_TEST_12
 
 
 int	main(void)
@@ -313,6 +314,56 @@ int	main(void)
 
 	main_loop(&all);
 	mx_destroy_img(&all.img);
+	mx_destroy_win(&all.win);
+	mx_destroy_mlx(all.mlx_ptr);
+
+# endif
+
+# ifdef MX_TEST_12
+/* XPM IMG */
+	all.mlx_ptr = mx_init_mlx();
+	all.win = mx_init_win(all.mlx_ptr, 1600, 700);
+	if (mx_create_win(&all.win, "mx test"))
+		abort();
+
+	all.img = mx_init_img(all.mlx_ptr, &all.win, mx_pt(1, 1), mx_vec(1, 1));
+	if (mx_create_xpm_img(&all.img, "assets/128w/128w_yama-uba.xpm"))
+		abort();
+
+	all.img2 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(200, 1), mx_vec(1, 1));
+	if (mx_create_xpm_img(&all.img2, "assets/128w/f128w_yama-uba.xpm"))
+		abort();
+
+	// all.img3 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(400, 1), mx_vec(1, 1));
+	// if (mx_create_xpm_img(&all.img3, "assets/128w/ff128w_yama-uba.xpm"))
+		// abort();
+
+	all.img3 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(0, 0), mx_vec(1600, 700));
+	if (mx_create_img(&all.img3, "mx image"))
+		abort();
+
+
+	// mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(513, 513)), LIME);
+	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(250, 250)), LIME);
+	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(120, 120)), LIME);
+	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(100, 100)), LIME);
+	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(64, 64)), LIME);
+
+	mx_grid_aabb(&all.img3, mx_aabb(mx_pt(550, 10), mx_vec(500, 500)), mx_vec(5, 5), LIME);
+
+	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(550, 10), mx_vec(500, 500)), LIME);
+
+	// t_ccl	cl = mx_circle(mx_pt(600, 600), 300);
+	// mx_grid_circle(&all.img, cl, mx_vec(4, 3), GREEN);
+
+	mx_draw_img(&all.img3);
+	mx_draw_img(&all.img);
+	mx_draw_img(&all.img2);
+
+	main_loop(&all);
+	mx_destroy_img(&all.img);
+	mx_destroy_img(&all.img2);
+	mx_destroy_img(&all.img3);
 	mx_destroy_win(&all.win);
 	mx_destroy_mlx(all.mlx_ptr);
 

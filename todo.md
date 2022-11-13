@@ -12,6 +12,8 @@
 - [x] point - triangle intersection
 - [x] square grid
 - [x] circular grid
+- [ ] fog war
+- [ ] game tiles
 
 ---
 ### ADD-ONS
@@ -28,7 +30,7 @@
 
 - [ ] Placement des pièces.
 - [ ] Déplacement ou parachutage d'une pièce.
-- [ ] Temps d'amélioration des mouvements.
+- [ ] Amélioration des mouvements des pièces.
 
 ```
 - Placement des pièces.

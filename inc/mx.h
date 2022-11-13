@@ -188,6 +188,8 @@ typedef struct	s_test
 	void	*mlx_ptr;
 	t_win	win;
 	t_img	img;
+	t_img	img2;
+	t_img	img3;
 
 }	t_test;
 
