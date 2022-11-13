@@ -3,12 +3,10 @@
         {
             "name": "Linux",
             "includePath": [
-                "${default}",
-                "${workspaceFolder}/inc/mx",
-                "/mnt/nfs/homes/sloquet/Documents/truc/inc"
+                "${workspaceFolder}/inc"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "",
             "cStandard": "c17",
             "cppStandard": "c++14",
             "intelliSenseMode": "linux-clang-x64"

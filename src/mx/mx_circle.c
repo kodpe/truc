@@ -91,6 +91,26 @@ void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor)
 	mx_draw_circle(img, center, radius, hexcolor);
 }
 
+void	mx_fill_circle(t_img *img, t_2Dpt center, int radius, t_uint hexcolor)
+{
+	int		i;
+
+	if (false == mx_ccl_in_aabb(mx_circle(center, radius), img->box_rel))
+	{
+		c_red();
+		mx_log_circle("mx_draw_circle_topleft() err outside img", \
+			mx_circle(center, radius));
+		c_reset();
+		return ;
+	}
+	i = 0;
+	while (i <= radius)
+	{
+		mx_draw_circle(img, center, i, hexcolor);
+		i++;
+	}
+}
+
 void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor)
 {
 	t_2Dpt	center;

@@ -153,6 +153,7 @@ void	mx_log_circle(const char *msg, t_ccl cl);
 void	mx_draw_circle(t_img *img, t_2Dpt center, int radius, t_uint hexcolor);
 void	mx_draw_cl(t_img *img, t_ccl cl, t_uint hexcolor);
 void	mx_draw_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor);
+void	mx_fill_circle(t_img *img, t_2Dpt center, int radius, t_uint hexcolor);
 void	mx_fill_circle_topleft(t_img *img, t_2Dpt pt, int radius, t_uint hexcolor);
 bool	mx_coll_xy_ccl(int x, int y, t_ccl cl);
 bool	mx_coll_pt_ccl(t_2Dpt pt, t_ccl cl);
@@ -194,6 +195,8 @@ typedef struct	s_test
 }	t_test;
 
 /*	EVENTS	*/
-void	main_loop(t_test *m);
+// void	main_loop(t_test *m);
+
+bool	mx_mouse_aabb(t_2Dpt mouse, t_aabb box);
 
 #endif /* MX_H */

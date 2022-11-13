@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:15:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 11:48:48 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/13 17:24:54 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	mx_move_pt_img(t_img *img, t_2Dpt new_origin)
 
 void	mx_draw_img(t_img *img)
 {
+	img->box_abs.origin = img->origin;
 	mx_log_img(MX_NAME, img);
 	if (false == mx_aabb_in_aabb(img->box_abs, img->win->box))
 	{

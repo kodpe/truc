@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_event.c                                       :+:      :+:    :+:   */
+/*   loop_event_test.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 18:08:40 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/13 17:13:06 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mx.h"
 
+#if 0
 #define KEY_ESCAPE	65307
 #define KEY_LEFT	65361
 #define KEY_UP		65362
@@ -99,4 +100,6 @@ void	main_loop(t_test *m)
 	mlx_loop(m->mlx_ptr);
 	return ;
 }
+#endif
+
 #endif

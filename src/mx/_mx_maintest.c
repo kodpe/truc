@@ -27,8 +27,9 @@
 // # define MX_TEST_9
 // # define MX_TEST_10
 // # define MX_TEST_11
-# define MX_TEST_12
+// # define MX_TEST_12
 
+#if 0
 
 int	main(void)
 {
@@ -322,36 +323,55 @@ int	main(void)
 # ifdef MX_TEST_12
 /* XPM IMG */
 	all.mlx_ptr = mx_init_mlx();
-	all.win = mx_init_win(all.mlx_ptr, 1600, 700);
+	all.win = mx_init_win(all.mlx_ptr, 900, 900);
 	if (mx_create_win(&all.win, "mx test"))
 		abort();
 
-	all.img = mx_init_img(all.mlx_ptr, &all.win, mx_pt(1, 1), mx_vec(1, 1));
-	if (mx_create_xpm_img(&all.img, "assets/128w/128w_yama-uba.xpm"))
+	all.img = mx_init_img(all.mlx_ptr, &all.win, mx_pt(40, 40), mx_vec(1, 1));
+	if (mx_create_xpm_img(&all.img, "assets/128w/80w_yama-uba.xpm"))
 		abort();
 
-	all.img2 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(200, 1), mx_vec(1, 1));
-	if (mx_create_xpm_img(&all.img2, "assets/128w/f128w_yama-uba.xpm"))
+	all.img2 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(66, 122), mx_vec(1, 1));
+	if (mx_create_xpm_img(&all.img2, "assets/128w/32w_castle.xpm"))
 		abort();
 
 	// all.img3 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(400, 1), mx_vec(1, 1));
 	// if (mx_create_xpm_img(&all.img3, "assets/128w/ff128w_yama-uba.xpm"))
 		// abort();
 
-	all.img3 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(0, 0), mx_vec(1600, 700));
+	all.img3 = mx_init_img(all.mlx_ptr, &all.win, mx_pt(0, 0), mx_vec(900, 900));
 	if (mx_create_img(&all.img3, "mx image"))
 		abort();
 
 
 	// mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(513, 513)), LIME);
-	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(250, 250)), LIME);
-	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(120, 120)), LIME);
-	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(100, 100)), LIME);
-	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(64, 64)), LIME);
+	// mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(250, 250)), LIME);
+	// mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(120, 120)), LIME);
+	// mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(100, 100)), LIME);
+	// mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 200), mx_vec(64, 64)), LIME);
 
-	mx_grid_aabb(&all.img3, mx_aabb(mx_pt(550, 10), mx_vec(500, 500)), mx_vec(5, 5), LIME);
+	mx_grid_aabb(&all.img3, mx_aabb(mx_pt(0, 0), mx_vec(800, 800)), mx_vec(5, 5), DARK_GRAY);
 
-	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(550, 10), mx_vec(500, 500)), LIME);
+	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 0), mx_vec(800, 800)), DARK_GRAY);
+	mx_draw_aabb(&all.img3, mx_aabb(mx_pt(0, 0), mx_vec(160, 160)), WHITE);
+	
+	int	bo = 2;
+	int bm = 160 - bo;
+
+	int	bi = 5;
+	int bk = 160 - bi;
+
+	mx_draw_line(&all.img3, mx_line(mx_pt(bo, bo), mx_pt(bi, bi)), WHITE);
+	mx_draw_line(&all.img3, mx_line(mx_pt(80, bo), mx_pt(80, bi)), WHITE);
+	mx_draw_line(&all.img3, mx_line(mx_pt(bm, bo), mx_pt(bk, bi)), WHITE);
+
+	mx_draw_line(&all.img3, mx_line(mx_pt(bo, 80), mx_pt(bi, 80)), WHITE);
+	mx_draw_line(&all.img3, mx_line(mx_pt(bm, 80), mx_pt(bk, 80)), WHITE);
+
+	// mx_draw_line(&all.img3, mx_line(mx_pt(bo, bm), mx_pt(bi, bk)), WHITE);
+	// mx_draw_line(&all.img3, mx_line(mx_pt(80, bm), mx_pt(80, bk)), WHITE);
+	// mx_draw_line(&all.img3, mx_line(mx_pt(bm, bm), mx_pt(bk, bk)), WHITE);
+
 
 	// t_ccl	cl = mx_circle(mx_pt(600, 600), 300);
 	// mx_grid_circle(&all.img, cl, mx_vec(4, 3), GREEN);
@@ -379,3 +399,5 @@ void	ft_void(void)
 {
 	return ;
 }
+
+#endif 
