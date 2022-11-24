@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 21:12:08 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 23:14:44 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <time.h>
+# include <dirent.h>
 # include <signal.h>
 # include <fcntl.h>
 # include <sys/types.h>
@@ -29,6 +30,11 @@
 # define PATH_COMDIR	"/sgoinfre/goinfre/Perso/sloquett/dcom/"
 # define PATH_PHOTO		"/sgoinfre/photos_students/"
 # define PATH_MAGICK	"/sgoinfre/goinfre/Perso/sloquett/tools/magick"
+
+# define GAME_STR_START	"Game will start in  s"
+# define GAME_STR_WAIT	"Waiting for an opponent"
+
+# define GAME_OPPONENT_NAME	"chsimon"
 
 typedef enum e_xpmid
 {
@@ -104,10 +110,21 @@ typedef struct s_gameinfo
 	char	*txt;
 }	t_gameinfo;
 
+typedef struct s_waiting_box
+{
+	t_img	img;
+	int		i;
+	int		starting_delay;
+}	t_waiting_box;
 
 // you current player / opp opponent
 typedef struct s_game
 {
+	bool	server;
+	bool	client;
+
+	t_waiting_box	waitbox;
+
 	void	*mlx_ptr;
 	t_win	win;
 
@@ -138,5 +155,17 @@ char	*get_42position(void);
 
 void	destroy_profil(t_profil *profil);
 void	load_profils(t_game	*ga);
+
+// dir
+void	dir_log(char *dirpath);
+int		dir_size(char *dirpath);
+char	**dir_namelist(char *dirpath);
+// com
+void	log_com(t_game *ga);
+int		server_exist(void);
+void	create_server(t_game *ga);
+void	create_client(t_game *ga);
+void	waiting_room(t_game *ga);
+void	starting_room(t_game *ga);
 
 #endif /* GAME_H */

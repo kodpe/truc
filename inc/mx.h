@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 # include "mx_color.h"
+# include "mx_event.h"
 # include <stdbool.h>
 # include <assert.h>
 # include <math.h>
@@ -109,6 +110,7 @@ void	mx_move_pt_img(t_img *img, t_2Dpt new_origin);
 void	mx_draw_img(t_img *img);
 void	mx_fill_img(t_img *img, t_uint hexcolor);
 void	mx_fill_img_bg(t_img *front, t_img *backg);
+int		mx_reset_img(t_img *img);
 
 /* PIXEL */
 bool	mx_sc_pixel_outside_img(t_img *img, int x, int y);

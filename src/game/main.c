@@ -34,29 +34,28 @@ void	load_info(t_game *ga)
 	mx_draw_img(&ga->info.img);
 }
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	time_t	t;
 	t_game	ga;
 
-	if (ac != 2)
-		abort();
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	ft_memset(&ga, 0, sizeof(t_game));
 	srand(time(&t));
 
-#if 0
+#if 1
 	// SERVEUR x CLIENT
 	if (server_exist())
-		create_client(&m);
+		create_client(&ga);
 	else
-		create_server(&m);
+		create_server(&ga);
+	exit(0);
 #endif
 
 	ga.mlx_ptr = mx_init_mlx();
 	ga.win = mx_init_win(ga.mlx_ptr, 1200, 900);
-	if (mx_create_win(&ga.win, av[1]))
+	if (mx_create_win(&ga.win, "y"))
 		abort();
 	
 	ga.img_board = mx_init_img(ga.mlx_ptr, &ga.win, mx_pt(200, 0), mx_vec(800, 800));

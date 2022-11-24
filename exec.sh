@@ -1,8 +1,7 @@
 #!/bin/bash
-rm -rf dcom
-mkdir dcom
-./update_makefile.sh
 clear
+rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
+./update_makefile.sh
 
 VALG="valgrind \
 	--show-leak-kinds=all \
@@ -14,6 +13,9 @@ VALG="valgrind \
 EXEC="./yokai"
 
 make -j && $VALG $EXEC serveur &
+
+exit
+
 sleep 5
 $EXEC client &
 echo Done
