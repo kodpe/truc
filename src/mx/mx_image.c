@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:15:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 17:24:54 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 19:43:51 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_img	mx_init_img(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size)
 
 int	mx_create_img(t_img *img, char *name)
 {
-	mx_log_img(MX_NAME, img);
 	if (img->width < 1 || img->height < 1)
 		return (1);
 	img->name = ft_strdup(name);
@@ -50,7 +49,7 @@ int	mx_create_img(t_img *img, char *name)
 		return (1);
 	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
 		mx_vec(img->width, img->height));
-	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
+	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width - 1, img->height - 1));
 	mx_log_img(MX_NAME, img);
 	return (0);
 }
@@ -60,7 +59,6 @@ int	mx_create_img(t_img *img, char *name)
 
 int	mx_create_xpm_img(t_img *img, char *file)
 {
-	mx_log_img(MX_NAME, img);
 	img->name = ft_strdup(file);
 	if (!img->name)
 		return (1);
@@ -74,7 +72,7 @@ int	mx_create_xpm_img(t_img *img, char *file)
 		return (1);
 	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
 		mx_vec(img->width, img->height));
-	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width, img->height));
+	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width - 1, img->height - 1));
 	mx_log_img(MX_NAME, img);
 	return (0);
 }
@@ -108,7 +106,8 @@ void	mx_move_xy_img(t_img *img, int x, int y)
 
 void	mx_move_pt_img(t_img *img, t_2Dpt new_origin)
 {
-	img->box_abs = mx_aabb(new_origin, img->box_abs.lenght);
+	img->origin = new_origin;
+	img->box_abs.origin = new_origin;
 	mx_log_aabb(MX_NAME, img->box_abs);
 }
 
@@ -139,4 +138,36 @@ void	mx_fill_img(t_img *img, t_uint hexcolor)
 {
 	mx_log_img(MX_NAME, img);
 	mx_fill_aabb(img, img->box_rel, hexcolor);
+}
+
+void	mx_fill_img_bg(t_img *front, t_img *backg)
+{
+	if (!mx_coll_aabb(front->box_abs, backg->box_abs))
+		return ;
+	int		x;
+	int		y;
+	t_2Dpt	ab;
+	t_2Dpt	bg;
+	t_uint	bg_color;
+
+	y = 0;
+	while (y < front->height)
+	{
+		x = 0;
+		while (x < front->width)
+		{
+			ab = mx_pt(front->origin.x + x, front->origin.y + y);
+			if (mx_coll_pt_aabb(ab, backg->box_abs))
+			{
+				if (mx_get_pixel_color(front, x, y) == 0xFF000000)
+				{
+					bg = mx_pt(ab.x - backg->origin.x, ab.y - backg->origin.y);
+					bg_color = mx_get_pixel_color(backg, bg.x, bg.y);
+					mx_draw_pixel(front, x, y, bg_color);
+				}
+			}
+			x++;
+		}
+		y++;
+	}
 }

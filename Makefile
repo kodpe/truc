@@ -9,31 +9,33 @@ e_src	=	$(shell ls $(SRC_DIR)/*.c 2>/dev/null | wc -l | tr -d '\n')" sources"
 e_obj	=	$(shell ls $(OBJ_DIR)/*.o 2>/dev/null | wc -l | tr -d '\n')" objects"
 grepr	=	$(shell grep -nH --color printf $(SRC_DIR)/*.c | grep -v "ft_printf")
 grepgc	=	$(shell grep -nH --color getchar $(SRC_DIR)/*.c)
-#-auto-sources-##############441836131122#
+#-auto-sources-##############102112241122#
 SRC = $(addsuffix .c, \
-	game/case \
-	game/load_xpm \
-	game/main \
 	game/main_loop \
-	mx/mx_mlx_ptr \
-	mx/mx_pt \
-	mx/loop_event_test \
-	mx/mx_image \
-	mx/mx_circle \
-	mx/mx_vec \
+	game/main \
+	game/case \
+	game/com \
+	game/profil \
+	game/load_xpm \
 	mx/mx_grid_circle \
-	mx/mx_aabb \
+	mx/mx_circle \
 	mx/mx_mouse \
-	mx/mx_window \
 	mx/mx__log \
-	mx/mx_triangle \
-	mx/mx_line_in_ccl \
-	mx/mx_draw_pixel \
 	mx/_mx_maintest \
-	mx/mx_line \
+	mx/mx_aabb \
+	mx/mx_pt \
 	mx/_mx_template \
+	mx/mx_mlx_ptr \
+	mx/mx_triangle \
+	mx/mx_window \
+	mx/mx_image \
+	mx/mx_line_in_ccl \
+	mx/loop_event_test \
+	mx/mx_line \
+	mx/mx_vec \
+	mx/mx_draw_pixel \
 	)
-#-auto-sources-##############441836131122#
+#-auto-sources-##############102112241122#
 
 INC_DIR	=	inc
 SRC_DIR	=	src
@@ -53,7 +55,7 @@ NAME	=	yokai
 
 CC		=	@gcc
 CFLAGS 	=	-Wall -Wextra -Werror -I $(INC_DIR) -I $(INC_LIB)
-# CFLAGS 	=	-Wall -Wextra -Werror -g3 -fsanitize=address -I $(INC_DIR) 
+# CFLAGS 	=	-Wall -Wextra -Werror -g3 -fsanitize=address -I $(INC_DIR)  -I $(INC_LIB)
 
 MLX		=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 MKDIR	=	@mkdir -p

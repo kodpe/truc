@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:08:29 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 18:36:44 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 18:26:07by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,49 +22,81 @@ int	init_piece(t_game *ga, t_piece *piece)
 	return (0);
 }
 
-void	display_board(t_game *ga)
+void	load_info(t_game *ga)
 {
-	for (int y = 0; y < 5; y++)
-	{
-		for (int x = 0; x < 5; x++)
-		{
-			t_case current = ga->board[y][x];
-			if (current.mouseover)
-				mx_draw_aabb(&ga->img_board, current.abs_box, WHITE);
-		}
-	}
-	mx_draw_img(&ga->img_board);
+	t_2Dpt pos;
+
+	pos = mx_pt(200, 800);
+	ga->info.img = mx_init_img(ga->mlx_ptr, &ga->win, pos, mx_vec(800, 100));
+	if (mx_create_img(&ga->info.img, "game info"))
+		abort();
+	mx_draw_aabb(&ga->info.img, ga->info.img.box_rel, RED);
+	mx_draw_img(&ga->info.img);
 }
 
-// int	init_board(t_game *ga)
-
-int	main(void)
+int	main(int ac, char **av)
 {
+	time_t	t;
 	t_game	ga;
+
+	if (ac != 2)
+		abort();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	ft_memset(&ga, 0, sizeof(t_game));
+	srand(time(&t));
+
+#if 0
+	// SERVEUR x CLIENT
+	if (server_exist())
+		create_client(&m);
+	else
+		create_server(&m);
+#endif
 
 	ga.mlx_ptr = mx_init_mlx();
 	ga.win = mx_init_win(ga.mlx_ptr, 1200, 900);
-	if (mx_create_win(&ga.win, "Yamayuba"))
+	if (mx_create_win(&ga.win, av[1]))
 		abort();
+	
+	ga.img_board = mx_init_img(ga.mlx_ptr, &ga.win, mx_pt(200, 0), mx_vec(800, 800));
+	if (mx_create_img(&ga.img_board, "img_board"))
+		abort();
+
+
+	//BOARD
+	mx_draw_aabb(&ga.img_board, ga.img_board.box_rel, RED);
+	mx_grid_aabb(&ga.img_board, ga.img_board.box_rel, mx_vec(5, 5), DARK_GRAY);
+	mx_draw_img(&ga.img_board);
 
 	load_xpm(&ga);
 
-	// t_2Dpt	pos = mx_pt(200,0);
-	// t_2Dvec	size = mx_vec(800, 800);
-	// ga.global_checkboard = mx_init_img(ga.mlx_ptr, &ga.win, pos, size);
-	// if (mx_create_img(&ga.global_checkboard, "global checkboard"))
-	// 	abort();
-	
-	// mx_grid_aabb(&ga.global_checkboard, ga.global_checkboard.box_rel, mx_vec(5, 5), DARK_GRAY);
-
-
-
 	// DISPLAY
 
-	// display_board(&ga);
+	load_profils(&ga);
+	load_info(&ga);
+
+	// mx_move_pt_img(&ga.xpm[1], mx_pt(500, 500));
+	// mx_move_pt_img(&ga.xpm[3], mx_pt(540, 540));
+
+	// mx_draw_img(&ga.xpm[1]);
+
+
+	// mx_fill_img_bg(&ga.xpm[3], &ga.xpm[1]);
+	// mx_draw_img(&ga.xpm[3]);
 
 	main_loop(&ga);
 	destroy_xpm(&ga);
-	// mx_destroy_img(&ga.global_checkboard);
+
+
+	destroy_profil(&ga.profil_you);
+	destroy_profil(&ga.profil_opp);
+
+	mx_destroy_img(&ga.info.img);
+
+	mx_destroy_img(&ga.img_board);
+	mx_destroy_win(&ga.win);
+	mx_destroy_mlx(ga.mlx_ptr);
+	LOG
 	return (0);
 }

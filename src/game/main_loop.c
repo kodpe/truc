@@ -6,11 +6,17 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 18:21:16 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 20:56:36 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
+
+#define MOUSE_LEFT			1
+#define MOUSE_MIDDLE		2
+#define MOUSE_RIGHT			3
+#define MOUSE_SCROLL_UP		4
+#define MOUSE_SCROLL_DOWN	5
 
 #define KEY_ESCAPE	65307
 #define KEY_LEFT	65361
@@ -63,10 +69,12 @@ int	hook_mouse_down(int button, int x, int y, t_game *ga)
 {
 	fprintf(stderr, "<> mouse down  [%i] [%i],[%i]\n", button, x, y);
 
-	// for (int i = 0; i < 8; i++)
-	// {
-		// if (mx_mouse_aabb(mx_pt(x, y), ga->piece->abs_box))
-	// }
+	if (button == MOUSE_LEFT && mx_coll_xy_aabb(x, y, ga->xpm[3].box_abs))
+	{
+		mx_draw_aabb(&ga->xpm[3], ga->xpm[3].box_rel, RED);
+		mx_draw_img(&ga->xpm[3]);
+	}
+
 	return (0);
 	(void)ga;
 }
@@ -74,6 +82,15 @@ int	hook_mouse_down(int button, int x, int y, t_game *ga)
 int	hook_mouse_up(int button, int x, int y, t_game *ga)
 {
 	fprintf(stderr, "<> mouse up    [%i] [%i],[%i]\n", button, x, y);
+
+	if (button == MOUSE_LEFT && mx_coll_xy_aabb(x, y, ga->xpm[3].box_abs))
+	{
+		mx_fill_img(&ga->xpm[3], LIME);
+		mx_draw_aabb(&ga->xpm[3], ga->xpm[3].box_rel, RED);
+		mx_fill_img_bg(&ga->xpm[3], &ga->xpm[1]);
+		mx_draw_img(&ga->xpm[3]);
+	}
+
 	return (0);
 	(void)ga;
 }
@@ -82,6 +99,20 @@ int	hook_mouse_move(int x, int y, t_game *ga)
 {
 	fprintf(stderr, "<> mouse move  [%i],[%i]\n", x, y);
 	ga->mouse = mx_pt(x, y);
+
+	if (mx_mouse_aabb(ga->mouse, ga->xpm[3].box_abs))
+	{
+		mx_draw_aabb(&ga->xpm[3], ga->xpm[3].box_rel, CYAN);
+		mx_draw_img(&ga->xpm[3]);
+	
+		// mlx_mouse_hide(ga->mlx_ptr, ga->win.ptr);
+	}
+	else
+	{
+		// if (mx_mouse_aabb(ga->mouse, ga->win.box))
+			// mlx_mouse_show(ga->mlx_ptr, ga->win.ptr);
+	}
+
 #if 0
 	int	k = -1;
 	for (int i = 0; i < 8; i++)

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 18:50:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 15:54:21 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	mx_fill_aabb(t_img *img, t_aabb box, t_uint hexcolor)
 	max = mx_pt_add_vec(box.origin, box.lenght);
 	ori = box.origin;
 	y = ori.y;
-	while (y < max.y)
+	while (y <= max.y)
 	{
 		mx_draw_line(img, mx_line(mx_pt(ori.x, y), mx_pt(max.x, y)), hexcolor);
 		y++;

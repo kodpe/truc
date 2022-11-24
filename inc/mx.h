@@ -108,10 +108,12 @@ void	mx_move_xy_img(t_img *img, int x, int y);
 void	mx_move_pt_img(t_img *img, t_2Dpt new_origin);
 void	mx_draw_img(t_img *img);
 void	mx_fill_img(t_img *img, t_uint hexcolor);
+void	mx_fill_img_bg(t_img *front, t_img *backg);
 
 /* PIXEL */
 bool	mx_sc_pixel_outside_img(t_img *img, int x, int y);
 void	mx_draw_pixel(t_img *img, int x, int y, t_uint hexcolor);
+t_uint	mx_get_pixel_color(t_img *img, int x, int y);
 
 /* 	LOG */
 void	mx_log_msg(const char *msg);

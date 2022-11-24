@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 18:31:16 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 21:12:08 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 # include "mx.h"
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <time.h>
+# include <signal.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+
+# define PATH_COMDIR	"/sgoinfre/goinfre/Perso/sloquett/dcom/"
+# define PATH_PHOTO		"/sgoinfre/photos_students/"
+# define PATH_MAGICK	"/sgoinfre/goinfre/Perso/sloquett/tools/magick"
 
 typedef enum e_xpmid
 {
@@ -74,10 +87,33 @@ typedef struct s_case
 	//ou si elle est eclairée
 }	t_case;
 
+typedef struct s_profil
+{
+	t_img	img;
+	char	*name;
+	char	*file;
+	t_img	photo;
+	char	*photo_path;
+	char	*photo_xpm_tmp_path;
+	char	*gps;
+}	t_profil;
+
+typedef struct s_gameinfo
+{
+	t_img	img;
+	char	*txt;
+}	t_gameinfo;
+
+
+// you current player / opp opponent
 typedef struct s_game
 {
 	void	*mlx_ptr;
 	t_win	win;
+
+	t_profil	profil_opp;
+	t_profil	profil_you;
+	t_gameinfo	info;
 
 	t_img	img_board;
 	t_case	board[5][5];
@@ -92,5 +128,15 @@ typedef struct s_game
 int		load_xpm(t_game *ga);
 void	main_loop(t_game *ga);
 void	destroy_xpm(t_game *ga);
+
+char	*get_username(void);
+char	*get_username_code(void);
+void	create_comfile(char *path);
+char	*get_user_photo(char *username);
+int		resize_img(char *src_path, char *dest_path, t_2Dvec size_max);
+char	*get_42position(void);
+
+void	destroy_profil(t_profil *profil);
+void	load_profils(t_game	*ga);
 
 #endif /* GAME_H */

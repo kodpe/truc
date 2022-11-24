@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 03:44:11 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 04:42:50 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 20:41:55 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MX_COLOR_H
 
 # define WHITE			0xffffff
+# define SILVER			0xeeeeee
 # define BLACK			0x000000
 # define INDIAN_RED		0xcd5c5c
 # define SALMON			0xfa8072

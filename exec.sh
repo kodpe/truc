@@ -8,11 +8,15 @@ VALG="valgrind \
 	--show-leak-kinds=all \
 	--track-origins=yes \
 	--leak-check=full \
+	--log-file=logs \
 "
 
 EXEC="./yokai"
 
-make -j && $VALG $EXEC
+make -j && $VALG $EXEC serveur &
+sleep 5
+$EXEC client &
+echo Done
 
 # make -j && $VALG $EXEC &
 
