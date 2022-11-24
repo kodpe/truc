@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 15:12:43 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 23:10:20 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 23:53:47 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,8 @@ void	create_client(t_game *ga)
 	ga->client = 1;
 	ga->profil_you.file = get_username_code();
 	create_comfile(ga->profil_you.file);
-
-#ifndef GAME_OPPONENT_NAME
 	ga->profil_you.name = get_username();
-#else
-	ga->profil_you.name = ft_strdup(GAME_OPPONENT_NAME);
-#endif
+
 	ga->profil_opp.file = ft_strdup(namelist[0]);
 	ft_arfree(namelist);
 

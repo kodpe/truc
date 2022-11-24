@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:15:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 23:15:32 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 23:27:46 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,25 +177,29 @@ void	mx_fill_img_bg(t_img *front, t_img *backg)
 
 int	mx_reset_img(t_img *img)
 {
-	t_img	new;
-	char	*name;
 	bool	is_xpm;
 	int		ret;
-	
-	new  = mx_init_img(img->mlx_ptr, img->win, img->origin, \
-		mx_vec(img->width, img->height));
-	name = ft_strdup(img->name);
+
+	void	*mlx_ptr = img->mlx_ptr;
+	t_win	*win = img->win;
+	t_2Dpt	origin = img->origin;
+	t_2Dvec	size = mx_vec(img->width, img->height);
+	char	*name = ft_strdup(img->name);
 	if (!name)
 		return (1);
 	if (ft_strchr(name, '/'))
 		is_xpm = true;
 	mx_destroy_img(img);
-	*img = mx_init_img(new.mlx_ptr, new.win, new.origin, mx_vec(new.width, new.height));
+	getchar();
+
+	*img = mx_init_img(mlx_ptr, win, origin, size);
 	if (is_xpm)
 		ret = mx_create_xpm_img(img, name);
 	else
 		ret = mx_create_img(img, name);
 	free(name);
 	mx_log_img(MX_NAME, img);
+
+	getchar();
 	return (ret);
 }

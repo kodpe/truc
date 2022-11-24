@@ -30,7 +30,7 @@ static void	display_waiting_room(t_game *ga)
 {
 	mx_draw_circle(&ga->waitbox.img, \
 		mx_pt(ga->waitbox.img.width / 2 - 15 + ga->waitbox.i, \
-			ga->waitbox.img.height / 2), 3, SILVER);
+			ga->waitbox.img.height / 2), 2, SILVER);
 	mx_draw_img(&ga->waitbox.img);
 
 	mlx_string_put(ga->mlx_ptr, ga->win.ptr, ga->win.width / 2 - 65, \
@@ -40,7 +40,19 @@ static void	display_waiting_room(t_game *ga)
 static int	loop_chrono_st(t_game *ga)
 {
 	usleep(200000);
-	if (mx_reset_img(&ga->waitbox.img))
+
+	// destroy im if exist
+	if (ga->waitbox.img.ptr)
+		mx_destroy_img(&ga->waitbox.img);
+
+	// create img
+	t_2Dpt	origin;
+	t_2Dvec	size;
+
+	size = mx_vec(600, 300);
+	origin = mx_pt(ga->win.width / 2 - size.x / 2, ga->win.height / 2 - size.y / 2);
+	ga->waitbox.img = mx_init_img(ga->mlx_ptr, &ga->win, origin, size);
+	if (mx_create_img(&ga->waitbox.img, "waitbox"))
 		abort();
 
 	display_waiting_room(ga);
@@ -56,8 +68,6 @@ static int	loop_chrono_st(t_game *ga)
 
 void	waiting_room(t_game *ga)
 {
-	t_2Dpt	origin;
-	t_2Dvec	size;
 
 	ga->mlx_ptr = mx_init_mlx();
 	if (!ga->mlx_ptr)
@@ -65,14 +75,6 @@ void	waiting_room(t_game *ga)
 
 	ga->win = mx_init_win(ga->mlx_ptr, 1200, 900);
 	if (mx_create_win(&ga->win, "waiting room"))
-		abort();
-
-	size = mx_vec(300, 300);
-	origin.x = ga->win.width / 2 - size.x / 2;
-	origin.y = ga->win.height / 2 - size.y / 2;
-
-	ga->waitbox.img = mx_init_img(ga->mlx_ptr, &ga->win, origin, size);
-	if (mx_create_img(&ga->waitbox.img, "waitbox"))
 		abort();
 
 	mlx_loop_hook(ga->mlx_ptr, &loop_chrono_st, ga);
@@ -83,4 +85,12 @@ void	waiting_room(t_game *ga)
 	mx_destroy_img(&ga->waitbox.img);
 	mx_destroy_win(&ga->win);
 	mx_destroy_mlx(ga->mlx_ptr);
+
+	if (dir_size(PATH_COMDIR) != 2)
+	{
+		// unlink_sc(ga.profil_you.file); // add strjoin with dcom path
+		free(ga->profil_you.file);
+		free(ga->profil_you.name);
+		exit(0);
+	}
 }

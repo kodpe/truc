@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:13:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 00:05:23 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/24 23:31:45 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_win	mx_init_win(void *mlx_ptr, int width, int height)
 
 int	mx_create_win(t_win *win, char *name)
 {
-	mx_log_win(MX_NAME, win);
 	if (win->width < 100 || win->height < 100)
 		return (1);
 	win->name = ft_strdup(name);

@@ -50,6 +50,12 @@ int	main(void)
 		create_client(&ga);
 	else
 		create_server(&ga);
+	log_com(&ga);
+	// unlink_sc(ga.profil_you.file); // add strjoin with dcom path
+	free(ga.profil_you.file);
+	free(ga.profil_you.name);
+	free(ga.profil_opp.file);
+	free(ga.profil_opp.name);
 	exit(0);
 #endif
 
