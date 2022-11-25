@@ -2,6 +2,10 @@
 
 ---
 ### MVP
+- [x] Multiplayer lobby
+- [ ] Multiplayer game
+- [x] Bloquer les signaux C-c C-\
+- [x] Ajouter photo de profil
 - [ ] game checkboard
 - [x] basic events
 - [x] charger les xpm
@@ -17,13 +21,11 @@
 
 ---
 ### ADD-ONS
-- [ ] Multijoueur
 - [ ] Trouver un nom pour le jeu
 - [ ] Passer les structures mx em ptr c'est mieux
 - [ ] Implémenter les OBB
 - [ ] Aligner les logs()
-- [ ] Bloquer les signaux C-c C-\
-- [x] Ajouter photo de profil
+- [ ] protection vs +3 exec at same time, game integrity
 
 ---
 ### RULES
