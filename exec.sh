@@ -40,14 +40,14 @@ fi
 terminator \
 		--borderless \
 		--title "server" \
-		--geometry 800x400+0+1000 \
-		--command="$VALG_SERVER $EXEC serveur &; zsh"
+		--geometry 800x450+0+990 \
+		--command="$VALG_SERVER $EXEC serveur && cat logs_server && zsh"
 sleep 3
 
 terminator \
 		--borderless \
 		--title "client" \
-		--geometry 800x400+1000+1000 \
-		--command="$VALG_CLIENT $EXEC client &; zsh"
+		--geometry 800x450+1300+990 \
+		--command="$VALG_CLIENT $EXEC client && cat logs_client && zsh"
 
 echo Done

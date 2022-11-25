@@ -44,6 +44,7 @@ void	*mlx_init();
 */
 
 void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);
+void	*mlx_new_window_pos(void *mlx_ptr,int size_x,int size_y,char *title, int screen_x, int screen_y);
 /*
 **  return void *0 if failed
 */

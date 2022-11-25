@@ -71,6 +71,8 @@ typedef struct s_win
 	void	*ptr;
 	int		height;
 	int		width;
+	int		x;
+	int		y;
 	char	*name;
 	t_aabb	box;
 	void	*mlx_ptr;
@@ -98,7 +100,7 @@ void	*mx_init_mlx(void);
 void	mx_destroy_mlx(void *mlx_ptr);
 
 /* WINDOW */
-t_win	mx_init_win(void *mlx_ptr, int width, int height);
+t_win	mx_init_win(void *mlx_ptr, int width, int height, int x, int y);
 int		mx_create_win(t_win *win, char *name);
 void	mx_destroy_win(t_win *win);
 

@@ -66,13 +66,23 @@ int	main(void)
 	mx_destroy_mlx(ga.mlx_ptr);
 # endif
 #endif
-
 	// MLX INIT
 	ga.mlx_ptr = mx_init_mlx();
-	ga.win = mx_init_win(ga.mlx_ptr, 1200, 900);
-	if (mx_create_win(&ga.win, "w2"))
+	if (!ga.mlx_ptr)
 		abort();
-	
+	if (ga.server)
+	{
+		ga.win = mx_init_win(ga.mlx_ptr, 1200, 900, 0, 0);
+		if (mx_create_win(&ga.win, "server"))
+			abort();
+	}
+	if (ga.client)
+	{
+		ga.win = mx_init_win(ga.mlx_ptr, 1200, 900, 1300, 0);
+		if (mx_create_win(&ga.win, "client"))
+			abort();
+	}
+
 	ga.img_board = mx_init_img(ga.mlx_ptr, &ga.win, mx_pt(200, 0), mx_vec(800, 800));
 	if (mx_create_img(&ga.img_board, "img_board"))
 		abort();

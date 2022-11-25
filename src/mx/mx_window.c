@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:13:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 23:31:45 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:01:19 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 #undef MX_NAME
 #define MX_NAME "mx_init_win()"
 
-t_win	mx_init_win(void *mlx_ptr, int width, int height)
+t_win	mx_init_win(void *mlx_ptr, int width, int height, int x, int y)
 {
 	t_win	win;
 
 	ft_memset(&win, 0, sizeof(t_win));
 	win.width = width;
 	win.height = height;
+	win.x = x;
+	win.y = y;
 	win.mlx_ptr = mlx_ptr;
 	mx_log_win(MX_NAME, &win);
 	return (win);
@@ -37,8 +39,8 @@ int	mx_create_win(t_win *win, char *name)
 	win->name = ft_strdup(name);
 	if (!win->name)
 		return (1);
-	win->ptr = mlx_new_window(win->mlx_ptr, \
-		win->width, win->height, win->name);
+	win->ptr = mlx_new_window_pos(win->mlx_ptr, \
+		win->width, win->height, win->name, win->x, win->y);
 	if (!win->ptr)
 		return (1);
 	win->box = mx_aabb(mx_pt(0, 0), mx_vec(win->width, win->height));

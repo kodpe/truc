@@ -156,9 +156,18 @@ void	lobby_room(t_game *ga)
 	ga->mlx_ptr = mx_init_mlx();
 	if (!ga->mlx_ptr)
 		abort();
-	ga->win = mx_init_win(ga->mlx_ptr, 1200, 900);
-	if (mx_create_win(&ga->win, "u1"))
-		abort();
+	if (ga->server)
+	{
+		ga->win = mx_init_win(ga->mlx_ptr, 1200, 900, 0, 0);
+		if (mx_create_win(&ga->win, "server"))
+			abort();
+	}
+	if (ga->client)
+	{
+		ga->win = mx_init_win(ga->mlx_ptr, 1200, 900, 1300, 0);
+		if (mx_create_win(&ga->win, "client"))
+			abort();
+	}
 
 	// MLX LOOP
 	mlx_loop_hook(ga->mlx_ptr, &main_loop_st, ga);

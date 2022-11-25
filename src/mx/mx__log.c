@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 15:51:02 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:02:27 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	mx_log_win(const char *msg, t_win *win)
 	fprintf(stderr, "%s:window:\n", msg);
 	fprintf(stderr, "ptr     :[%p]\n", win->ptr);
 	fprintf(stderr, "size    :[%i]x[%i]\n", win->width, win->height);
+	fprintf(stderr, "origin  :[%i],[%i]\n", win->x, win->y);
 	fprintf(stderr, "title   :[%s]\n", win->name);
 	fprintf(stderr, "mlx_ptr :[%p]\n", win->mlx_ptr);
 	// mx_log_aabb("window", win->box);
