@@ -1,0 +1,13 @@
+f 0 0 11110000 n 0 1 10011001 d 1 0 11000011 w 1 1 00001111 l 0 4 u 4 0 m 3 4 c 4 4
+
+# f fighter pos x pos y dep [00000000]
+# n ninja
+# d dragon
+# w witch
+
+# l lamp
+# u lotus
+# m mountain
+# c castle
+
+# strjoin() all piece

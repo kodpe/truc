@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 19:37:41 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:51:00 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 
 # define SERVER_NAME	"clvicent"
 # define CLIENT_NAME	"chsimon"
+
+// # define STOP_AFTER_INIT
 
 # define MULTIPLAYER
 

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:31:36 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 19:38:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:50:52 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	game_init(t_game *ga)
 	else
 		create_server(ga);
 	lobby_room(ga);
-# if 1
+# ifdef STOP_AFTER_INIT
 	lobby_exit(ga);
 	LOG
 	dprintf(2, "\033[1;31mEXIT SUCCESS\033[0m\n");
