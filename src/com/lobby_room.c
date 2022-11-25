@@ -15,6 +15,9 @@
 static int	hook_crossdestroy_st(t_game *ga)
 {
 	mlx_loop_end(ga->mlx_ptr);
+	lobby_exit(ga);
+	LOG
+	exit(0);
 	return (0);
 }
 
@@ -23,6 +26,9 @@ static int	hook_key_press_st(int keycode, t_game *ga)
 	if (keycode == KEY_ESCAPE)
 	{
 		mlx_loop_end(ga->mlx_ptr);
+		lobby_exit(ga);
+		LOG
+		exit(0);
 		return (0);
 	}
 	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
@@ -106,7 +112,7 @@ int	loop_starting(t_game *ga)
 		abort();
 
 	if (ga->waitbox.starting_delay == 0)
-		ga->waitbox.starting_delay = 10 * 5;
+		ga->waitbox.starting_delay = 9 * 5; // 9 seconds
 
 	display_starting_room(ga);
 
