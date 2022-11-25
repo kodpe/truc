@@ -75,7 +75,6 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 # $(CC) $(CFLAGS) -c $< -o $@
 		$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 #\
-		
 		@echo $(cg)"(@) "$@" (<) "$<
 
 mlx:
