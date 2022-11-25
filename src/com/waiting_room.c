@@ -71,7 +71,6 @@ static int	loop_chrono_st(t_game *ga)
 
 void	waiting_room(t_game *ga)
 {
-
 	ga->mlx_ptr = mx_init_mlx();
 	if (!ga->mlx_ptr)
 		abort();

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 15:12:43 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 14:45:39 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:59:27 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	server_exist(void)
 	if (dir_size(PATH_COMDIR) > 1)
 	{
 		LOG
-		dprintf(2, "ERROR com dir broken:too many files\n");
-		abort();
+		dprintf(2, "ERROR com dir broken:corrupted files or a game is already in progress\n");
+		exit(1);
 	}
 	namelist = dir_namelist(PATH_COMDIR);
 	if (!namelist)
