@@ -24,7 +24,8 @@ VALG_CLIENT="valgrind \
 "
 
 clear
-# rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
+rm -f /tmp/*.xpm
+rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
 ./update_makefile.sh
 make -j 
 if [ $? -eq 0 ]; then
@@ -40,14 +41,26 @@ fi
 terminator \
 		--borderless \
 		--title "server" \
-		--geometry 800x450+0+990 \
+		--geometry 800x450+0+1000 \
 		--command="$VALG_SERVER $EXEC serveur && cat logs_server && zsh"
-sleep 3
+sleep 2
 
 terminator \
 		--borderless \
 		--title "client" \
-		--geometry 800x450+1300+990 \
+		--geometry 800x450+1700+1000 \
 		--command="$VALG_CLIENT $EXEC client && cat logs_client && zsh"
+
+sleep 12
+
+terminator \
+		--borderless \
+		--geometry 800x220+850+1000 \
+		--command="cd /tmp/ && ls -la *.xpm && zsh"
+
+terminator \
+		--borderless \
+		--geometry 800x220+850+1220 \
+		--command="cd /sgoinfre/goinfre/Perso/sloquett/dcom/ && ls -la && zsh"
 
 echo Done
