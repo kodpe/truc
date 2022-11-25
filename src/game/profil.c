@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 20:42:59 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 11:38:00 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:58:12 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	destroy_profil(t_profil *profil)
 {
-	free(profil->name);
+	char	*comfilepath = ft_strjoin(PATH_COMDIR, profil->file);
+	unlink_sc(comfilepath);
+	free(comfilepath);
 	free(profil->file);
+	free(profil->name);
 	free(profil->gps);
 	free(profil->photo_path);
 	if (profil->photo_xpm_tmp_path)
@@ -79,33 +82,21 @@ void	load_profils(t_game	*ga)
 
 	/**	YOU	**/
 	you = mx_pt(0, 700);
-	ft_memset(&ga->profil_you, 0, sizeof(ga->profil_you));
 	ga->profil_you.img = mx_init_img(ga->mlx_ptr, &ga->win, you, mx_vec(200, 100));
 	if (mx_create_img(&ga->profil_you.img, "profil_you"))
 		abort();
 	mx_draw_aabb(&ga->profil_you.img, ga->profil_you.img.box_rel, RED);
 	mx_draw_img(&ga->profil_you.img);
-
-	ga->profil_you.file = get_username_code();
-	create_comfile(ga->profil_you.file);
-	ga->profil_you.name = get_username();
-
 	load_profil_photo(ga, &ga->profil_you, you);
 	put_profil_info(ga, &ga->profil_you, you);
 
 	/** OPPONENT **/
 	opp = mx_pt(1000, 0);
-	ft_memset(&ga->profil_opp, 0, sizeof(ga->profil_opp));
 	ga->profil_opp.img = mx_init_img(ga->mlx_ptr, &ga->win, opp, mx_vec(200, 100));
 	if (mx_create_img(&ga->profil_opp.img, "profil_opp"))
 		abort();
 	mx_draw_aabb(&ga->profil_opp.img, ga->profil_opp.img.box_rel, RED);
 	mx_draw_img(&ga->profil_opp.img);
-
-	ga->profil_opp.file = get_username_code();
-	create_comfile(ga->profil_opp.file);
-	ga->profil_opp.name = ft_strdup("chsimon");
-
 	load_profil_photo(ga, &ga->profil_opp, opp);
 	put_profil_info(ga, &ga->profil_opp, opp);
 }

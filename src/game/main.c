@@ -46,6 +46,7 @@ int	main(void)
 
 #ifdef SOLO
 	dprintf(2, "\033[1;31mSOLO MODE\033[0m\n");
+	abort(); // TODO
 #endif
 
 #ifdef MULTIPLAYER
@@ -55,19 +56,21 @@ int	main(void)
 	else
 		create_server(&ga);
 	lobby_room(&ga);
+# if 0
 	lobby_exit(&ga);
 	LOG
 	dprintf(2, "\033[1;31mEXIT SUCCESS\033[0m\n");
 	exit(0);
+# else
+	mx_destroy_win(&ga.win);
+	mx_destroy_mlx(ga.mlx_ptr);
+# endif
 #endif
 
-
-
-
-
+	// MLX INIT
 	ga.mlx_ptr = mx_init_mlx();
 	ga.win = mx_init_win(ga.mlx_ptr, 1200, 900);
-	if (mx_create_win(&ga.win, "y"))
+	if (mx_create_win(&ga.win, "w2"))
 		abort();
 	
 	ga.img_board = mx_init_img(ga.mlx_ptr, &ga.win, mx_pt(200, 0), mx_vec(800, 800));
@@ -100,12 +103,13 @@ int	main(void)
 	destroy_xpm(&ga);
 
 
-	destroy_profil(&ga.profil_you);
-	destroy_profil(&ga.profil_opp);
 
 	mx_destroy_img(&ga.info.img);
 
 	mx_destroy_img(&ga.img_board);
+
+	destroy_profil(&ga.profil_you);
+	destroy_profil(&ga.profil_opp);
 	mx_destroy_win(&ga.win);
 	mx_destroy_mlx(ga.mlx_ptr);
 	LOG
