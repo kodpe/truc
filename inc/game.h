@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 19:30:13 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:34:38 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ typedef struct s_game
 	t_2Dpt	mouse;
 }	t_game;
 
+void	game_init(t_game *ga);
 
 int		load_xpm(t_game *ga);
 void	main_loop(t_game *ga);

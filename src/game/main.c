@@ -36,6 +36,10 @@ void	load_info(t_game *ga)
 
 int	main(void)
 {
+	t_game	ga;
+
+	game_init(&ga);
+	/*
 	time_t	t;
 	t_game	ga;
 
@@ -82,6 +86,7 @@ int	main(void)
 		if (mx_create_win(&ga.win, "client"))
 			abort();
 	}
+	*/
 
 	ga.img_board = mx_init_img(ga.mlx_ptr, &ga.win, mx_pt(200, 0), mx_vec(800, 800));
 	if (mx_create_img(&ga.img_board, "img_board"))
