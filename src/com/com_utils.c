@@ -1,17 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   com.c                                              :+:      :+:    :+:   */
+/*   com_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:52:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 13:31:19 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 16:46:05 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
+void	log_com(t_game *ga)
+{
+	dprintf(2, "==========================================\n");
+	LOG
+	if (ga->server && ga->client)
+		dprintf(2, "\033[1;31mFATAL ERROR SERV/CL\n");
+	if (ga->server == true)
+		dprintf(2, "\033[1;32mSERVER\n");
+	if (ga->client == true)
+		dprintf(2, "\033[1;32mCLIENT\n");
+	dprintf(2, "\033[0;35m");
+	dprintf(2, "PLAYER   : [%s] [%s]\n", ga->profil_you.name, ga->profil_you.file);
+	dprintf(2, "OPPONENT : [%s] [%s]\n", ga->profil_opp.name, ga->profil_opp.file);
+	dprintf(2, "\033[0m\n");
+	dprintf(2, "==========================================\n");
+}
 
 char	*get_username(void)
 {
@@ -44,6 +60,41 @@ char	*set_username_code(char *name)
 	free(num);
 	assert(username_code);
 	return (username_code);
+}
+
+char	*get_opponent_file(char	*player_file)
+{
+	char	**namelist;
+	char	*opp_file;
+
+	namelist = dir_namelist(PATH_COMDIR);
+	assert(namelist);
+	if (ft_strcmp(player_file, namelist[0]))
+		opp_file = ft_strdup(namelist[0]);
+	else
+		opp_file = ft_strdup(namelist[1]);
+	ft_arfree(namelist);
+	assert(opp_file);
+	return (opp_file);
+}
+
+char	*parse_opponent_name(char *opp_file)
+{
+	char	*opp_name;
+	int		i;
+
+	assert(opp_file);
+	i = 0;
+	while (opp_file[i])
+	{
+		if (opp_file[i] == '_')
+			break ;
+		i++;
+	}
+	opp_name = ft_strldup(opp_file, i + 1);
+	if (!opp_name)
+		abort();
+	return (opp_name);
 }
 
 void	create_comfile(char *comfile_path)

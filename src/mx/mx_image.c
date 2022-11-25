@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:15:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 23:27:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:51:13 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	mx_create_xpm_img(t_img *img, char *file)
 
 void	mx_destroy_img(t_img *img)
 {
-	mx_log_img(MX_NAME, img);
 	if (img == NULL)
 		return ;
+	mx_log_img(MX_NAME, img);
 	if (img->ptr)
 		mlx_destroy_image(img->mlx_ptr, img->ptr);
 	if (img->name)

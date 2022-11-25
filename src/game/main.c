@@ -44,26 +44,26 @@ int	main(void)
 	srand(time(&t));
 	ft_memset(&ga, 0, sizeof(t_game));
 
-#if 1
-	// SERVEUR x CLIENT
+#ifdef SOLO
+	dprintf(2, "\033[1;31mSOLO MODE\033[0m\n");
+#endif
+
+#ifdef MULTIPLAYER
+
 	if (server_exist())
 		create_client(&ga);
 	else
 		create_server(&ga);
-
-	char	*comfilepath = ft_strjoin(PATH_COMDIR, ga.profil_you.file);
-	unlink_sc(comfilepath);
-	free(comfilepath);
-	free(ga.profil_you.file);
-	free(ga.profil_you.name);
-	free(ga.profil_opp.file);
-	free(ga.profil_opp.name);
+	lobby_room(&ga);
+	lobby_exit(&ga);
+	LOG
+	dprintf(2, "\033[1;31mEXIT SUCCESS\033[0m\n");
 	exit(0);
-
-	// mx_destroy_win(&ga.win);
-	// mx_destroy_mlx(ga.mlx_ptr);
-	return (0);
 #endif
+
+
+
+
 
 	ga.mlx_ptr = mx_init_mlx();
 	ga.win = mx_init_win(ga.mlx_ptr, 1200, 900);

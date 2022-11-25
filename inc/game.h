@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 13:33:49 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:10:38 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,18 @@
 # define PATH_PHOTO		"/sgoinfre/photos_students/"
 # define PATH_MAGICK	"/sgoinfre/goinfre/Perso/sloquett/tools/magick"
 
-# define GAME_STR_START	"Game will start in  s"
-# define GAME_STR_WAIT	"Waiting for an opponent"
+# define STR_START	"Game will start in  s"
+# define STR_WAIT	"Waiting for an opponent"
 
-# define GAME_OPPONENT_NAME	"chsimon"
+# define SERVER_NAME	"vbarbier"
+# define CLIENT_NAME	"chsimon"
+
+# define MULTIPLAYER
+
+# undef SOLO
+# ifndef MULTIPLAYER
+#  define SOLO
+# endif
 
 typedef enum e_xpmid
 {
@@ -149,14 +157,26 @@ int		load_xpm(t_game *ga);
 void	main_loop(t_game *ga);
 void	destroy_xpm(t_game *ga);
 
+/* COM UTILS */
+void	log_com(t_game *ga);
 char	*get_username(void);
 char	*get_username_code(void);
 char	*set_username_code(char *name);
+char	*get_opponent_file(char	*player_file);
+char	*parse_opponent_name(char *opp_file);
 void	create_comfile(char *path);
 char	*get_user_photo(char *username);
 int		resize_img(char *src_path, char *dest_path, t_2Dvec size_max);
 char	*get_42position(void);
 
+/* COM */
+int		server_exist(void);
+void	create_server(t_game *ga);
+void	create_client(t_game *ga);
+void	receive_opponent(t_game *ga);
+
+
+////
 void	destroy_profil(t_profil *profil);
 void	load_profils(t_game	*ga);
 
@@ -164,12 +184,8 @@ void	load_profils(t_game	*ga);
 void	dir_log(char *dirpath);
 int		dir_size(char *dirpath);
 char	**dir_namelist(char *dirpath);
-// com
-void	log_com(t_game *ga);
-int		server_exist(void);
-void	create_server(t_game *ga);
-void	create_client(t_game *ga);
-void	waiting_room(t_game *ga);
-void	starting_room(t_game *ga);
+
+void	lobby_room(t_game *ga);
+void	lobby_exit(t_game *ga);
 
 #endif /* GAME_H */

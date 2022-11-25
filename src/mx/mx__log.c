@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 14:11:50 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:51:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	mx_log_img(const char *msg, t_img *img)
 	fprintf(stderr, "\n");
 	fprintf(stderr, "%s:image:%s\n", msg, img->name);
 	fprintf(stderr, "ptr     [%14p] addr    [%14p]\n", img->ptr, img->addr);
-	fprintf(stderr, "mlx_ptr [%14p] win_ptr [%14p]\n", img->mlx_ptr, img->win->ptr);
+	fprintf(stderr, "mlx_ptr [%14p] win     [%14p]\n", img->mlx_ptr, img->win);
 	fprintf(stderr, "origin  x[%4i]  y[%4i] ", img->origin.x, img->origin.y);
 	fprintf(stderr, "size    w[%4i]  h[%4i]\n", img->width, img->height);
 	// mx_log_aabb("box_rel ", img->box_rel);
