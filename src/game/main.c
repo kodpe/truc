@@ -41,8 +41,8 @@ int	main(void)
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	ft_memset(&ga, 0, sizeof(t_game));
 	srand(time(&t));
+	ft_memset(&ga, 0, sizeof(t_game));
 
 #if 1
 	// SERVEUR x CLIENT

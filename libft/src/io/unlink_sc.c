@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:14:03 by sloquet           #+#    #+#             */
-/*   Updated: 2022/07/28 16:14:10 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:49:23 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	unlink_sc(char *str)
 {
+	dprintf(2, "\033[0;33munlink [%s]\033[0m\n", str);
 	if (unlink(str) == -1)
 	{
 		perror("unlink");

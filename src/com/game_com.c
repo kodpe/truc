@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 15:12:43 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 14:34:59 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:45:39 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,16 @@ void	create_server(t_game *ga)
 	dprintf(2, "CREATE GAME AS SERVER / WAITING FOR CLIENT OPPONENT\n");
 	ga->server = 1;
 	ga->client = 0;
+	ga->profil_you.name = get_username();
 	ga->profil_you.file = get_username_code();
 	create_comfile(ga->profil_you.file);
 
-	ga->profil_you.name = get_username();
 	waiting_room(ga);
+
 	if (dir_size(PATH_COMDIR) != 2)
 	{
 		LOG
-		dprintf(2, "ERROR com dir broken: invalid files (2)\n");
+		dprintf(2, "ERROR com dir broken: bad client file (2)\n");
 		abort();
 	}
 	namelist = dir_namelist(PATH_COMDIR);
@@ -88,10 +89,9 @@ void	create_server(t_game *ga)
 	else
 		ga->profil_opp.file = ft_strdup(namelist[1]);
 	ft_arfree(namelist);
-
 	parse_opponent_name(ga);
+
 	starting_room(ga);
-	assert(ga->server == true);
 }
 
 void	create_client(t_game *ga)
@@ -99,30 +99,27 @@ void	create_client(t_game *ga)
 	char	**namelist;
 
 	dprintf(2, "CREATE GAME AS CLIENT / JOIN SERVER OPPONENT\n");
-	namelist = dir_namelist(PATH_COMDIR);
-	if (!namelist)
-		abort();
 	ga->server = 0;
 	ga->client = 1;
+	namelist = dir_namelist(PATH_COMDIR);
+	assert(namelist);
+	ga->profil_opp.file = ft_strdup(namelist[0]);
+	ft_arfree(namelist);
+	parse_opponent_name(ga);
 
 #ifdef GAME_OPPONENT_NAME
 
-	ga->profil_you.file = set_username_code(GAME_OPPONENT_NAME);
 	ga->profil_you.name = ft_strdup(GAME_OPPONENT_NAME);
+	ga->profil_you.file = set_username_code(GAME_OPPONENT_NAME);
 
 #else
 
-	ga->profil_you.file = get_username_code();
 	ga->profil_you.name = get_username();
+	ga->profil_you.file = get_username_code();
 
 #endif
 
 	create_comfile(ga->profil_you.file);
 
-	ga->profil_opp.file = ft_strdup(namelist[0]);
-	ft_arfree(namelist);
-
-	parse_opponent_name(ga);
 	starting_room(ga);
-	assert(ga->client == true);
 }
