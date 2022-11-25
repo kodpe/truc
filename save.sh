@@ -5,5 +5,5 @@ git commit -am save
 git push
 make -j
 clear
-ls
-echo "done!"
+ls -la
+echo -e "\033[1;33mDone!\033[0m"
