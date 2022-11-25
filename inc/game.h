@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 19:34:38 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:37:41 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,12 @@ typedef struct s_game
 
 void	game_init(t_game *ga);
 
-int		load_xpm(t_game *ga);
-void	main_loop(t_game *ga);
-void	destroy_xpm(t_game *ga);
+/* COM */
+int		server_exist(void);
+void	create_server(t_game *ga);
+void	create_client(t_game *ga);
+void	receive_opponent(t_game *ga);
+
 
 /* COM UTILS */
 void	log_com(t_game *ga);
@@ -170,12 +173,12 @@ char	*get_user_photo(char *username);
 int		resize_img(char *src_path, char *dest_path, t_2Dvec size_max);
 char	*get_42position(void);
 
-/* COM */
-int		server_exist(void);
-void	create_server(t_game *ga);
-void	create_client(t_game *ga);
-void	receive_opponent(t_game *ga);
 
+// MAIN LOOP
+void	main_loop(t_game *ga);
+
+int		load_xpm(t_game *ga);
+void	destroy_xpm(t_game *ga);
 
 ////
 void	destroy_profil(t_profil *profil);
