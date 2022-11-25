@@ -14,7 +14,7 @@ EXEC="./yokai"
 
 make -j && $VALG $EXEC serveur &
 
-sleep 5
+sleep 10
 $EXEC client &
 echo Done
 
