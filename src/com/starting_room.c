@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 12:33:21 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 23:48:54 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 11:16:51 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ void	starting_room(t_game *ga)
 	mx_destroy_mlx(ga->mlx_ptr);
 	if (dir_size(PATH_COMDIR) != 2)
 	{
-		unlink_sc(ga->profil_you.file);
+		char	*comfilepath = ft_strjoin(PATH_COMDIR, ga->profil_you.file);
+		unlink_sc(comfilepath);
+		free(comfilepath);
 		free(ga->profil_you.file);
 		free(ga->profil_you.name);
 		free(ga->profil_opp.file);

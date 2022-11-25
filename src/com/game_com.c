@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 15:12:43 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 23:53:47 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 11:21:55 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	log_com(t_game *ga)
 {
+	dprintf(2, "==========================================\n");
+	dprintf(2, "\033[35m");
 	dprintf(2, "GAME %s VS %s\n", ga->profil_you.name, ga->profil_opp.name);
 	dprintf(2, "PLAYER_NAME    : [%s]\n", ga->profil_you.name);
 	dprintf(2, "PLAYER_FILE    : [%s]\n", ga->profil_you.file);
@@ -25,6 +27,7 @@ void	log_com(t_game *ga)
 	else
 		dprintf(2, "server : %s\nclient : %s\n", \
 			ga->profil_opp.name, ga->profil_you.name);
+	dprintf(2, "\033[0m\n");
 }
 
 int	server_exist(void)

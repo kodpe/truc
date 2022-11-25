@@ -51,11 +51,17 @@ int	main(void)
 	else
 		create_server(&ga);
 	log_com(&ga);
-	// unlink_sc(ga.profil_you.file); // add strjoin with dcom path
+
+	char	*comfilepath = ft_strjoin(PATH_COMDIR, ga.profil_you.file);
+	unlink_sc(comfilepath);
+	free(comfilepath);
 	free(ga.profil_you.file);
 	free(ga.profil_you.name);
 	free(ga.profil_opp.file);
 	free(ga.profil_opp.name);
+
+	mx_destroy_win(&ga.win);
+	mx_destroy_mlx(ga.mlx_ptr);
 	exit(0);
 #endif
 

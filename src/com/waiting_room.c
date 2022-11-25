@@ -88,7 +88,9 @@ void	waiting_room(t_game *ga)
 
 	if (dir_size(PATH_COMDIR) != 2)
 	{
-		// unlink_sc(ga.profil_you.file); // add strjoin with dcom path
+		char	*comfilepath = ft_strjoin(PATH_COMDIR, ga->profil_you.file);
+		unlink_sc(comfilepath);
+		free(comfilepath);
 		free(ga->profil_you.file);
 		free(ga->profil_you.name);
 		exit(0);
