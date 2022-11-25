@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 17:10:38 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:30:13 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define STR_START	"Game will start in  s"
 # define STR_WAIT	"Waiting for an opponent"
 
-# define SERVER_NAME	"vbarbier"
+# define SERVER_NAME	"clvicent"
 # define CLIENT_NAME	"chsimon"
 
 # define MULTIPLAYER
