@@ -130,7 +130,6 @@ int	loop_starting(t_game *ga)
 	mx_wait_fps(5);
 	// destroy img
 	mx_destroy_img(&ga->waitbox.img);
-	getchar();
 	return (0);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   game_room.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 21:27:27 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 22:04:33 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,15 @@ int	hook_mouse_move(int x, int y, t_game *ga)
 
 int	hook_frame(t_game *ga)
 {
-	sleep(0.1);
 	// fprintf(stderr, "<> mouse [%i],[%i]\n", ga->mouse.x, ga->mouse.y);
 
-#if 0
-	for (int i = 0; i < 8; i++)
-	{
-		if (ga->piece[i].mouseover == true)
-			mx_draw_aabb(&ga->piece[i].img, ga->piece[i].img.box_rel, WHITE);
-	}
-#endif
+	mx_wait_fps(30);
+	//destroy images
+	if (assert_comfile(ga->profil_opp.file))
+		mlx_loop_end(ga->mlx_ptr);
+	if (assert_comfile(ga->profil_you.file))
+		mlx_loop_end(ga->mlx_ptr);
 	return (0);
-	(void)ga;
 }
 
 #if 1
