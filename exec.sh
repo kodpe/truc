@@ -1,7 +1,6 @@
 #!/bin/bash
-clear
-rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
-./update_makefile.sh
+
+EXEC="./yokai"
 
 VALG="valgrind \
 	--show-leak-kinds=all \
@@ -10,16 +9,45 @@ VALG="valgrind \
 	--log-file=logs \
 "
 
-EXEC="./yokai"
+VALG_SERVER="valgrind \
+	--show-leak-kinds=all \
+	--track-origins=yes \
+	--leak-check=full \
+	--log-file=logs_server \
+"
 
-make -j && $VALG $EXEC serveur &
+VALG_CLIENT="valgrind \
+	--show-leak-kinds=all \
+	--track-origins=yes \
+	--leak-check=full \
+	--log-file=logs_client \
+"
 
-sleep 10
-$EXEC client &
+clear
+# rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
+./update_makefile.sh
+make -j 
+if [ $? -eq 0 ]; then
+	echo "make success!"
+else
+	echo "make failure!"; exit
+fi
+
+# $VALG_SERVER $EXEC serveur &
+# sleep 3
+# $VALG_CLIENT $EXEC client &
+
+terminator \
+		--borderless \
+		--title "server" \
+		--geometry 800x400+0+1000 \
+		--command="$VALG_SERVER $EXEC serveur &; zsh"
+sleep 3
+
+terminator \
+		--borderless \
+		--title "client" \
+		--geometry 800x400+1000+1000 \
+		--command="$VALG_CLIENT $EXEC client &; zsh"
+
 echo Done
-
-# make -j && $VALG $EXEC &
-
-# sleep 1
-# make -j && valgrind --leak-check=full ./yokai &
-
