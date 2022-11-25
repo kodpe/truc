@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 23:14:44 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:33:49 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ typedef struct s_game
 {
 	bool	server;
 	bool	client;
+	bool	room_wait; //
+	bool	room_start; //
+	bool	room_game; //
 
 	t_waiting_box	waitbox;
 
@@ -148,6 +151,7 @@ void	destroy_xpm(t_game *ga);
 
 char	*get_username(void);
 char	*get_username_code(void);
+char	*set_username_code(char *name);
 void	create_comfile(char *path);
 char	*get_user_photo(char *username);
 int		resize_img(char *src_path, char *dest_path, t_2Dvec size_max);

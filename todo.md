@@ -4,7 +4,7 @@
 ### MVP
 - [ ] game checkboard
 - [x] basic events
-- [ ] charger les xpm
+- [x] charger les xpm
 - [x] position mouse
 - [x] event mouse
 - [x] event Keyboard
@@ -23,7 +23,7 @@
 - [ ] Implémenter les OBB
 - [ ] Aligner les logs()
 - [ ] Bloquer les signaux C-c C-\
-- [ ] Ajouter photo de profil
+- [x] Ajouter photo de profil
 
 ---
 ### RULES
@@ -57,3 +57,17 @@ Chochin . Lanterne  | ``NO``  |	Révèle le contenu des cases accessibles au per
 Renge . Lotus       | ``NO``  | Offre une deuxième vie à un personnage. Il est détruit à sa place.
 Yama . Montagne     | ``NO``  | Double la portée du personnage allié ou ennemi présent sur la case. Ne peut etre détruit.
 Shiro . Chateau     | ``NO``  | Le joueur qui s'empare du chateau de son adverse gagne la partie.
+
+#### Computer AI
+	/*
+	- placer ses 8 pièces de manière aléatoire
+		- chateau sur la ligne du fond
+		- dragon devant le chateau
+		- les autres pieces position random
+	- choisir une pièce sur le board sauf le dragon ou une pièce à parachuter
+	- choisir une case de destination parmi les positions possibles
+	- si chateau position inconnue :
+		tester le plus vite possible les 10 cases adverses pour trouver le chateau
+	- si chateau position trouvée :
+		rush le chateau ennemi
+	*/

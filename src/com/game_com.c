@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 15:12:43 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 11:21:55 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:34:59 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 void	log_com(t_game *ga)
 {
 	dprintf(2, "==========================================\n");
-	dprintf(2, "\033[35m");
-	dprintf(2, "GAME %s VS %s\n", ga->profil_you.name, ga->profil_opp.name);
-	dprintf(2, "PLAYER_NAME    : [%s]\n", ga->profil_you.name);
-	dprintf(2, "PLAYER_FILE    : [%s]\n", ga->profil_you.file);
-	dprintf(2, "OPONNENT_NAME  : [%s]\n", ga->profil_opp.name);
-	dprintf(2, "OPONNENT_FILE  : [%s]\n", ga->profil_opp.file);
-	if (ga->server)
-		dprintf(2, "server : %s\nclient : %s\n", \
-			ga->profil_you.name, ga->profil_opp.name);
-	else
-		dprintf(2, "server : %s\nclient : %s\n", \
-			ga->profil_opp.name, ga->profil_you.name);
+	LOG
+	if (ga->server && ga->client)
+		dprintf(2, "\033[1;31mFATAL ERROR SERV/CL\n");
+	if (ga->server == true)
+		dprintf(2, "\033[1;32mSERVER\n");
+	if (ga->client == true)
+		dprintf(2, "\033[1;32mCLIENT\n");
+	dprintf(2, "\033[0;35m");
+	dprintf(2, "PLAYER   : [%s] [%s]\n", ga->profil_you.name, ga->profil_you.file);
+	dprintf(2, "OPPONENT : [%s] [%s]\n", ga->profil_opp.name, ga->profil_opp.file);
 	dprintf(2, "\033[0m\n");
+	dprintf(2, "==========================================\n");
 }
 
 int	server_exist(void)
@@ -79,7 +78,7 @@ void	create_server(t_game *ga)
 	if (dir_size(PATH_COMDIR) != 2)
 	{
 		LOG
-		dprintf(2, "ERROR com dir broken: invalid file\n");
+		dprintf(2, "ERROR com dir broken: invalid files (2)\n");
 		abort();
 	}
 	namelist = dir_namelist(PATH_COMDIR);
@@ -92,7 +91,7 @@ void	create_server(t_game *ga)
 
 	parse_opponent_name(ga);
 	starting_room(ga);
-	log_com(ga);
+	assert(ga->server == true);
 }
 
 void	create_client(t_game *ga)
@@ -105,14 +104,25 @@ void	create_client(t_game *ga)
 		abort();
 	ga->server = 0;
 	ga->client = 1;
+
+#ifdef GAME_OPPONENT_NAME
+
+	ga->profil_you.file = set_username_code(GAME_OPPONENT_NAME);
+	ga->profil_you.name = ft_strdup(GAME_OPPONENT_NAME);
+
+#else
+
 	ga->profil_you.file = get_username_code();
-	create_comfile(ga->profil_you.file);
 	ga->profil_you.name = get_username();
+
+#endif
+
+	create_comfile(ga->profil_you.file);
 
 	ga->profil_opp.file = ft_strdup(namelist[0]);
 	ft_arfree(namelist);
 
 	parse_opponent_name(ga);
 	starting_room(ga);
-	log_com(ga);
+	assert(ga->client == true);
 }

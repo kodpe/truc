@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 12:33:21 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 11:16:51 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 14:35:11 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ static int	hook_crossdestroy_st(t_game *ga)
 
 static int	hook_key_press_st(int keycode, t_game *ga)
 {
-	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
 	if (keycode == KEY_ESCAPE)
+	{
 		mlx_loop_end(ga->mlx_ptr);
+		return (0);
+	}
+	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
 	return (0);
 }
 
@@ -103,6 +106,7 @@ void	starting_room(t_game *ga)
 	mx_destroy_img(&ga->waitbox.img);
 	mx_destroy_win(&ga->win);
 	mx_destroy_mlx(ga->mlx_ptr);
+	log_com(ga);
 	if (dir_size(PATH_COMDIR) != 2)
 	{
 		char	*comfilepath = ft_strjoin(PATH_COMDIR, ga->profil_you.file);

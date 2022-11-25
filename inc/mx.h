@@ -25,6 +25,8 @@
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
 					c_reset();
 
+# define MX_VERBOSE	1
+
 typedef unsigned int	t_uint;
 
 typedef struct s_2Dpt

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 20:42:59 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 20:47:12 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 11:38:00 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	load_profils(t_game	*ga)
 
 	ga->profil_opp.file = get_username_code();
 	create_comfile(ga->profil_opp.file);
-	ga->profil_opp.name = ft_strdup("clvicent");
+	ga->profil_opp.name = ft_strdup("chsimon");
 
 	load_profil_photo(ga, &ga->profil_opp, opp);
 	put_profil_info(ga, &ga->profil_opp, opp);

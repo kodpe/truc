@@ -50,7 +50,6 @@ int	main(void)
 		create_client(&ga);
 	else
 		create_server(&ga);
-	log_com(&ga);
 
 	char	*comfilepath = ft_strjoin(PATH_COMDIR, ga.profil_you.file);
 	unlink_sc(comfilepath);
@@ -59,10 +58,11 @@ int	main(void)
 	free(ga.profil_you.name);
 	free(ga.profil_opp.file);
 	free(ga.profil_opp.name);
-
-	mx_destroy_win(&ga.win);
-	mx_destroy_mlx(ga.mlx_ptr);
 	exit(0);
+
+	// mx_destroy_win(&ga.win);
+	// mx_destroy_mlx(ga.mlx_ptr);
+	return (0);
 #endif
 
 	ga.mlx_ptr = mx_init_mlx();

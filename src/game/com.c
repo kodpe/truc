@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:52:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 19:58:19 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:31:19 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ char	*get_username_code(void)
 
 	num = ft_itoa(rand() % 90 + 10 + (rand() % 90 + 10) * 1000);
 	username_code = ft_strjointri(getenv("USER"), "_", num);
+	free(num);
+	assert(username_code);
+	return (username_code);
+}
+
+char	*set_username_code(char *name)
+{
+	char	*username_code;
+	char	*num;
+
+	num = ft_itoa(rand() % 90 + 10 + (rand() % 90 + 10) * 1000);
+	username_code = ft_strjointri(name, "_", num);
 	free(num);
 	assert(username_code);
 	return (username_code);

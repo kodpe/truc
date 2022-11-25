@@ -20,9 +20,12 @@ static int	hook_crossdestroy_st(t_game *ga)
 
 static int	hook_key_press_st(int keycode, t_game *ga)
 {
-	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
 	if (keycode == KEY_ESCAPE)
+	{
 		mlx_loop_end(ga->mlx_ptr);
+		return (0);
+	}
+	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
 	return (0);
 }
 
