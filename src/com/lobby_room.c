@@ -93,7 +93,7 @@ int	loop_waiting(t_game *ga)
 		mx_destroy_img(&ga->waitbox.img);
 		return (0);
 	}
-	usleep(200000);
+	mx_wait_fps(5);
 	// destroy img
 	mx_destroy_img(&ga->waitbox.img);
 	return (0);
@@ -127,9 +127,10 @@ int	loop_starting(t_game *ga)
 		mlx_loop_end(ga->mlx_ptr);
 		return (0);
 	}
-	usleep(200000);
+	mx_wait_fps(5);
 	// destroy img
 	mx_destroy_img(&ga->waitbox.img);
+	getchar();
 	return (0);
 }
 
@@ -187,6 +188,8 @@ void	lobby_room(t_game *ga)
 	}
 	assert(ga->profil_you.name);
 	assert(ga->profil_you.file);
+	assert_comfile(ga->profil_opp.file);
 	assert(ga->profil_opp.name);
 	assert(ga->profil_opp.file);
+	assert_comfile(ga->profil_you.file);
 }

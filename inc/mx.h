@@ -192,6 +192,9 @@ bool	mx_ccl_in_aabb(t_ccl cl, t_aabb box_around);
 /* OBB ORIENTED BOUNDING BOX */
 //todo
 
+/* LOOP */
+void	mx_wait_fps(int frame_per_second);
+
 typedef struct	s_test
 {
 	void	*mlx_ptr;

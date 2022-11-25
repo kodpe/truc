@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:52:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 16:46:05 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:42:51 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,4 +224,22 @@ char	*get_42position(void)
 	}
 	str[i] = '\0';
 	return (ft_strdup(str));
+}
+
+int	assert_comfile(char *comfile_path)
+{
+	char	*cwd;
+	int		ret;
+
+	assert(comfile_path);
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		abort();
+	if (-1 == chdir(PATH_COMDIR))
+		abort();
+	ret = access(comfile_path, R_OK);
+	if (-1 == chdir(cwd))
+		abort();
+	free(cwd);
+	return (ret);
 }

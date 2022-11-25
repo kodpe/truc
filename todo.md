@@ -3,6 +3,8 @@
 ---
 ### MVP
 - [x] Multiplayer lobby
+- [ ] mx_reset_image()
+- [ ] mouse react over pieces
 - [ ] Multiplayer game
 - [x] Bloquer les signaux C-c C-\
 - [x] Ajouter photo de profil

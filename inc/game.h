@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 19:51:00 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:42:32 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,6 @@ int		server_exist(void);
 void	create_server(t_game *ga);
 void	create_client(t_game *ga);
 void	receive_opponent(t_game *ga);
-
-
 /* COM UTILS */
 void	log_com(t_game *ga);
 char	*get_username(void);
@@ -174,7 +172,7 @@ void	create_comfile(char *path);
 char	*get_user_photo(char *username);
 int		resize_img(char *src_path, char *dest_path, t_2Dvec size_max);
 char	*get_42position(void);
-
+int		assert_comfile(char *comfile_path);
 
 // MAIN LOOP
 void	main_loop(t_game *ga);
