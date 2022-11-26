@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:58:19 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 17:13:20 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/25 23:14:14 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	lobby_exit(t_game *ga)
 		free(ga->profil_opp.file);
 	if (ga->profil_opp.name)
 		free(ga->profil_opp.name);
+	mx_destroy_img(&ga->waitbox.img);
 	mx_destroy_win(&ga->win);
 	mx_destroy_mlx(ga->mlx_ptr);
 }

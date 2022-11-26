@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 20:42:32 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:02:35 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ char	*get_42position(void);
 int		assert_comfile(char *comfile_path);
 
 // MAIN LOOP
+
 void	main_loop(t_game *ga);
 
 int		load_xpm(t_game *ga);
@@ -190,6 +191,8 @@ int		dir_size(char *dirpath);
 char	**dir_namelist(char *dirpath);
 
 void	lobby_room(t_game *ga);
+int		loop_waiting(t_game *ga);
+int		loop_starting(t_game *ga);
 void	lobby_exit(t_game *ga);
 
 #endif /* GAME_H */

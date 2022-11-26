@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/24 15:54:21 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 00:14:25y sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,54 @@ void	mx_fill_aabb(t_img *img, t_aabb box, t_uint hexcolor)
 	}
 }
 
+void	mx_fill_2aabb(t_img *img, t_aabb box1, t_aabb box2, t_uint hexcolor)
+{
+	t_2Dpt	max;
+	t_2Dpt	ori;
+	t_2Dpt	pt;
+
+	if (false == mx_coll_aabb(box1, box2))
+		return ;
+	max = mx_pt_add_vec(box1.origin, box1.lenght);
+	ori = box1.origin;
+	pt.y = ori.y;
+	while (pt.y <= max.y)
+	{
+		pt.x = ori.x;
+		while (pt.x <= max.x)
+		{
+			if (mx_coll_pt_2aabb(pt, box1, box2))
+				if (false == mx_sc_pixel_outside_img(img, pt.x, pt.y))
+					mx_draw_pt(img, pt, hexcolor);
+			pt.x++;
+		}
+		pt.y++;
+	}
+}
+
+void	mx_fill_not2aabb(t_img *img, t_aabb box1, t_aabb box2, t_uint hexcolor)
+{
+	t_2Dpt	max;
+	t_2Dpt	ori;
+	t_2Dpt	pt;
+
+	max = mx_pt_add_vec(box1.origin, box1.lenght);
+	ori = box1.origin;
+	pt.y = ori.y;
+	while (pt.y <= max.y)
+	{
+		pt.x = ori.x;
+		while (pt.x <= max.x)
+		{
+			if (false == mx_coll_pt_2aabb(pt, box1, box2))
+				if (false == mx_sc_pixel_outside_img(img, pt.x, pt.y))
+					mx_draw_pt(img, pt, hexcolor);
+			pt.x++;
+		}
+		pt.y++;
+	}
+}
+
 void	mx_grid_aabb(t_img *img, t_aabb box, t_2Dvec nb_tiles, t_uint hexcolor)
 {
 	t_2Dpt	a;
@@ -107,6 +155,11 @@ bool	mx_coll_xy_aabb(int x, int y, t_aabb box)
 bool	mx_coll_pt_aabb(t_2Dpt pt, t_aabb box)
 {
 	return (mx_coll_xy_aabb(pt.x, pt.y, box));
+}
+
+bool	mx_coll_pt_2aabb(t_2Dpt pt, t_aabb box1, t_aabb box2)
+{
+	return (mx_coll_pt_aabb(pt, box1) && mx_coll_pt_aabb(pt, box2));
 }
 
 bool	mx_coll_aabb(t_aabb box1, t_aabb box2)
