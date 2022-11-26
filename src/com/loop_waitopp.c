@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_waiting.c                                     :+:      :+:    :+:   */
+/*   loop_waitopp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 03:37:36 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 18:49:14 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-static void	display_waiting_room(t_game *ga, t_img *img)
+static void	display(t_game *ga, t_img *img)
 {
 	mx_draw_aabb(img, img->box_rel, SILVER);
 	mx_draw_circle(img, \
@@ -29,19 +29,32 @@ static void	display_waiting_room(t_game *ga, t_img *img)
 			abort();
 }
 
-int	loop_waiting(t_game *ga)
+int	loop_waitopp(t_game *ga)
 {
-	display_waiting_room(ga, &ga->waitbox.img);
+	display(ga, &ga->waitbox.img);
 
 	ga->waitbox.i += 10;
 	if (ga->waitbox.i == 30)
 		ga->waitbox.i = 0;
 
+	///TODO FIXME why this display nothing
+	// mx_log_event("waitopp", ga->lp_waitopp.evstat.mlx_keycode);
 	// stop condition
+	if (ga->lp_waitopp.evstat.win_exit_cross
+		|| ga->lp_waitopp.evstat.key_escape)
+	{
+		mlx_loop_end(ga->mlx_ptr);
+		lobby_exit(ga);
+		LOG
+		exit(0);
+	}
 	if (dir_size(PATH_COMDIR) == 2)
 	{
 		if (ga->server == true && ga->profil_opp.file == NULL)
+		{
 			receive_opponent(ga);
+			_goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_STARTGAME);
+		}
 		return (0);
 	}
 	// FPS

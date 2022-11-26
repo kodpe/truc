@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 16:27:58 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 18:14:22 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@
 # ifndef MULTIPLAYER
 #  define SOLO
 # endif
+
+// LOOP //
+# define LOOP_ID_WAITOPP	1
+# define LOOP_ID_STARTGAME	2
+# define LOOP_ID_GAME		3
+# define LOOP_ID_WANTQUIT	4
 
 typedef enum e_xpmid
 {
@@ -145,9 +151,11 @@ typedef struct s_game
 	bool	server;
 	bool	client;
 	bool	solo;
-	bool	room_wait; //
-	bool	room_start; //
-	bool	room_game; //
+
+	t_loop	lp_waitopp;
+	t_loop	lp_startgame;
+	t_loop	lp_game;
+	t_loop	lp_wantquit;
 
 
 	t_waiting_box	waitbox;
@@ -209,11 +217,20 @@ void	dir_log(char *dirpath);
 int		dir_size(char *dirpath);
 char	**dir_namelist(char *dirpath);
 
+//loop utils
+int		get_active_loop_id(t_game *ga);
+t_loop	*get_active_loop_ptr(t_game *ga);
+void	_goto_loop(t_game *ga, int src_id, int dest_id);
+
 void	lobby_room(t_game *ga);
-int		loop_waiting(t_game *ga);
-int		loop_starting(t_game *ga);
+
+int		loop_waitopp(t_game *ga); //OK
+
+int		loop_startgame(t_game *ga);
+// int		loop_game(t_game *ga);
+int		loop_wantquit(t_game *ga);
+
 void	lobby_exit(t_game *ga);
 
-int		loop_wantquit(t_game *ga);
 
 #endif /* GAME_H */

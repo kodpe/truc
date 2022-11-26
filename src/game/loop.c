@@ -12,79 +12,48 @@
 
 #include "game.h"
 
-static int	hook_crossdestroy_st(t_game *ga)
+
+static void	exit_tmploop(t_game *ga)
 {
-	mlx_loop_end(ga->mlx_ptr);
-	lobby_exit(ga);
-	LOG
-	exit(0);
+		mlx_loop_end(ga->mlx_ptr);
+		lobby_exit(ga);
+		LOG
+		exit(0);
+}
+
+static int	hook_win_cross_st(t_game *ga)
+{
+	t_loop	*lp;
+
+	exit_tmploop(ga); //TODO FIXME
+	lp = get_active_loop_ptr(ga);
+	if (!lp)
+		abort();
+	mx_add_keycode_to_evstat(&lp->evstat, WIN_CROSS, 42042);
 	return (0);
 }
 
 static int	hook_key_press_st(int keycode, t_game *ga)
 {
+	t_loop	*lp;
 
 	if (keycode == KEY_ESCAPE)
-	{
-		mlx_loop_end(ga->mlx_ptr);
-		lobby_exit(ga);
-		LOG
-		exit(0);
-		return (0);
-	}
-	if (keycode == KEY_LSHIFT)
-		ga->mx_evstat.key_lshift = 1;
-	if (keycode == KEY_RSHIFT)
-		ga->mx_evstat.key_rshift = 1;
-	if (keycode == KEY_CAPSLOCK)
-	{
-		if (ga->mx_evstat.key_capslock)
-			ga->mx_evstat.key_capslock = 0;
-		else
-			ga->mx_evstat.key_capslock = 1;
-	}
-
-	if (ft_isalpha(keycode))
-	{
-		if (ga->mx_evstat.key_lshift || ga->mx_evstat.key_rshift)
-		{
-			if (ga->mx_evstat.key_capslock == 0)
-				keycode = ft_toupper(keycode);
-		}
-		else
-		{
-			if (ga->mx_evstat.key_capslock)
-				keycode = ft_toupper(keycode);
-		}
-	}
-
-	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
+		exit_tmploop(ga); //TODO FIXME
+	lp = get_active_loop_ptr(ga);
+	if (!lp)
+		abort();
+	mx_add_keycode_to_evstat(&lp->evstat, KEY_PRESS, keycode);
 	return (0);
 }
 
 static int	hook_key_release_st(int keycode, t_game *ga)
 {
+	t_loop	*lp;
 
-	if (keycode == KEY_LSHIFT)
-		ga->mx_evstat.key_lshift = 0;
-	if (keycode == KEY_RSHIFT)
-		ga->mx_evstat.key_rshift = 0;
-
-	if (ft_isalpha(keycode))
-	{
-		if (ga->mx_evstat.key_lshift || ga->mx_evstat.key_rshift)
-		{
-			if (ga->mx_evstat.key_capslock == 0)
-				keycode = ft_toupper(keycode);
-		}
-		else
-		{
-			if (ga->mx_evstat.key_capslock)
-				keycode = ft_toupper(keycode);
-		}
-	}
-
-	fprintf(stderr, "<> key release [%i] [%c]\n", keycode, keycode);
+	lp = get_active_loop_ptr(ga);
+	if (!lp)
+		abort();
+	mx_add_keycode_to_evstat(&lp->evstat, KEY_RELEASE, keycode);
 	return (0);
 }
 
@@ -93,6 +62,7 @@ static void	lobby_room_init(t_game *ga)
 	log_com(ga);
 	assert(ga->profil_you.name);
 	assert(ga->profil_you.file);
+	assert(ga->profil_you.path);
 	if (ga->server == true)
 		assert(ga->profil_opp.name == NULL && ga->profil_opp.file == NULL);
 	if (ga->client == true)
@@ -142,15 +112,20 @@ static void	lobby_room_end(t_game *ga)
 	assert_comfile(ga->profil_you.path);
 }
 
-static int	main_loop_st(t_game *ga)
+static int	loop_manager(t_game *ga)
 {
-	if (ga->room_wantquit)
-		loop_wantquit(ga);
+	if (ga->lp_waitopp.active)
+		loop_waitopp(ga);
 
 	if (ga->profil_opp.file == NULL)
-		loop_waiting(ga);
+		loop_waitopp(ga);
+
 	if (ga->profil_opp.file)
-		loop_starting(ga);
+		loop_startgame(ga);
+
+	if (ga->lp_wantquit.active)
+		loop_wantquit(ga);
+
 	return (0);
 }
 
@@ -159,9 +134,14 @@ void	lobby_room(t_game *ga)
 	// INIT
 	lobby_room_init(ga);
 
+	if (ga->server == true)
+		_goto_loop(ga, 0, LOOP_ID_WAITOPP);
+	else
+		_goto_loop(ga, 0, LOOP_ID_STARTGAME);
+
 	// MLX LOOP
-	mlx_loop_hook(ga->mlx_ptr, &main_loop_st, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_CROSSDESTROY, 0, &hook_crossdestroy_st, ga);
+	mlx_loop_hook(ga->mlx_ptr, &loop_manager, ga);
+	mlx_hook(ga->win.ptr, MX_EVENT_WIN_CROSS, 0, &hook_win_cross_st, ga);
 	mlx_hook(ga->win.ptr, MX_EVENT_KEYDOWN, 1L << 0, &hook_key_press_st, ga);
 	mlx_hook(ga->win.ptr, MX_EVENT_KEYUP, 1L << 1, &hook_key_release_st, ga);
 	mlx_loop(ga->mlx_ptr);

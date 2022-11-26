@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 14:52:26 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 18:18:31 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	main_loop(t_game *ga)
 	mlx_hook(ga->win.ptr, MX_EVENT_MOUSEDOWM, 1L << 2, &hook_mouse_down, ga);
 	mlx_hook(ga->win.ptr, MX_EVENT_MOUSEUP, 1L << 3, &hook_mouse_up, ga);
 	mlx_hook(ga->win.ptr, MX_EVENT_MOUSEMOVE, 1L << 6, &hook_mouse_move, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_CROSSDESTROY,	0, &hook_crossdestroy, ga);
+	mlx_hook(ga->win.ptr, MX_EVENT_WIN_CROSS,	0, &hook_crossdestroy, ga);
 	mlx_loop(ga->mlx_ptr);
 	return ;
 }
