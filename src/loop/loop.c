@@ -25,11 +25,12 @@ static int	hook_win_cross_st(t_game *ga)
 {
 	t_loop	*lp;
 
-	exit_tmploop(ga); //TODO FIXME
 	lp = get_active_loop_ptr(ga);
 	if (!lp)
 		abort();
 	mx_add_keycode_to_evstat(&lp->evstat, WIN_CROSS, 42042);
+
+	exit_tmploop(ga); //TODO FIXME
 	return (0);
 }
 
@@ -37,12 +38,13 @@ static int	hook_key_press_st(int keycode, t_game *ga)
 {
 	t_loop	*lp;
 
-	if (keycode == KEY_ESCAPE)
-		exit_tmploop(ga); //TODO FIXME
 	lp = get_active_loop_ptr(ga);
 	if (!lp)
 		abort();
 	mx_add_keycode_to_evstat(&lp->evstat, KEY_PRESS, keycode);
+
+	if (keycode == KEY_ESCAPE)
+		exit_tmploop(ga); //TODO FIXME
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 03:44:11 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 18:42:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:08:08 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,21 @@ typedef long long	t_time;
 typedef struct s_loop
 {
 	int				active;
+	int				loop_id;
 	int				last_loop_id;
 	t_time			time_origin;
 	t_time			time_elapsed;
 	t_time			timeout;
+	t_time			last_frame_duration;
 	int				fps;
+	float			real_fps;
+	int				usleep_duration;
 	t_event_stat	evstat;
 }	t_loop;
 
 void	mx_wait_fps(int frame_per_second);
 t_time	mx_sc_time_ms(void);
 t_time	mx_time_ms(void);
-void	mx_loop_time(t_loop *loop);
+void	mx_time_loop(t_loop *loop, int fps);
 
 #endif /* MX_EVENT_H */

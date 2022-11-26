@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 18:51:05 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:10:55 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	display(t_game *ga, t_img *img)
 
 int	loop_waitopp(t_game *ga)
 {
+	mx_time_loop(&ga->lp_waitopp, 30);
 	display(ga, &ga->waitbox.img);
 
 	ga->waitbox.i += 10;
@@ -58,6 +59,6 @@ int	loop_waitopp(t_game *ga)
 		return (0);
 	}
 	// FPS
-	mx_wait_fps(5);
+	// mx_wait_fps(5);
 	return (0);
 }
