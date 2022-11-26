@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:31:36 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 19:50:52 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:16:38 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	game_init(t_game *ga)
 		create_server(ga);
 	lobby_room(ga);
 # ifdef STOP_AFTER_INIT
-	lobby_exit(ga);
-	LOG
-	dprintf(2, "\033[1;31mEXIT SUCCESS\033[0m\n");
-	exit(0);
+	lobby_exit(ga); LOG dprintf(2, "\033[1;31mEXIT SUCCESS\033[0m\n"); exit(0);
 # else
 	mx_destroy_win(&ga->win);
 	mx_destroy_mlx(ga->mlx_ptr);

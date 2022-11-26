@@ -53,7 +53,7 @@ static void	lobby_room_init(t_game *ga)
 		ga->win = mx_init_win(ga->mlx_ptr, 1200, 900, 0, 0);
 	if (ga->client)
 		ga->win = mx_init_win(ga->mlx_ptr, 1200, 900, 1300, 0);
-	if (mx_create_win(&ga->win, ga->profil_you.name))
+	if (mx_create_win(&ga->win, "y"))
 		abort();
 
 	// CREATE MLX IMG

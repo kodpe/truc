@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 03:01:02 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:37:36 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ static void	display_waiting_room(t_game *ga, t_img *img)
 	mx_draw_circle(img, \
 				mx_pt(img->width / 2 - 15 + ga->waitbox.i, \
 					img->height / 2 + 12), 2, SILVER);
+
+	mx_draw_aabb(img, mx_aabb(mx_pt(img->width / 2 - 72, img->height / 2 - 24), mx_vec(144, 16)), RED);
+
 	mx_draw_img(img);
 	mx_putstr_cen_img(img, STR_WAIT, SILVER);
 

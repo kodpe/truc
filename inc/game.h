@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 03:02:35 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:17:25 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_game
 {
 	bool	server;
 	bool	client;
+	bool	solo;
 	bool	room_wait; //
 	bool	room_start; //
 	bool	room_game; //
