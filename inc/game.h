@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 18:14:22 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 21:12:20 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define STR_WANTQUIT	"Are you sure you want to quit?"
 # define STR_WANTLOSE	"You will lose this game"
 
-# define SERVER_NAME	"clvicent"
-# define CLIENT_NAME	"chsimon"
+# define SERVER_NAME	"eamar"
+# define CLIENT_NAME	"eleotard"
 
 // # define STOP_AFTER_INIT
 # define COM_VERBOSE
@@ -142,10 +142,6 @@ typedef struct s_waiting_box
 	int		starting_delay;
 }	t_waiting_box;
 
-
-
-
-// you current player / opp opponent
 typedef struct s_game
 {
 	bool	server;
@@ -157,11 +153,8 @@ typedef struct s_game
 	t_loop	lp_game;
 	t_loop	lp_wantquit;
 
-
+	// used in waitopp, startgame, wantquit
 	t_waiting_box	waitbox;
-	t_event_stat	mx_evstat;
-
-	int	room_wantquit;
 
 	void	*mlx_ptr;
 	t_win	win;

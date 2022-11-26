@@ -117,9 +117,6 @@ static int	loop_manager(t_game *ga)
 	if (ga->lp_waitopp.active)
 		loop_waitopp(ga);
 
-	if (ga->profil_opp.file == NULL)
-		loop_waitopp(ga);
-
 	if (ga->profil_opp.file)
 		loop_startgame(ga);
 
