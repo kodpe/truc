@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 03:17:25 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:39:16 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include "mx.h"
 
 # include <unistd.h>
+# include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 # include <time.h>
 # include <dirent.h>
 # include <signal.h>
@@ -38,6 +40,9 @@
 # define CLIENT_NAME	"chsimon"
 
 // # define STOP_AFTER_INIT
+# define COM_VERBOSE
+# define COM_TRUNC_RECEIVE
+# define COM_IGNORE_EMPTY_RECEIVE
 
 # define MULTIPLAYER
 
@@ -108,6 +113,7 @@ typedef struct s_profil
 	t_img	img;
 	char	*name;
 	char	*file;
+	char	*path;
 	t_img	photo;
 	char	*photo_path;
 	char	*photo_xpm_tmp_path;
@@ -127,6 +133,14 @@ typedef struct s_waiting_box
 	int		starting_delay;
 }	t_waiting_box;
 
+typedef struct s_mx_event_stat
+{
+	int	key_ctrl;
+	int	key_alt;
+	int	key_shift;
+	int	key_capslock;
+}	t_mx_event_stat;
+
 // you current player / opp opponent
 typedef struct s_game
 {
@@ -138,6 +152,7 @@ typedef struct s_game
 	bool	room_game; //
 
 	t_waiting_box	waitbox;
+	t_mx_event_stat	mx_evstat;
 
 	void	*mlx_ptr;
 	t_win	win;
@@ -160,8 +175,8 @@ void	game_init(t_game *ga);
 /* COM */
 int		server_exist(void);
 void	create_server(t_game *ga);
-void	create_client(t_game *ga);
 void	receive_opponent(t_game *ga);
+void	create_client(t_game *ga);
 /* COM UTILS */
 void	log_com(t_game *ga);
 char	*get_username(void);
@@ -169,11 +184,13 @@ char	*get_username_code(void);
 char	*set_username_code(char *name);
 char	*get_opponent_file(char	*player_file);
 char	*parse_opponent_name(char *opp_file);
-void	create_comfile(char *path);
+char	*create_comfile(char *file);
 char	*get_user_photo(char *username);
 int		resize_img(char *src_path, char *dest_path, t_2Dvec size_max);
 char	*get_42position(void);
-int		assert_comfile(char *comfile_path);
+int		assert_comfile(char *path);
+int		com_send(char *path, char *msg);
+char	*com_receive(char *path);
 
 // MAIN LOOP
 

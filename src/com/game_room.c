@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 22:04:33 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:26:21 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ int	hook_crossdestroy(t_game *ga)
 
 int	hook_key_press(int keycode, t_game *ga)
 {
-	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
 	if (keycode == KEY_ESCAPE)
 		mlx_loop_end(ga->mlx_ptr);
+	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
+
+	char	*msg = ft_itoa(rand() % INT_MAX - INT_MAX / 2);
+	if (com_send(ga->profil_you.path, msg))
+		abort();
+	free(msg);
 	return (0);
 }
 
@@ -102,10 +107,13 @@ int	hook_frame(t_game *ga)
 
 	mx_wait_fps(30);
 	//destroy images
-	if (assert_comfile(ga->profil_opp.file))
+	if (assert_comfile(ga->profil_opp.path))
 		mlx_loop_end(ga->mlx_ptr);
-	if (assert_comfile(ga->profil_you.file))
+	if (assert_comfile(ga->profil_you.path))
 		mlx_loop_end(ga->mlx_ptr);
+
+	char	*msg = com_receive(ga->profil_opp.path);
+	free(msg);
 	return (0);
 }
 

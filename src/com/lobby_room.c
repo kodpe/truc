@@ -32,6 +32,7 @@ static int	hook_key_press_st(int keycode, t_game *ga)
 		return (0);
 	}
 	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
+
 	return (0);
 }
 
@@ -83,10 +84,10 @@ static void	lobby_room_end(t_game *ga)
 	}
 	assert(ga->profil_you.name);
 	assert(ga->profil_you.file);
-	assert_comfile(ga->profil_opp.file);
+	assert_comfile(ga->profil_opp.path);
 	assert(ga->profil_opp.name);
 	assert(ga->profil_opp.file);
-	assert_comfile(ga->profil_you.file);
+	assert_comfile(ga->profil_you.path);
 }
 
 static int	main_loop_st(t_game *ga)

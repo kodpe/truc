@@ -28,6 +28,7 @@
 - [ ] Implémenter les OBB
 - [ ] Aligner les logs()
 - [ ] protection vs +3 exec at same time, game integrity
+- [ ] protection of data in com file
 
 ---
 ### RULES

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:52:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 20:42:51 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:26:19 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,24 +97,20 @@ char	*parse_opponent_name(char *opp_file)
 	return (opp_name);
 }
 
-void	create_comfile(char *comfile_path)
+char	*create_comfile(char *file)
 {
-	char	*cwd; 
+	char	*path;
 	int		fd;
 	
-	assert(comfile_path);
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
+	assert(file);
+	path = ft_strjoin(PATH_COMDIR, file);
+	if (!path)
 		abort();
-	if (-1 == chdir(PATH_COMDIR))
-		abort();
-	fd = open(comfile_path, O_CREAT | O_RDONLY | O_TRUNC, 0666);
+	fd = open(path, O_CREAT | O_RDONLY | O_TRUNC, 0666);
 	if (fd == -1)
 		abort();
 	close(fd);
-	if (-1 == chdir(cwd))
-		abort();
-	free(cwd);
+	return (path);
 }
 
 char	*get_user_photo(char *username)
@@ -226,20 +222,8 @@ char	*get_42position(void)
 	return (ft_strdup(str));
 }
 
-int	assert_comfile(char *comfile_path)
+int	assert_comfile(char *path)
 {
-	char	*cwd;
-	int		ret;
-
-	assert(comfile_path);
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		abort();
-	if (-1 == chdir(PATH_COMDIR))
-		abort();
-	ret = access(comfile_path, R_OK);
-	if (-1 == chdir(cwd))
-		abort();
-	free(cwd);
-	return (ret);
+	assert(path);
+	return (access(path, R_OK));
 }
