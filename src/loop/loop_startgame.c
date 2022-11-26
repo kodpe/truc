@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:01:45 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 18:19:08 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:52:42 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	display_starting_room(t_game *ga, t_img *img)
 int	loop_startgame(t_game *ga)
 {
 	if (ga->waitbox.starting_delay == 0)
-		ga->waitbox.starting_delay = 9 * 5; // 9 seconds
+		ga->waitbox.starting_delay = 5 * 5; // 5 seconds
 
 	display_starting_room(ga, &ga->waitbox.img);
 

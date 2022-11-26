@@ -42,29 +42,29 @@ terminator \
 		--borderless \
 		--geometry 800x450+0+1000 \
 		--command="$VALG_SERVER $EXEC serveur; cat logs_server; zsh" 2>/dev/null &
-sleep 2
+sleep 1
 
 terminator \
 		--borderless \
 		--geometry 800x450+1700+1000 \
 		--command="$VALG_CLIENT $EXEC client; cat logs_client; zsh" 2>/dev/null &
 
-sleep 12
+sleep 1
 
 terminator \
 		--borderless \
 		--geometry 800x120+850+1150 \
-		--command="cd /tmp/ && ls -la *.xpm; zsh" 2>/dev/null &
+		--command="cd /tmp/; sleep 15; echo -e '\033[1;35m'; ls -l *.xpm; zsh" 2>/dev/null &
 
 terminator \
 		--borderless \
 		--geometry 800x120+850+1300 \
-		--command="cd /sgoinfre/goinfre/Perso/sloquett/dcom/; ls -l; zsh" 2>/dev/null &
+		--command="cd /sgoinfre/goinfre/Perso/sloquett/dcom/; sleep 15; echo -e '\033[1;35m'; ls -l; zsh" 2>/dev/null &
 
 echo Done
 #exit
 
+sleep 10
 echo "             auto close in $1 sec"
-sleep $1
-./close_all.sh
+./close_all.sh $1 &
 echo Done
