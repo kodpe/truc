@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 14:39:16 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:27:58 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 # define PATH_PHOTO		"/sgoinfre/photos_students/"
 # define PATH_MAGICK	"/sgoinfre/goinfre/Perso/sloquett/tools/magick"
 
-# define STR_START	"Game will start in  s"
-# define STR_WAIT	"Waiting for an opponent"
+# define STR_START		"Game will start in  s"
+# define STR_WAIT		"Waiting for an opponent"
+# define STR_WANTQUIT	"Are you sure you want to quit?"
+# define STR_WANTLOSE	"You will lose this game"
 
 # define SERVER_NAME	"clvicent"
 # define CLIENT_NAME	"chsimon"
@@ -43,6 +45,7 @@
 # define COM_VERBOSE
 # define COM_TRUNC_RECEIVE
 # define COM_IGNORE_EMPTY_RECEIVE
+
 
 # define MULTIPLAYER
 
@@ -133,13 +136,8 @@ typedef struct s_waiting_box
 	int		starting_delay;
 }	t_waiting_box;
 
-typedef struct s_mx_event_stat
-{
-	int	key_ctrl;
-	int	key_alt;
-	int	key_shift;
-	int	key_capslock;
-}	t_mx_event_stat;
+
+
 
 // you current player / opp opponent
 typedef struct s_game
@@ -151,8 +149,11 @@ typedef struct s_game
 	bool	room_start; //
 	bool	room_game; //
 
+
 	t_waiting_box	waitbox;
-	t_mx_event_stat	mx_evstat;
+	t_event_stat	mx_evstat;
+
+	int	room_wantquit;
 
 	void	*mlx_ptr;
 	t_win	win;
@@ -212,5 +213,7 @@ void	lobby_room(t_game *ga);
 int		loop_waiting(t_game *ga);
 int		loop_starting(t_game *ga);
 void	lobby_exit(t_game *ga);
+
+int		loop_wantquit(t_game *ga);
 
 #endif /* GAME_H */

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 06:01:28 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 14:26:21 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:52:26 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	hook_crossdestroy(t_game *ga)
 
 int	hook_key_press(int keycode, t_game *ga)
 {
+
 	if (keycode == KEY_ESCAPE)
 		mlx_loop_end(ga->mlx_ptr);
 	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);

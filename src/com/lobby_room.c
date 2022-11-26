@@ -23,6 +23,7 @@ static int	hook_crossdestroy_st(t_game *ga)
 
 static int	hook_key_press_st(int keycode, t_game *ga)
 {
+
 	if (keycode == KEY_ESCAPE)
 	{
 		mlx_loop_end(ga->mlx_ptr);
@@ -31,8 +32,59 @@ static int	hook_key_press_st(int keycode, t_game *ga)
 		exit(0);
 		return (0);
 	}
-	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
+	if (keycode == KEY_LSHIFT)
+		ga->mx_evstat.key_lshift = 1;
+	if (keycode == KEY_RSHIFT)
+		ga->mx_evstat.key_rshift = 1;
+	if (keycode == KEY_CAPSLOCK)
+	{
+		if (ga->mx_evstat.key_capslock)
+			ga->mx_evstat.key_capslock = 0;
+		else
+			ga->mx_evstat.key_capslock = 1;
+	}
 
+	if (ft_isalpha(keycode))
+	{
+		if (ga->mx_evstat.key_lshift || ga->mx_evstat.key_rshift)
+		{
+			if (ga->mx_evstat.key_capslock == 0)
+				keycode = ft_toupper(keycode);
+		}
+		else
+		{
+			if (ga->mx_evstat.key_capslock)
+				keycode = ft_toupper(keycode);
+		}
+	}
+
+	fprintf(stderr, "<> key press   [%i] [%c]\n", keycode, keycode);
+	return (0);
+}
+
+static int	hook_key_release_st(int keycode, t_game *ga)
+{
+
+	if (keycode == KEY_LSHIFT)
+		ga->mx_evstat.key_lshift = 0;
+	if (keycode == KEY_RSHIFT)
+		ga->mx_evstat.key_rshift = 0;
+
+	if (ft_isalpha(keycode))
+	{
+		if (ga->mx_evstat.key_lshift || ga->mx_evstat.key_rshift)
+		{
+			if (ga->mx_evstat.key_capslock == 0)
+				keycode = ft_toupper(keycode);
+		}
+		else
+		{
+			if (ga->mx_evstat.key_capslock)
+				keycode = ft_toupper(keycode);
+		}
+	}
+
+	fprintf(stderr, "<> key release [%i] [%c]\n", keycode, keycode);
 	return (0);
 }
 
@@ -92,6 +144,9 @@ static void	lobby_room_end(t_game *ga)
 
 static int	main_loop_st(t_game *ga)
 {
+	if (ga->room_wantquit)
+		loop_wantquit(ga);
+
 	if (ga->profil_opp.file == NULL)
 		loop_waiting(ga);
 	if (ga->profil_opp.file)
@@ -108,6 +163,7 @@ void	lobby_room(t_game *ga)
 	mlx_loop_hook(ga->mlx_ptr, &main_loop_st, ga);
 	mlx_hook(ga->win.ptr, MX_EVENT_CROSSDESTROY, 0, &hook_crossdestroy_st, ga);
 	mlx_hook(ga->win.ptr, MX_EVENT_KEYDOWN, 1L << 0, &hook_key_press_st, ga);
+	mlx_hook(ga->win.ptr, MX_EVENT_KEYUP, 1L << 1, &hook_key_release_st, ga);
 	mlx_loop(ga->mlx_ptr);
 
 	// END

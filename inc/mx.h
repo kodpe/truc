@@ -20,12 +20,13 @@
 # include <stdbool.h>
 # include <assert.h>
 # include <math.h>
+# include <sys/time.h>
 
 # define LOG		c_magenta();\
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
 					c_reset();
 
-# define MX_VERBOSE	1
+# define MX_VERBOSE	0
 
 typedef unsigned int	t_uint;
 
@@ -201,9 +202,6 @@ bool	mx_ccl_in_aabb(t_ccl cl, t_aabb box_around);
 
 /* OBB ORIENTED BOUNDING BOX */
 //todo
-
-/* LOOP */
-void	mx_wait_fps(int frame_per_second);
 
 typedef struct	s_test
 {
