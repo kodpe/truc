@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:52:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 04:24:21 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:04:57 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	log_com(t_game *ga)
 {
 	dprintf(2, "==========================================\n");
-	LOG
 	if (ga->server && ga->client)
 		dprintf(2, "\033[1;31mFATAL ERROR SERV/CL\n");
 	if (ga->server == true)

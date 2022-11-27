@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:08:29 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 05:30:13 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:38:06 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	_sc_check_multiplayer(t_game *ga)
 {
+	ga->lp_game.active = 0;
+	LOG
 	log_com(ga);
 	assert(ga->profil_you.name);
 	assert(ga->profil_you.file);
@@ -66,12 +68,7 @@ void	_global_mlx_loop(t_game *ga)
 		goto_loop(ga, 0, LOOP_ID_STARTGAME);
 
 	mlx_loop_hook(ga->mlx_ptr, &_loop_manager, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_KEYDOWN, 1L << 0, &hook_key_press, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_KEYUP, 1L << 1, &hook_key_release, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_MOUSEDOWM, 1L << 2, &hook_mouse_down, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_MOUSEUP, 1L << 3, &hook_mouse_up, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_MOUSEMOVE, 1L << 6, &hook_mouse_move, ga);
-	mlx_hook(ga->win.ptr, MX_EVENT_WIN_CROSS, 0, &hook_win_cross, ga);
+	mx_hook_init(ga->win.ptr, &ga->evstat);
 	mlx_loop(ga->mlx_ptr);
 }
 

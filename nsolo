@@ -26,7 +26,7 @@ VALG_CLIENT="valgrind \
 clear
 rm -f /tmp/*.xpm
 rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
-./update_makefile.sh
+./update_makefile
 make -j 
 if [ $? -eq 0 ]; then
 	echo "make success!"

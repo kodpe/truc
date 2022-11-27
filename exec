@@ -26,7 +26,7 @@ VALG_CLIENT="valgrind \
 clear
 rm -f /tmp/*.xpm
 rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
-./update_makefile.sh
+./update_makefile
 make -j 
 echo
 if [ $? -eq 0 ]; then
@@ -66,5 +66,5 @@ echo Done
 
 sleep 10
 echo "             auto close in $1 sec"
-./close_all.sh $1 &
+./close_all $1 &
 echo Done

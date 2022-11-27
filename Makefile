@@ -9,7 +9,7 @@ e_src	=	$(shell ls $(SRC_DIR)/*.c 2>/dev/null | wc -l | tr -d '\n')" sources"
 e_obj	=	$(shell ls $(OBJ_DIR)/*.o 2>/dev/null | wc -l | tr -d '\n')" objects"
 grepr	=	$(shell grep -nH --color printf $(SRC_DIR)/*.c | grep -v "ft_printf")
 grepgc	=	$(shell grep -nH --color getchar $(SRC_DIR)/*.c)
-#-auto-sources-##############480846271122#
+#-auto-sources-##############060945271122#
 SRC = $(addsuffix .c, \
 	loop/loop_startgame \
 	loop/loop_waitopp \
@@ -33,10 +33,10 @@ SRC = $(addsuffix .c, \
 	mx/mx_aabb \
 	mx/mx_pt \
 	mx/_mx_template \
+	mx/mx_evstat \
 	mx/mx_mlx_ptr \
 	mx/mx_triangle \
 	mx/mx_window \
-	mx/mx_add_key_evstat \
 	mx/mx_image \
 	mx/mx_line_in_ccl \
 	mx/loop_event_test \
@@ -44,7 +44,7 @@ SRC = $(addsuffix .c, \
 	mx/mx_vec \
 	mx/mx_draw_pixel \
 	)
-#-auto-sources-##############480846271122#
+#-auto-sources-##############060945271122#
 
 INC_DIR	=	inc
 SRC_DIR	=	src

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:01:45 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 08:15:33 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:38:22 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	_destroy(t_game *ga)
 {
+	ga->lp_startgame.active = 0;
 	LOG
 	unlink_sc(ga->profil_you.path);
 	free(ga->profil_you.file);
@@ -69,12 +70,15 @@ void	loop_startgame(t_game *ga)
 	ga->waitbox.starting_delay--;
 
 	if (ga->evstat.win_cross)
-		_destroy(ga);
-
+		return (_destroy(ga));
 	if (ga->waitbox.starting_delay == 0)
 	{
-		assert_comfile(ga->profil_you.path);
-		assert_comfile(ga->profil_opp.path);
+		if (assert_comfile(ga->profil_opp.path))
+			return (_destroy(ga));
+		if (assert_comfile(ga->profil_you.path))
+			return (_destroy(ga));
+		// launch game, waitbox is now useless
+		mx_destroy_img(&ga->waitbox.img);
 		goto_loop(ga, LOOP_ID_STARTGAME, LOOP_ID_GAME);
 	}
 }

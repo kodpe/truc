@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 08:41:21 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:38:14 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	_destroy(t_game *ga)
 {
+	ga->lp_waitopp.active = 0;
 	LOG
 	log_com(ga);
 	unlink_sc(ga->profil_you.path);
@@ -67,21 +68,17 @@ void	loop_waitopp(t_game *ga)
 	if (ga->waitbox.i == 30)
 		ga->waitbox.i = 0;
 	
-	// c_blue();
-	// c_bold();
-	// printf("SPACE EVSTAT [%i]\n", ga->evstat.key_space);
-	// c_reset();
-
-	if (ga->evstat.win_cross || mx_get_ppkey(&ga->evstat, KEYCODE_ESCAPE))
-		_destroy(ga);
-
-	if (dir_size(PATH_COMDIR) == 2)
+	if (ga->evstat.win_cross)
+		return (_destroy(ga));
+	if (dir_size(PATH_COMDIR) == 2 && ga->profil_opp.path == NULL)
 	{
-		if (ga->server == true && ga->profil_opp.file == NULL)
-		{
 			receive_opponent(ga);
+			if (assert_comfile(ga->profil_opp.path))
+				return (_destroy(ga));
+			if (assert_comfile(ga->profil_you.path))
+				return (_destroy(ga));
+			// passage a startgame avec new img init
+			mx_destroy_img(&ga->waitbox.img); 
 			goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_STARTGAME);
-		}
-		_destroy(ga);
 	}
 }

@@ -20,6 +20,7 @@
 - [x] circular grid
 - [ ] fog war
 - [ ] game tiles
+- [ ] Fix CAPSLOCK
 
 ---
 ### ADD-ONS

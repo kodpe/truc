@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 03:38:58 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 04:42:02 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:42:46 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ static void	_destroy(t_game *ga)
 	mx_destroy_img(&ga->info.img);
 	destroy_profil(&ga->profil_you);
 	destroy_profil(&ga->profil_opp);
-	mlx_loop_end(ga->mlx_ptr);
-	mx_destroy_win(&ga->win);
-	mx_destroy_mlx(ga->mlx_ptr);
-	exit(0);
+	mlx_loop_end(ga->mlx_ptr); // MLX LOOP END ON SORT
 }
 
 static void	_init(t_game *ga)
@@ -67,30 +64,31 @@ static void	_init(t_game *ga)
 
 static void	_display(t_game *ga, t_img *img)
 {
-	if (rand() % 3 == 0) // cool
-		if (mx_reset_img(img))
-			abort();
+	// if (rand() % 3 == 0) // cool
+		// if (mx_reset_img(img))
+			// abort();
 
-	mx_draw_aabb(img, img->box_rel, SILVER);
-	mx_draw_circle(img, \
-				mx_pt(img->width / 2 - 15 + ga->waitbox.i, \
-					img->height / 2 + 12), 2, SILVER);
-	mx_draw_img(img);
-	mx_putstr_cen_img(img, STR_WAIT, SILVER);
+	// mx_draw_aabb(img, img->box_rel, SILVER);
+	// mx_draw_img(img);
+	// mx_putstr_cen_img(img, STR_WAIT, SILVER);
+	(void)ga;
+	(void)img;
 }
 
 void	loop_game(t_game *ga)
 {
 	if (0 == mx_time_loop(&ga->lp_game, 30, 0))
 		_init(ga);
-	_display(ga, &ga->waitbox.img);
+	_display(ga, NULL);
 
 	ga->waitbox.i += 10;
 	if (ga->waitbox.i == 30)
 		ga->waitbox.i = 0;
 
+	if (ga->evstat.win_cross)
+		return (_destroy(ga));
 	if (assert_comfile(ga->profil_opp.path))
-		_destroy(ga);
+		return (_destroy(ga));
 	if (assert_comfile(ga->profil_you.path))
-		_destroy(ga);
+		return (_destroy(ga));
 }

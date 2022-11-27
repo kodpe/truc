@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 06:25:29 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:33:16 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,11 @@
 # define STR_WANTLOSE	"You will lose this game"
 
 # define SERVER_NAME	"eamar"
-# define CLIENT_NAME	"eleotard"
+# define CLIENT_NAME	"chsimon"
 
-// # define STOP_AFTER_INIT
 # define COM_VERBOSE
 # define COM_TRUNC_RECEIVE
 # define COM_IGNORE_EMPTY_RECEIVE
-
-
-# define MULTIPLAYER
-
-# undef SOLO
-# ifndef MULTIPLAYER
-#  define SOLO
-# endif
 
 // LOOP //
 # define LOOP_ID_WAITOPP	1
@@ -197,36 +188,19 @@ void	dir_log(char *dirpath);
 int		dir_size(char *dirpath);
 char	**dir_namelist(char *dirpath);
 
-/* HOOK */
-int		hook_key_press(int keycode, t_game *ga);
-int		hook_key_release(int keycode, t_game *ga);
-int		hook_mouse_down(int button, int x, int y, t_game *ga);
-int		hook_mouse_up(int button, int x, int y, t_game *ga);
-int		hook_mouse_move(int x, int y, t_game *ga);
-int		hook_win_cross(t_game *ga);
 /* LOOP */
 void	loop_waitopp(t_game *ga);
 void	loop_startgame(t_game *ga);
 void	loop_game(t_game *ga);
 void	loop_wantquit(t_game *ga);
 /* LOOP UTILS */
-// int		get_active_loop_id(t_game *ga);
 void	goto_loop(t_game *ga, int src_id, int dest_id);
 
-
-//TODO !
-void	game_init(t_game *ga);
-
-
-/* LOOP GAME */
+/* LOOP GAME ONLY */
 int		load_xpm(t_game *ga);
 void	destroy_xpm(t_game *ga);
 
 void	load_profils(t_game	*ga);
 void	destroy_profil(t_profil *profil);
-
-
-void	lobby_exit(t_game *ga);
-
 
 #endif /* GAME_H */
