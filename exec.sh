@@ -40,13 +40,13 @@ gnome-system-monitor 2>/dev/null &
 
 terminator \
 		--borderless \
-		--geometry 800x450+0+1000 \
+		--geometry 800x450+1700+1000 \
 		--command="$VALG_SERVER $EXEC serveur; cat logs_server; zsh" 2>/dev/null &
 sleep 1
 
 terminator \
 		--borderless \
-		--geometry 800x450+1700+1000 \
+		--geometry 800x450+0+1000 \
 		--command="$VALG_CLIENT $EXEC client; cat logs_client; zsh" 2>/dev/null &
 
 sleep 1
