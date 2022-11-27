@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 15:43:35 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 04:42:47 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	display_room(t_game *ga, t_img *img)
 		abort();
 }
 
-int	loop_wantquit(t_game *ga)
+void	loop_wantquit(t_game *ga)
 {
 	display_room(ga, &ga->waitbox.img);
 
@@ -32,5 +32,4 @@ int	loop_wantquit(t_game *ga)
 	// if (ga->room_wantquit == 0)
 	// FPS
 	mx_wait_fps(5);
-	return (0);
 }

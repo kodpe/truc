@@ -6,59 +6,82 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 23:10:55 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 08:41:21 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-static void	display(t_game *ga, t_img *img)
+static void	_destroy(t_game *ga)
 {
+	LOG
+	log_com(ga);
+	unlink_sc(ga->profil_you.path);
+	free(ga->profil_you.file);
+	free(ga->profil_you.name);
+	free(ga->profil_you.path);
+	free(ga->profil_opp.file);
+	free(ga->profil_opp.name);
+	free(ga->profil_opp.path);
+	mx_destroy_img(&ga->waitbox.img);
+	mlx_loop_end(ga->mlx_ptr);
+}
+
+static void	_init(t_game *ga)
+{
+	t_2Dpt	origin;
+	t_2Dvec	size;
+
+	size = mx_vec(500, 250);
+	origin = mx_pt(ga->win.width / 2 - size.x / 2, \
+					ga->win.height / 2 - size.y / 2);
+	ga->waitbox.img = mx_init_img(ga->mlx_ptr, &ga->win, origin, size);
+	if (mx_create_img(&ga->waitbox.img, "waitbox"))
+		abort();
+}
+
+static void	_display(t_game *ga, t_img *img)
+{
+	if (rand() % 3 == 0) // cool
+		if (mx_reset_img(img))
+		{
+			LOG
+			abort();
+		}
+
 	mx_draw_aabb(img, img->box_rel, SILVER);
 	mx_draw_circle(img, \
 				mx_pt(img->width / 2 - 15 + ga->waitbox.i, \
 					img->height / 2 + 12), 2, SILVER);
-
-	// mx_draw_aabb(img, mx_aabb(mx_pt(img->width / 2 - 72, img->height / 2 - 24), mx_vec(144, 16)), RED);
-
 	mx_draw_img(img);
 	mx_putstr_cen_img(img, STR_WAIT, SILVER);
-
-	if (rand() % 3 == 0) // cool
-		if (mx_reset_img(&ga->waitbox.img))
-			abort();
 }
 
-int	loop_waitopp(t_game *ga)
+void	loop_waitopp(t_game *ga)
 {
-	mx_time_loop(&ga->lp_waitopp, 30);
-	display(ga, &ga->waitbox.img);
+	if (0 == mx_time_loop(&ga->lp_waitopp, 5, 0))
+		_init(ga);
+	_display(ga, &ga->waitbox.img);
 
 	ga->waitbox.i += 10;
 	if (ga->waitbox.i == 30)
 		ga->waitbox.i = 0;
+	
+	// c_blue();
+	// c_bold();
+	// printf("SPACE EVSTAT [%i]\n", ga->evstat.key_space);
+	// c_reset();
 
-	///TODO FIXME why this display nothing
-	// mx_log_event("waitopp", ga->lp_waitopp.evstat.mlx_keycode);
-	// stop condition
-	if (ga->lp_waitopp.evstat.win_exit_cross
-		|| ga->lp_waitopp.evstat.key_escape)
-	{
-		mlx_loop_end(ga->mlx_ptr);
-		lobby_exit(ga);
-		LOG
-		exit(0);
-	}
+	if (ga->evstat.win_cross || mx_get_ppkey(&ga->evstat, KEYCODE_ESCAPE))
+		_destroy(ga);
+
 	if (dir_size(PATH_COMDIR) == 2)
 	{
 		if (ga->server == true && ga->profil_opp.file == NULL)
 		{
 			receive_opponent(ga);
-			_goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_STARTGAME);
+			goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_STARTGAME);
 		}
-		return (0);
+		_destroy(ga);
 	}
-	// FPS
-	// mx_wait_fps(5);
-	return (0);
 }

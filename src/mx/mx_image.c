@@ -266,3 +266,43 @@ void	mx_putnbr_cen_img(t_img *img, int nbr, t_uint hexcolor)
 	mx_putstr_cen_img(img, str, hexcolor);
 	free(str);
 }
+
+/*
+--------------------------------------------------
+| LT                    CT                    RT |
+|                                                |
+|                                                |
+| LC                    CC                    RC |
+|                                                |
+|                                                |
+| LB                    CB                    RB |
+--------------------------------------------------
+*/
+t_2Dpt	mx_getpt_img(t_img *img, char *mode)
+{
+	t_2Dpt	pt;
+
+	if (ft_strlen(mode) != 4)
+		abort();
+	if (mode[0] != 'A' && mode[0] != 'R')
+		abort();
+	if (mode[1] != '.')
+		abort();
+	if (mode[2] != 'L' && mode[2] != 'C' && mode[2] != 'R')
+		abort();
+	if (mode[3] != 'T' && mode[3] != 'C' && mode[3] != 'B')
+		abort();
+	if (mode[0] == 'A')
+		pt = mx_pt(0, 0);
+	if (mode[0] == 'R')
+		pt = img->origin;
+	if (mode[2] == 'C')
+		pt.x += img->width / 2;
+	if (mode[2] == 'R')
+		pt.x += img->width;
+	if (mode[3] == 'C')
+		pt.y += img->height / 2;
+	if (mode[3] == 'B')
+		pt.y += img->height;
+	return (pt);
+}

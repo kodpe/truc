@@ -9,20 +9,18 @@ e_src	=	$(shell ls $(SRC_DIR)/*.c 2>/dev/null | wc -l | tr -d '\n')" sources"
 e_obj	=	$(shell ls $(OBJ_DIR)/*.o 2>/dev/null | wc -l | tr -d '\n')" objects"
 grepr	=	$(shell grep -nH --color printf $(SRC_DIR)/*.c | grep -v "ft_printf")
 grepgc	=	$(shell grep -nH --color getchar $(SRC_DIR)/*.c)
-#-auto-sources-##############412359261122#
+#-auto-sources-##############230844271122#
 SRC = $(addsuffix .c, \
-	loop/loop \
 	loop/loop_startgame \
 	loop/loop_waitopp \
-	loop/game_room \
-	loop/lobby_exit \
+	loop/hook \
+	loop/loop_game \
 	loop/goto_loop \
 	loop/loop_wantquit \
 	game/main \
 	game/case \
 	game/profil \
 	game/load_xpm \
-	game/game_init \
 	com/dir \
 	com/com \
 	com/com_utils \
@@ -38,15 +36,15 @@ SRC = $(addsuffix .c, \
 	mx/mx_mlx_ptr \
 	mx/mx_triangle \
 	mx/mx_window \
+	mx/mx_add_key_evstat \
 	mx/mx_image \
 	mx/mx_line_in_ccl \
 	mx/loop_event_test \
 	mx/mx_line \
 	mx/mx_vec \
 	mx/mx_draw_pixel \
-	mx/mx_add_evstat_keycode \
 	)
-#-auto-sources-##############412359261122#
+#-auto-sources-##############230844271122#
 
 INC_DIR	=	inc
 SRC_DIR	=	src

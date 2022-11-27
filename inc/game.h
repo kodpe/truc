@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 21:12:20 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 06:25:29 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,19 +148,20 @@ typedef struct s_game
 	bool	client;
 	bool	solo;
 
-	t_loop	lp_waitopp;
-	t_loop	lp_startgame;
-	t_loop	lp_game;
-	t_loop	lp_wantquit;
+	void	*mlx_ptr;
+	t_win	win;
+	t_profil	profil_opp;
+	t_profil	profil_you;
+
+	t_loop			lp_waitopp;
+	t_loop			lp_startgame;
+	t_loop			lp_game;
+	t_loop			lp_wantquit;
+	t_evstat	evstat;
 
 	// used in waitopp, startgame, wantquit
 	t_waiting_box	waitbox;
 
-	void	*mlx_ptr;
-	t_win	win;
-
-	t_profil	profil_opp;
-	t_profil	profil_you;
 	t_gameinfo	info;
 
 	t_img	img_board;
@@ -171,8 +172,6 @@ typedef struct s_game
 
 	t_2Dpt	mouse;
 }	t_game;
-
-void	game_init(t_game *ga);
 
 /* COM */
 int		server_exist(void);
@@ -193,35 +192,39 @@ char	*get_42position(void);
 int		assert_comfile(char *path);
 int		com_send(char *path, char *msg);
 char	*com_receive(char *path);
-
-// MAIN LOOP
-
-void	main_loop(t_game *ga);
-
-int		load_xpm(t_game *ga);
-void	destroy_xpm(t_game *ga);
-
-////
-void	destroy_profil(t_profil *profil);
-void	load_profils(t_game	*ga);
-
-// dir
+/* DIR */
 void	dir_log(char *dirpath);
 int		dir_size(char *dirpath);
 char	**dir_namelist(char *dirpath);
 
-//loop utils
-int		get_active_loop_id(t_game *ga);
-t_loop	*get_active_loop_ptr(t_game *ga);
-void	_goto_loop(t_game *ga, int src_id, int dest_id);
+/* HOOK */
+int		hook_key_press(int keycode, t_game *ga);
+int		hook_key_release(int keycode, t_game *ga);
+int		hook_mouse_down(int button, int x, int y, t_game *ga);
+int		hook_mouse_up(int button, int x, int y, t_game *ga);
+int		hook_mouse_move(int x, int y, t_game *ga);
+int		hook_win_cross(t_game *ga);
+/* LOOP */
+void	loop_waitopp(t_game *ga);
+void	loop_startgame(t_game *ga);
+void	loop_game(t_game *ga);
+void	loop_wantquit(t_game *ga);
+/* LOOP UTILS */
+// int		get_active_loop_id(t_game *ga);
+void	goto_loop(t_game *ga, int src_id, int dest_id);
 
-void	lobby_room(t_game *ga);
 
-int		loop_waitopp(t_game *ga); //OK
+//TODO !
+void	game_init(t_game *ga);
 
-int		loop_startgame(t_game *ga);
-// int		loop_game(t_game *ga);
-int		loop_wantquit(t_game *ga);
+
+/* LOOP GAME */
+int		load_xpm(t_game *ga);
+void	destroy_xpm(t_game *ga);
+
+void	load_profils(t_game	*ga);
+void	destroy_profil(t_profil *profil);
+
 
 void	lobby_exit(t_game *ga);
 

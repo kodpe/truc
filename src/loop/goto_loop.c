@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:45:12 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 23:08:17 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 05:15:46 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ int	get_active_loop_id(t_game *ga)
 	return (-1);
 }
 
-// return the current active loop ptr or NULL
-t_loop	*get_active_loop_ptr(t_game *ga)
-{
-	if (ga->lp_waitopp.active)
-		return (&ga->lp_game);
+// // return the current active loop ptr or NULL
+// t_loop	*get_active_loop_ptr(t_game *ga)
+// {
+// 	if (ga->lp_waitopp.active)
+// 		return (&ga->lp_game);
 
-	if (ga->lp_startgame.active)
-		return (&ga->lp_startgame);
+// 	if (ga->lp_startgame.active)
+// 		return (&ga->lp_startgame);
 
-	if (ga->lp_game.active)
-		return (&ga->lp_game);
+// 	if (ga->lp_game.active)
+// 		return (&ga->lp_game);
 
-	if (ga->lp_wantquit.active)
-		return (&ga->lp_wantquit);
+// 	if (ga->lp_wantquit.active)
+// 		return (&ga->lp_wantquit);
 	
-	return (NULL);
-}
+// 	return (NULL);
+// }
 
 static void	_setzero_loop(t_game *ga)
 {
@@ -68,11 +68,10 @@ static void	_active_loop(t_loop *loop, int src_id, int dest_id)
 	loop->fps = 0;
 	loop->real_fps = 0.0;
 	loop->usleep_duration = 0;
-	ft_memset(&loop->evstat, 0, sizeof(t_event_stat)); // RESET COMPLET
 }
 
 // change loop
-void	_goto_loop(t_game *ga, int src_id, int dest_id)
+void	goto_loop(t_game *ga, int src_id, int dest_id)
 {
 	_setzero_loop(ga);
 

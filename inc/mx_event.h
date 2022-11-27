@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 03:44:11 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/26 23:08:08 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 08:21:57 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,54 @@
 # define MX_EVENT_H
 
 # define MX_VERBOSE_EVENT	1
+# define MX_VERBOSE_LOOP	0
 
 //mx log event modes
-# define WIN_CROSS			"win exit_cross"
-# define KEY_PRESS			"key press"
-# define KEY_RELEASE		"key release"
-//
-# define K_PRESS			'p'
-# define K_RELEASE			'r'
-
-# define MOUSE_LEFT			1
-# define MOUSE_MIDDLE		2
-# define MOUSE_RIGHT		3
+# define STR_WIN_CROSS			"win_cross"
+# define STR_KEY_PRESS			"key_press"
+# define STR_KEY_RELEASE		"key_release"
+# define STR_MOUSE_DOWN			"mouse_down"
+# define STR_MOUSE_UP			"mouse_up"
+# define STR_MOUSE_MOVE			"mouse"
+//mecanic
+# define MOUSE_BUT_LEFT		1
+# define MOUSE_BUT_MIDDLE	2
+# define MOUSE_BUT_RIGHT	3
 # define MOUSE_SCROLL_UP	4
 # define MOUSE_SCROLL_DOWN	5
 
-
-# define KEY_SPACE	32
-
-# define KEY_A		97
-# define KEY_D		100
-# define KEY_S		115
-# define KEY_W		119
-
-# define KEY_DELETE		65288
-# define KEY_TAB		65289
-
-# define KEY_ENTER		65293
-
-# define KEY_ESCAPE		65307
-
-# define KEY_LEFT		65361
-# define KEY_UP			65362
-# define KEY_RIGHT		65363
-# define KEY_DOWN		65364
-
-# define KEY_LSHIFT		65505
-# define KEY_RSHIFT		65506
-# define KEY_LCTRL		65507
-# define KEY_RCTRL		65508
-# define KEY_CAPSLOCK	65509
-
-# define KEY_LALT		65513
-# define KEY_RALTCTRL	65514
+// (0) -> 32 -> 126 -> (200) -> 65200 -> 65600 -> (600)
+# define KEYCODE_DELETE		65288
+# define KEYCODE_TAB		65289
+# define KEYCODE_ENTER		65293
+# define KEYCODE_ESCAPE		65307
+# define KEYCODE_LEFT		65361
+# define KEYCODE_UP			65362
+# define KEYCODE_RIGHT		65363
+# define KEYCODE_DOWN		65364
+# define KEYCODE_LSHIFT		65505
+# define KEYCODE_RSHIFT		65506
+# define KEYCODE_LCTRL		65507
+# define KEYCODE_RCTRL		65508
+# define KEYCODE_CAPSLOCK	65509
+# define KEYCODE_LALT		65513
+# define KEYCODE_RALTCTRL	65514
+//
+# define STR_PPKEY_DELETE	"DEL"
+# define STR_PPKEY_TAB		"TAB"
+# define STR_PPKEY_ENTER	"ENT"
+# define STR_PPKEY_ESCAPE	"ESC"
+# define STR_PPKEY_LEFT		"LEFT"
+# define STR_PPKEY_UP		"UP"
+# define STR_PPKEY_RIGHT	"RIGHT"
+# define STR_PPKEY_DOWN		"DOWN"
+# define STR_PPKEY_LSHIFT	"L_SHIFT"
+# define STR_PPKEY_RSHIFT	"R_SHIFT"
+# define STR_PPKEY_LCTRL	"L_CTRL"
+# define STR_PPKEY_RCTRL	"R_CTRL"
+# define STR_PPKEY_CAPSLOCK	"CAPSLOCK"
+# define STR_PPKEY_LALT		"L_ALT"
+# define STR_PPKEY_RALTCTRL	"ALT_CTRL"
 ///
 
 # define MX_EVENT_KEYDOWN		2 /* int (*f)(int keycode, void *param) */
@@ -78,38 +83,23 @@
 typedef struct s_event_stat
 {
 	int	mlx_keycode;
+	int	key[600];
+	int	mouse_x;
+	int	mouse_y;
+	int	mouse[6];
+	int	win_cross;
+}	t_evstat;
 
-	int	key_space;
-
-	int	key_tab;
-
-	int	key_delete;
-
-	int	key_enter;
-
-	int	key_escape;
-
-	int	key_arrow_left;
-	int	key_arrow_up;
-	int key_arrow_right;
-	int key_arrow_down;
-
-	int	key_lshift;
-	int	key_rshift;
-	int	key_lctrl;
-	int	key_rctrl;
-	int	key_capslock;
-
-	// int	key_lalt;
-	// int	key_raltctrl;
-
-	int	win_exit_cross;
-}	t_event_stat;
-// TODO add more keys
-//TODO tableau pour les keys avec defines et bon index directement
-
-void	mx_add_keycode_to_evstat(t_event_stat *evstat, char *mode, int keycode);
-void	mx_log_event(char *mode, int keycode);
+/* EVSTAT */
+int		mx_is_ppkey(int keycode);
+void	mx_set_ppkey(t_evstat *ev, int event, int keycode);
+int		mx_get_ppkey(t_evstat *ev, int keycode);
+char	*mx_get_ppkey_name(int keycode);
+void	mx_log_key_evstat(int event, int keycode);
+void	mx_add_key_evstat(t_evstat *ev, int event, int keycode);
+void	mx_log_mouse_evstat(int event, int button, int x, int y);
+void	mx_add_mouse_evstat(t_evstat *ev, int event, int button, int x, int y);
+void	mx_add_win_cross_evstat(t_evstat *ev);
 
 typedef long long	t_time;
 
@@ -125,12 +115,11 @@ typedef struct s_loop
 	int				fps;
 	float			real_fps;
 	int				usleep_duration;
-	t_event_stat	evstat;
 }	t_loop;
 
 void	mx_wait_fps(int frame_per_second);
 t_time	mx_sc_time_ms(void);
 t_time	mx_time_ms(void);
-void	mx_time_loop(t_loop *loop, int fps);
+int		mx_time_loop(t_loop *loop, int fps, int sec_timeout);
 
 #endif /* MX_EVENT_H */
