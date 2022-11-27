@@ -6,4 +6,5 @@ pkill yokai
 pkill terminator
 rm -f /tmp/*.xpm
 rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
-echo -e "\033[1;32mDone!\033[0m" && echo
+echo -e "\033[1;32mClose done!\033[0m" && echo
+pkill close_all

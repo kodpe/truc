@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:01:45 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 09:38:22 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 10:13:48 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	_init(t_game *ga)
 	ga->waitbox.img = mx_init_img(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_img(&ga->waitbox.img, "waitbox"))
 		abort();
-	ga->waitbox.starting_delay = 9 * 5; // 5 seconds
+	ga->waitbox.starting_delay = 3 * 5; // 3 seconds
 }
 
 static void	_display(t_game *ga, t_img *img)

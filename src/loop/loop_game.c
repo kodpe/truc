@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 03:38:58 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 09:42:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 10:02:55y sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	load_info(t_game *ga)
 static void	_destroy(t_game *ga)
 {
 	LOG
+
+	mx_destroy_img(&ga->txi.img);
+	free(ga->txi.buffer);
+
 	destroy_xpm(ga);
 	mx_destroy_img(&ga->img_board);
 	mx_destroy_img(&ga->info.img);
@@ -60,6 +64,16 @@ static void	_init(t_game *ga)
 
 	load_profils(ga);
 	load_info(ga);
+
+	ga->txi.img = mx_init_img(ga->mlx_ptr, &ga->win, mx_pt(600, 850), mx_vec(200, 20));
+	if (mx_create_img(&ga->txi.img, "txt input txi"))
+		abort();
+
+	ga->txi.buffer = ft_calloc(sizeof(char *) * 21);
+	ga->txi.maxlen = 21;
+	if (!ga->txi.buffer)
+		abort();
+	printf("buffer %li:[%s]\n", ft_strlen(ga->txi.buffer), ga->txi.buffer);
 }
 
 static void	_display(t_game *ga, t_img *img)
@@ -68,10 +82,9 @@ static void	_display(t_game *ga, t_img *img)
 		// if (mx_reset_img(img))
 			// abort();
 
-	// mx_draw_aabb(img, img->box_rel, SILVER);
-	// mx_draw_img(img);
-	// mx_putstr_cen_img(img, STR_WAIT, SILVER);
-	(void)ga;
+	mx_draw_aabb(&ga->txi.img, ga->txi.img.box_rel, SILVER);
+	mx_draw_img(&ga->txi.img);
+	mx_putstr_cen_img(&ga->txi.img, ga->txi.buffer, SILVER);
 	(void)img;
 }
 

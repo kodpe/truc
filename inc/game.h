@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 09:33:16 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 09:59:38 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,16 @@ typedef struct s_waiting_box
 	int		starting_delay;
 }	t_waiting_box;
 
+typedef struct s_txt_input
+{
+	t_img	img;
+	char	*buffer;
+	int		size_x;
+	int		maxlen;
+	int		len;
+}	t_txt_input;
+
+
 typedef struct s_game
 {
 	bool	server;
@@ -148,7 +158,10 @@ typedef struct s_game
 	t_loop			lp_startgame;
 	t_loop			lp_game;
 	t_loop			lp_wantquit;
-	t_evstat	evstat;
+	t_evstat		evstat;
+
+
+	t_txt_input		txi;
 
 	// used in waitopp, startgame, wantquit
 	t_waiting_box	waitbox;
