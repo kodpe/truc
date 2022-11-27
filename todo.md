@@ -20,7 +20,8 @@
 - [x] circular grid
 - [ ] fog war
 - [ ] game tiles
-- [ ] Fix CAPSLOCK
+- [x] Fix CAPSLOCK
+- [ ] Button
 
 ---
 ### ADD-ONS
@@ -30,6 +31,7 @@
 - [ ] Aligner les logs()
 - [ ] protection vs +3 exec at same time, game integrity
 - [ ] protection of data in com file
+- [ ] Bounder Border Box
 
 ---
 ### RULES

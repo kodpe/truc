@@ -57,8 +57,17 @@ void	mx_set_ppkey(t_evstat *ev, int event, int keycode)
 {
 	if (!mx_is_ppkey(keycode))
 		abort();
-	if (keycode == KEYCODE_CAPSLOCK && event == MX_EVENT_KEYUP)
+	if (keycode == KEYCODE_CAPSLOCK)
+	{
+		if (event == MX_EVENT_KEYDOWN)
+		{
+			if (ev->key[509] == 1)
+				ev->key[509] = 0;
+			else
+				ev->key[509] = 1;
+		}
 		return ;
+	}
 	ev->key[keycode - 65000] = _mx_set_key(event);
 }
 
