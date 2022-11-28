@@ -135,18 +135,17 @@ void	mx_add_key_evstat(t_evstat *ev, int event, int keycode)
 	mx_log_key_evstat(event, keycode);
 }
 
-void	mx_log_mouse_evstat(int event, int button, int x, int y)
+void	mx_log_mouse_evstat(int event, int button, t_2Dpt pos)
 {
 	if (!MX_VERBOSE_EVENT)
 		return ;
-
 	if (event == MX_EVENT_MOUSEDOWM)
 		fprintf(stderr, "<> %-12s ", STR_MOUSE_DOWN);
 	else if (event == MX_EVENT_MOUSEUP)
 		fprintf(stderr, "<> %-12s ", STR_MOUSE_UP);
 	else
 		fprintf(stderr, "<> %-12s ", STR_MOUSE_MOVE);
-	fprintf(stderr, "[%-5i],[%-5i] ", x, y);
+	fprintf(stderr, "[%-5i],[%-5i] ", pos.x, pos.y);
 	if (button == 0)
 		fprintf(stderr, "\n");
 	if (button == MOUSE_BUT_LEFT)
@@ -161,19 +160,14 @@ void	mx_log_mouse_evstat(int event, int button, int x, int y)
 		fprintf(stderr, "[SC-D]\n");
 }
 
-static int	_mx_set_mouse(int event)
+void	mx_add_mouse_evstat(t_evstat *ev, int event, int button, t_2Dpt pos)
 {
-	if (event == MX_EVENT_MOUSEDOWM)
-		return (1);
-	return (0);
-}
-
-void	mx_add_mouse_evstat(t_evstat *ev, int event, int button, int x, int y)
-{
-	ev->mouse[button] = _mx_set_mouse(event);
-	ev->mouse_x = x;
-	ev->mouse_y = y;
-	mx_log_mouse_evstat(event, button, x, y);
+	ev->mouse[button].event = event;
+	ev->mouse[button].pos = pos;
+	ev->mouse_event = event;
+	ev->mouse_pos = pos;
+	mx_log_mouse_evstat(event, button, pos);
+	// scroll up / scroll down not work, cf mx_handle_button()
 }
 
 void	mx_add_win_cross_evstat(t_evstat *ev)

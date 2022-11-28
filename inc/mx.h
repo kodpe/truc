@@ -103,14 +103,17 @@ typedef struct s_but
 	t_aabb	box_abs;
 	t_aabb	box_rel;
 
-	int		over;
 	t_img	img_away;
 	t_img	img_over;
-
-	int		active;
 	t_img	img_active;
 
-	int		lock;
+	int		xev_is_in;
+	int		xev_action_in;
+	int		xev_action_out;
+
+	int		xev_is_press[6];
+	int		xev_action_press[6];
+	int		xev_action_release[6];
 }	t_but;
 
 /* MLX_PTR */
@@ -175,6 +178,8 @@ t_2Dvec	mx_div_vec(t_2Dvec vec, int scalar);
 bool	mx_same_vec(t_2Dvec vec_a, t_2Dvec vec_b);
 
 /* LINE */
+t_line	mx_line_wh(int x, int y, int w, int h);
+t_line	mx_line_xy(int x1, int y1, int x2, int y2);
 t_line	mx_line(t_2Dpt pt_a, t_2Dpt pt_b);
 void	mx_log_line(const char *msg, t_line ln);
 void	mx_draw_line(t_img *img, t_line ln, t_uint hexcolor);
@@ -219,16 +224,22 @@ bool	mx_ccl_in_aabb(t_ccl cl, t_aabb box_around);
 void	mx_draw_pn_border_aabb(t_img *img, t_aabb box, int border_size, t_uint hexcolor);
 void	mx_draw_lt_border_aabb(t_img *img, t_aabb box, int border_size, t_uint hexcolor);
 
+typedef struct s_mouse_button
+{
+	int		event;
+	t_2Dpt	pos;
+}	t_mouse_button;
+
 typedef struct s_event_stat
 {
-	int	mlx_keycode;
-	int	key[600];
-	int	mouse_x;
-	int	mouse_y;
-	int	mouse[6];
-	int	win_cross;
-}	t_evstat;
+	int				mlx_keycode;
+	int				key[600];
 
+	t_2Dpt			mouse_pos;
+	int				mouse_event;
+	t_mouse_button	mouse[6];
+	int				win_cross;
+}	t_evstat;
 /* HOOK */
 void	mx_hook_init(void *win_ptr, t_evstat *ev);
 int		mx_hook_key_press(int keycode, t_evstat *ev);
@@ -245,8 +256,8 @@ int		mx_get_ppkey(t_evstat *ev, int keycode);
 char	*mx_get_ppkey_name(int keycode);
 void	mx_log_key_evstat(int event, int keycode);
 void	mx_add_key_evstat(t_evstat *ev, int event, int keycode);
-void	mx_log_mouse_evstat(int event, int button, int x, int y);
-void	mx_add_mouse_evstat(t_evstat *ev, int event, int button, int x, int y);
+void	mx_log_mouse_evstat(int event, int button, t_2Dpt pos);
+void	mx_add_mouse_evstat(t_evstat *ev, int event, int button, t_2Dpt pos);
 void	mx_add_win_cross_evstat(t_evstat *ev);
 
 typedef long long	t_time;
@@ -274,7 +285,9 @@ int		mx_time_loop(t_loop *loop, int fps, int sec_timeout);
 t_but	mx_init_button(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size);
 int		mx_create_button(t_but *bt, char *name);
 void	mx_destroy_button(t_but *bt);
-void	mx_draw_button(t_but *bt, t_evstat *ev);
+void	mx_handle_button(t_but *bt, t_evstat *ev);
+// void	mx_draw_button(t_but *bt, t_evstat *ev);
+void	mx_log_button(const char *msg, t_but *bt);
 
 // DEPRECATED BELOW // TODO
 

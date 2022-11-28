@@ -9,44 +9,44 @@ e_src	=	$(shell ls $(SRC_DIR)/*.c 2>/dev/null | wc -l | tr -d '\n')" sources"
 e_obj	=	$(shell ls $(OBJ_DIR)/*.o 2>/dev/null | wc -l | tr -d '\n')" objects"
 grepr	=	$(shell grep -nH --color printf $(SRC_DIR)/*.c | grep -v "ft_printf")
 grepgc	=	$(shell grep -nH --color getchar $(SRC_DIR)/*.c)
-#-auto-sources-##############000334281122#
+#-auto-sources-##############032141281122#
 SRC = $(addsuffix .c, \
-	loop/loop_startgame \
-	loop/loop_waitopp \
-	loop/loop_game \
-	loop/goto_loop \
-	loop/loop_wantquit \
-	loop/loop_menu \
-	game/main \
-	game/case \
 	game/profil \
+	game/case \
 	game/load_xpm \
-	com/dir \
+	game/main \
+	mx/mx_mlx_ptr \
+	mx/mx_pt \
+	mx/mx_hook \
+	mx/loop_event_test \
+	mx/mx_evstat \
+	mx/mx_image \
+	mx/mx_circle \
+	mx/mx_loop \
+	mx/mx_vec \
+	mx/mx_grid_circle \
+	mx/mx_aabb \
+	mx/mx_mouse \
+	mx/mx_window \
+	mx/mx__log \
+	mx/mx_button \
+	mx/mx_triangle \
+	mx/mx_line_in_ccl \
+	mx/mx_draw_pixel \
+	mx/_mx_maintest \
+	mx/mx_line \
+	mx/_mx_template \
+	loop/goto_loop \
+	loop/loop_game \
+	loop/loop_wantquit \
+	loop/loop_waitopp \
+	loop/loop_menu \
+	loop/loop_startgame \
 	com/com \
 	com/com_utils \
-	mx/mx_grid_circle \
-	mx/mx_circle \
-	mx/mx_mouse \
-	mx/mx__log \
-	mx/_mx_maintest \
-	mx/mx_loop \
-	mx/mx_hook \
-	mx/mx_aabb \
-	mx/mx_pt \
-	mx/_mx_template \
-	mx/mx_evstat \
-	mx/mx_mlx_ptr \
-	mx/mx_triangle \
-	mx/mx_window \
-	mx/mx_image \
-	mx/mx_line_in_ccl \
-	mx/loop_event_test \
-	mx/mx_button \
-	mx/mx_line \
-	mx/mx_vec \
-	mx/mx_draw_pixel \
+	com/dir \
 	)
-#-auto-sources-##############000334281122#
+#-auto-sources-##############032141281122#
 
 INC_DIR	=	inc
 SRC_DIR	=	src

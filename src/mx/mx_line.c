@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:34:31 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 10:46:49 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 19:48:24 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,24 @@ static void	bresenham_line(t_img *img, t_bham_line *ham, t_uint hexcolor)
 			ham->a.y += ham->y_slope;
 		}
 	}
+}
+
+t_line	mx_line_wh(int x, int y, int w, int h)
+{
+	t_line	ln;
+
+	ln.a = mx_pt(x, y);
+	ln.b = mx_pt(x + w, y + h);
+	return (ln);
+}
+
+t_line	mx_line_xy(int x1, int y1, int x2, int y2)
+{
+	t_line	ln;
+
+	ln.a = mx_pt(x1, y1);
+	ln.b = mx_pt(x2, y2);
+	return (ln);
 }
 
 t_line	mx_line(t_2Dpt pt_a, t_2Dpt pt_b)

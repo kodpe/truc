@@ -45,7 +45,7 @@ static void	_init(t_game *ga)
 	if (mx_create_img(&ga->waitbox.img, "waitbox"))
 		abort();
 
-	ga->bt = mx_init_button(ga->mlx_ptr, &ga->win, mx_pt(200, 700), mx_vec(200, 100));
+	ga->bt = mx_init_button(ga->mlx_ptr, &ga->win, mx_pt(200, 700), mx_vec(200, 50));
 	if (mx_create_button(&ga->bt, "PLAY"))
 		abort();
 
@@ -54,10 +54,12 @@ static void	_init(t_game *ga)
 	// if (mx_create_xpm_img(&ga->bt.img_active, XPM_PATH_80W_SAMURAI))
 	// 	abort();
 
+	// mx_draw_line(&ga->bt.img_away, mx_line_xy(150, 50, 200, 0), SILVER);
+
 	mx_draw_aabb(&ga->bt.img_away, ga->bt.box_rel, DARK_GRAY);
 	// mx_draw_lt_border_aabb(&ga->bt.img_over, ga->bt.box_rel, 5, SILVER);
 	mx_draw_pn_border_aabb(&ga->bt.img_over, ga->bt.box_rel, 3, SILVER);
-	mx_draw_pn_border_aabb(&ga->bt.img_active, ga->bt.box_rel, 6, LIME);
+	mx_draw_pn_border_aabb(&ga->bt.img_active, ga->bt.box_rel, 6, SILVER);
 
 	// ga->testborder = mx_init_img(ga->mlx_ptr, &ga->win, mx_pt(0, 0), mx_vec(1200, 900));
 	// if (mx_create_img(&ga->testborder, "test border"))
@@ -81,6 +83,7 @@ static void	_init(t_game *ga)
 	// mx_draw_img(&ga->testborder2);
 	// mx_draw_img(&ga->testborder3);
 
+			mx_draw_img(&ga->bt.img_away);
 }
 
 static void	_display(t_game *ga, t_img *img)
@@ -88,11 +91,24 @@ static void	_display(t_game *ga, t_img *img)
 	if (rand() % 3 == 0) // cool
 		if (mx_reset_img(img))
 			abort();
+	mx_handle_button(&ga->bt, &ga->evstat);
 
-	mx_draw_button(&ga->bt, &ga->evstat);
-
-	if (ga->bt.active) { c_green(); printf("ON\n"); c_reset();}
-	else { c_red(); printf("OFF\n"); c_reset();}
+		if (ga->bt.xev_action_out)
+			mx_draw_img(&ga->bt.img_away);
+		if (ga->bt.xev_action_in)
+			mx_draw_img(&ga->bt.img_over);
+		if (ga->bt.xev_action_press[MOUSE_BUT_LEFT])
+			mx_draw_img(&ga->bt.img_active);
+		if (ga->bt.xev_action_release[MOUSE_BUT_LEFT])
+			mx_draw_img(&ga->bt.img_over);
+		if (ga->bt.xev_is_press[MOUSE_BUT_LEFT])
+		{
+			printf("GG oui je reste appuyé\n");
+			ga->bt.origin = mx_pt(ga->evstat.mouse_pos.x -100, ga->evstat.mouse_pos.y - 25);
+			ga->bt.img_away.origin = ga->bt.origin;
+			ga->bt.img_over.origin = ga->bt.origin;
+			ga->bt.img_active.origin = ga->bt.origin;
+		}
 
 	mx_draw_aabb(img, img->box_rel, SILVER);
 	mx_draw_circle(img, \
@@ -104,7 +120,7 @@ static void	_display(t_game *ga, t_img *img)
 
 void	loop_waitopp(t_game *ga)
 {
-	if (0 == mx_time_loop(&ga->lp_waitopp, 10, 0))
+	if (0 == mx_time_loop(&ga->lp_waitopp, 50, 0))
 		_init(ga);
 	_display(ga, &ga->waitbox.img);
 

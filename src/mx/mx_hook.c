@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 03:43:09 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 10:50:59 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:48:18 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ int	mx_hook_key_release(int keycode, t_evstat *ev)
 
 int	mx_hook_mouse_down(int button, int x, int y, t_evstat *ev)
 {
-	mx_add_mouse_evstat(ev, MX_EVENT_MOUSEDOWM, button, x, y);
+	mx_add_mouse_evstat(ev, MX_EVENT_MOUSEDOWM, button, mx_pt(x, y));
 	return (0);
 }
 
 int	mx_hook_mouse_up(int button, int x, int y, t_evstat *ev)
 {
-	mx_add_mouse_evstat(ev, MX_EVENT_MOUSEUP, button, x, y);
+	mx_add_mouse_evstat(ev, MX_EVENT_MOUSEUP, button, mx_pt(x, y));
 	return (0);
 }
 
 int	mx_hook_mouse_move(int x, int y, t_evstat *ev)
 {
-	mx_add_mouse_evstat(ev, MX_EVENT_MOUSEMOVE, 0, x, y);
+	mx_add_mouse_evstat(ev, MX_EVENT_MOUSEMOVE, MOUSE_MOVE, mx_pt(x, y));
 	return (0);
 }
 

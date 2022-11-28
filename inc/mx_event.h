@@ -6,15 +6,16 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 03:44:11 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/28 02:45:00 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 21:15:07 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MX_EVENT_H
 # define MX_EVENT_H
 
-# define MX_VERBOSE_EVENT	1
+# define MX_VERBOSE_EVENT	0
 # define MX_VERBOSE_LOOP	0
+# define MX_VERBOSE_BUTTON	1
 
 //mx log event modes
 # define STR_WIN_CROSS			"win_cross"
@@ -24,6 +25,7 @@
 # define STR_MOUSE_UP			"mouse_up"
 # define STR_MOUSE_MOVE			"mouse"
 //mecanic
+# define MOUSE_MOVE			0
 # define MOUSE_BUT_LEFT		1
 # define MOUSE_BUT_MIDDLE	2
 # define MOUSE_BUT_RIGHT	3
