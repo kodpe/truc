@@ -42,7 +42,7 @@ terminator \
 		--borderless \
 		--geometry 800x450+1700+1000 \
 		--command="$VALG_SERVER $EXEC serveur; cat logs_server; zsh" 2>/dev/null &
-sleep 1
+sleep 3
 
 terminator \
 		--borderless \
@@ -66,5 +66,5 @@ echo Done
 
 sleep 10
 echo "             auto close in $1 sec"
-./close_all $1 &
+./close $1 &
 echo Done

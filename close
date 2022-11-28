@@ -1,5 +1,5 @@
 #!/bin/bash
-sleep $1
+sleep $1 2>/dev/null
 pkill gnome-system-mo
 pkill gnome-system-monitor
 pkill yokai
@@ -7,4 +7,4 @@ pkill terminator
 rm -f /tmp/*.xpm
 rm -f /sgoinfre/goinfre/Perso/sloquett/dcom/*
 echo -e "\033[1;32mClose done!\033[0m" && echo
-pkill close_all
+pkill close

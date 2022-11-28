@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 09:38:14 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 02:18:15by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ static void	_destroy(t_game *ga)
 	free(ga->profil_opp.name);
 	free(ga->profil_opp.path);
 	mx_destroy_img(&ga->waitbox.img);
+
+	mx_destroy_button(&ga->bt);
+	// mx_destroy_img(&ga->testborder); //NEW
+	// mx_destroy_img(&ga->testborder2); //NEW
+	// mx_destroy_img(&ga->testborder3); //NEW
 	mlx_loop_end(ga->mlx_ptr);
 }
 
@@ -39,16 +44,55 @@ static void	_init(t_game *ga)
 	ga->waitbox.img = mx_init_img(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_img(&ga->waitbox.img, "waitbox"))
 		abort();
+
+	ga->bt = mx_init_button(ga->mlx_ptr, &ga->win, mx_pt(200, 700), mx_vec(200, 100));
+	if (mx_create_button(&ga->bt, "PLAY"))
+		abort();
+
+	// mx_destroy_img(&ga->bt.img_active);
+	// ga->bt.img_active = mx_init_img(ga->mlx_ptr, &ga->win, mx_pt(205, 705), mx_vec(1, 1));
+	// if (mx_create_xpm_img(&ga->bt.img_active, XPM_PATH_80W_SAMURAI))
+	// 	abort();
+
+	mx_draw_aabb(&ga->bt.img_away, ga->bt.box_rel, DARK_GRAY);
+	// mx_draw_lt_border_aabb(&ga->bt.img_over, ga->bt.box_rel, 5, SILVER);
+	mx_draw_pn_border_aabb(&ga->bt.img_over, ga->bt.box_rel, 3, SILVER);
+	mx_draw_pn_border_aabb(&ga->bt.img_active, ga->bt.box_rel, 6, LIME);
+
+	// ga->testborder = mx_init_img(ga->mlx_ptr, &ga->win, mx_pt(0, 0), mx_vec(1200, 900));
+	// if (mx_create_img(&ga->testborder, "test border"))
+		// abort();
+	// ga->testborder2 = mx_init_img(ga->mlx_ptr, &ga->win, mx_pt(500, 200), mx_vec(200, 100));
+	// if (mx_create_img(&ga->testborder2, "test border"))
+	// 	abort();
+	// ga->testborder3 = mx_init_img(ga->mlx_ptr, &ga->win, mx_pt(800, 200), mx_vec(200, 100));
+	// if (mx_create_img(&ga->testborder3, "test border"))
+	// 	abort();
+
+	// mx_draw_lt_border_aabb(&ga->testborder, ga->testborder.box_rel, 5, SILVER);
+
+	// mx_draw_pn_border_aabb(&ga->testborder2, ga->testborder2.box_rel, 5, SILVER);
+
+	// mx_draw_pn_border_aabb(&ga->testborder3, ga->testborder3.box_rel, 5, SILVER);
+
+	// mx_fill_aabb(&ga->testborder3, mx_aabb(mx_pt(5, 5), mx_vec(190, 90)), DARK_GRAY);
+
+	// mx_draw_img(&ga->testborder);
+	// mx_draw_img(&ga->testborder2);
+	// mx_draw_img(&ga->testborder3);
+
 }
 
 static void	_display(t_game *ga, t_img *img)
 {
 	if (rand() % 3 == 0) // cool
 		if (mx_reset_img(img))
-		{
-			LOG
 			abort();
-		}
+
+	mx_draw_button(&ga->bt, &ga->evstat);
+
+	if (ga->bt.active) { c_green(); printf("ON\n"); c_reset();}
+	else { c_red(); printf("OFF\n"); c_reset();}
 
 	mx_draw_aabb(img, img->box_rel, SILVER);
 	mx_draw_circle(img, \
@@ -60,7 +104,7 @@ static void	_display(t_game *ga, t_img *img)
 
 void	loop_waitopp(t_game *ga)
 {
-	if (0 == mx_time_loop(&ga->lp_waitopp, 5, 0))
+	if (0 == mx_time_loop(&ga->lp_waitopp, 10, 0))
 		_init(ga);
 	_display(ga, &ga->waitbox.img);
 
@@ -68,6 +112,7 @@ void	loop_waitopp(t_game *ga)
 	if (ga->waitbox.i == 30)
 		ga->waitbox.i = 0;
 	
+
 	if (ga->evstat.win_cross)
 		return (_destroy(ga));
 	if (dir_size(PATH_COMDIR) == 2 && ga->profil_opp.path == NULL)

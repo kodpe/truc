@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:52:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 09:04:57 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 21:20:26 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	assert_comfile(char *path)
 	if (-1 == access(path, R_OK))
 	{
 		dprintf(2, "ERROR access_comfile() unfound [%s]\n", path);
-		return (-1);
+		return (1);
 	}
 	return (0);
 }

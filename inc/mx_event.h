@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 03:44:11 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 08:57:54 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 02:45:00 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,55 +80,5 @@
 # define MX_EVENT_EXPOSE		12 /* int (*f)(void *param) */
 # define MX_EVENT_WIN_CROSS		17 /* int (*f)(void *param) */
 
-typedef struct s_event_stat
-{
-	int	mlx_keycode;
-	int	key[600];
-	int	mouse_x;
-	int	mouse_y;
-	int	mouse[6];
-	int	win_cross;
-}	t_evstat;
-
-/* HOOK */
-void	mx_hook_init(void *win_ptr, t_evstat *ev);
-int		mx_hook_key_press(int keycode, t_evstat *ev);
-int		mx_hook_key_release(int keycode, t_evstat *ev);
-int		mx_hook_mouse_down(int button, int x, int y, t_evstat *ev);
-int		mx_hook_mouse_up(int button, int x, int y, t_evstat *ev);
-int		mx_hook_mouse_move(int x, int y, t_evstat *ev);
-int		mx_hook_win_cross(t_evstat *ev);
-
-/* EVSTAT */
-int		mx_is_ppkey(int keycode);
-void	mx_set_ppkey(t_evstat *ev, int event, int keycode);
-int		mx_get_ppkey(t_evstat *ev, int keycode);
-char	*mx_get_ppkey_name(int keycode);
-void	mx_log_key_evstat(int event, int keycode);
-void	mx_add_key_evstat(t_evstat *ev, int event, int keycode);
-void	mx_log_mouse_evstat(int event, int button, int x, int y);
-void	mx_add_mouse_evstat(t_evstat *ev, int event, int button, int x, int y);
-void	mx_add_win_cross_evstat(t_evstat *ev);
-
-typedef long long	t_time;
-
-typedef struct s_loop
-{
-	int				active;
-	int				loop_id;
-	int				last_loop_id;
-	t_time			time_origin;
-	t_time			time_elapsed;
-	t_time			timeout;
-	t_time			last_frame_duration;
-	int				fps;
-	float			real_fps;
-	int				usleep_duration;
-}	t_loop;
-
-void	mx_wait_fps(int frame_per_second);
-t_time	mx_sc_time_ms(void);
-t_time	mx_time_ms(void);
-int		mx_time_loop(t_loop *loop, int fps, int sec_timeout);
 
 #endif /* MX_EVENT_H */

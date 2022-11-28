@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:08:29 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 09:38:06 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 21:54:18 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ static void	_init_mlx(t_game *ga)
 
 static int	_loop_manager(t_game *ga)
 {
+	if (ga->lp_menu.active)
+		loop_menu(ga);
+
 	if (ga->lp_waitopp.active)
 		loop_waitopp(ga);
 	if (ga->lp_startgame.active)
@@ -67,6 +70,8 @@ void	_global_mlx_loop(t_game *ga)
 	if (ga->client)
 		goto_loop(ga, 0, LOOP_ID_STARTGAME);
 
+	// goto_loop(ga, 0, LOOP_ID_MENU);
+
 	mlx_loop_hook(ga->mlx_ptr, &_loop_manager, ga);
 	mx_hook_init(ga->win.ptr, &ga->evstat);
 	mlx_loop(ga->mlx_ptr);
@@ -81,14 +86,15 @@ int	main(void)
 	// signal(SIGQUIT, SIG_IGN);
 	srand(time(&t));
 	ft_memset(&ga, 0, sizeof(t_game));
+	
 	if (server_exist())
 		create_client(&ga);
 	else
 		create_server(&ga);
 	_sc_check_multiplayer(&ga);
+
 	_init_mlx(&ga);
 	_global_mlx_loop(&ga);
-
 	mx_destroy_win(&ga.win);
 	mx_destroy_mlx(ga.mlx_ptr);
 	return (0);

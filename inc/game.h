@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 09:59:38 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 02:36:37 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,34 @@
 # define STR_WANTQUIT	"Are you sure you want to quit?"
 # define STR_WANTLOSE	"You will lose this game"
 
-# define SERVER_NAME	"eamar"
-# define CLIENT_NAME	"chsimon"
+# define SERVER_NAME	"eleotard"
+# define CLIENT_NAME	"eamar"
 
 # define COM_VERBOSE
 # define COM_TRUNC_RECEIVE
 # define COM_IGNORE_EMPTY_RECEIVE
 
 // LOOP //
+# define LOOP_ID_MENU		10
+
 # define LOOP_ID_WAITOPP	1
 # define LOOP_ID_STARTGAME	2
 # define LOOP_ID_GAME		3
 # define LOOP_ID_WANTQUIT	4
+
+#define XPM_PATH_30W_LANTERN	"assets/30w_xpm/30w_lantern.xpm"
+#define XPM_PATH_30W_LOTUS		"assets/30w_xpm/30w_lotus.xpm"
+#define XPM_PATH_30W_MOUNTAIN	"assets/30w_xpm/30w_mountain.xpm"
+#define XPM_PATH_30W_CASTLE		"assets/30w_xpm/30w_castle.xpm"
+#define XPM_PATH_80W_LANTERN	"assets/80w_xpm/80w_lantern.xpm"
+#define XPM_PATH_80W_LOTUS		"assets/80w_xpm/80w_lotus.xpm"
+#define XPM_PATH_80W_MOUNTAIN	"assets/80w_xpm/80w_mountain.xpm"
+#define XPM_PATH_80W_CASTLE		"assets/80w_xpm/80w_castle.xpm"
+#define XPM_PATH_80W_SAMURAI	"assets/80w_xpm/80w_samurai.xpm"
+#define XPM_PATH_80W_NINJA		"assets/80w_xpm/80w_ninja.xpm"
+#define XPM_PATH_80W_DRAGON		"assets/80w_xpm/80w_dragon.xpm"
+#define XPM_PATH_80W_WITCH		"assets/80w_xpm/80w_witch.xpm"
+
 
 typedef enum e_xpmid
 {
@@ -142,7 +158,6 @@ typedef struct s_txt_input
 	int		len;
 }	t_txt_input;
 
-
 typedef struct s_game
 {
 	bool	server;
@@ -153,6 +168,9 @@ typedef struct s_game
 	t_win	win;
 	t_profil	profil_opp;
 	t_profil	profil_you;
+
+	t_loop			lp_menu;
+	// t_loop			lp_ingame_menu;
 
 	t_loop			lp_waitopp;
 	t_loop			lp_startgame;
@@ -165,6 +183,11 @@ typedef struct s_game
 
 	// used in waitopp, startgame, wantquit
 	t_waiting_box	waitbox;
+	t_img			testborder;
+	t_img			testborder2;
+	t_img			testborder3;
+
+	t_but 			bt;
 
 	t_gameinfo	info;
 
@@ -202,6 +225,8 @@ int		dir_size(char *dirpath);
 char	**dir_namelist(char *dirpath);
 
 /* LOOP */
+void	loop_menu(t_game *ga);
+
 void	loop_waitopp(t_game *ga);
 void	loop_startgame(t_game *ga);
 void	loop_game(t_game *ga);

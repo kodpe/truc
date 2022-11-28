@@ -6,29 +6,29 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:45:12 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 05:15:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 21:48:31 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
 // return the current active loop id or -1
-int	get_active_loop_id(t_game *ga)
-{
-	if (ga->lp_waitopp.active)
-		return (LOOP_ID_WAITOPP);
+// int	get_active_loop_id(t_game *ga)
+// {
+// 	if (ga->lp_waitopp.active)
+// 		return (LOOP_ID_WAITOPP);
 
-	if (ga->lp_startgame.active)
-		return (LOOP_ID_STARTGAME);
+// 	if (ga->lp_startgame.active)
+// 		return (LOOP_ID_STARTGAME);
 
-	if (ga->lp_game.active)
-		return (LOOP_ID_GAME);
+// 	if (ga->lp_game.active)
+// 		return (LOOP_ID_GAME);
 
-	if (ga->lp_wantquit.active)
-		return (LOOP_ID_WANTQUIT);
+// 	if (ga->lp_wantquit.active)
+// 		return (LOOP_ID_WANTQUIT);
 	
-	return (-1);
-}
+// 	return (-1);
+// }
 
 // // return the current active loop ptr or NULL
 // t_loop	*get_active_loop_ptr(t_game *ga)
@@ -50,6 +50,8 @@ int	get_active_loop_id(t_game *ga)
 
 static void	_setzero_loop(t_game *ga)
 {
+	ga->lp_menu.active = 0;
+
 	ga->lp_waitopp.active = 0;
 	ga->lp_startgame.active = 0;
 	ga->lp_game.active = 0;
@@ -75,6 +77,11 @@ void	goto_loop(t_game *ga, int src_id, int dest_id)
 {
 	_setzero_loop(ga);
 
+	if (dest_id == LOOP_ID_MENU)
+		return (_active_loop(&ga->lp_menu, src_id, dest_id));
+
+
+//TODO CLEAN NEW_LOOP FROM MENU
 	if (dest_id == LOOP_ID_WAITOPP)
 		return (_active_loop(&ga->lp_waitopp, src_id, dest_id));
 
@@ -84,8 +91,8 @@ void	goto_loop(t_game *ga, int src_id, int dest_id)
 	if (dest_id == LOOP_ID_GAME)
 		return (_active_loop(&ga->lp_game, src_id, dest_id));
 
-	if (dest_id == LOOP_ID_WANTQUIT)
-		return (_active_loop(&ga->lp_wantquit, src_id, dest_id));
+	// if (dest_id == LOOP_ID_WANTQUIT)
+		// return (_active_loop(&ga->lp_wantquit, src_id, dest_id));
 
 	abort(); // TODO fatal error loop bad id
 }

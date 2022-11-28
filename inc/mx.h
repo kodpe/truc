@@ -96,6 +96,23 @@ typedef struct s_img
 	t_win	*win;
 }	t_img;
 
+typedef struct s_but
+{
+	char	*name;
+	t_2Dpt	origin;
+	t_aabb	box_abs;
+	t_aabb	box_rel;
+
+	int		over;
+	t_img	img_away;
+	t_img	img_over;
+
+	int		active;
+	t_img	img_active;
+
+	int		lock;
+}	t_but;
+
 /* MLX_PTR */
 void	*mx_init_mlx(void);
 void	mx_destroy_mlx(void *mlx_ptr);
@@ -199,6 +216,67 @@ bool	mx_coll_pt_2aabb(t_2Dpt pt, t_aabb box1, t_aabb box2);
 bool	mx_coll_aabb(t_aabb box1, t_aabb box2);
 bool	mx_aabb_in_aabb(t_aabb box_inside, t_aabb box_around);
 bool	mx_ccl_in_aabb(t_ccl cl, t_aabb box_around);
+void	mx_draw_pn_border_aabb(t_img *img, t_aabb box, int border_size, t_uint hexcolor);
+void	mx_draw_lt_border_aabb(t_img *img, t_aabb box, int border_size, t_uint hexcolor);
+
+typedef struct s_event_stat
+{
+	int	mlx_keycode;
+	int	key[600];
+	int	mouse_x;
+	int	mouse_y;
+	int	mouse[6];
+	int	win_cross;
+}	t_evstat;
+
+/* HOOK */
+void	mx_hook_init(void *win_ptr, t_evstat *ev);
+int		mx_hook_key_press(int keycode, t_evstat *ev);
+int		mx_hook_key_release(int keycode, t_evstat *ev);
+int		mx_hook_mouse_down(int button, int x, int y, t_evstat *ev);
+int		mx_hook_mouse_up(int button, int x, int y, t_evstat *ev);
+int		mx_hook_mouse_move(int x, int y, t_evstat *ev);
+int		mx_hook_win_cross(t_evstat *ev);
+
+/* EVSTAT */
+int		mx_is_ppkey(int keycode);
+void	mx_set_ppkey(t_evstat *ev, int event, int keycode);
+int		mx_get_ppkey(t_evstat *ev, int keycode);
+char	*mx_get_ppkey_name(int keycode);
+void	mx_log_key_evstat(int event, int keycode);
+void	mx_add_key_evstat(t_evstat *ev, int event, int keycode);
+void	mx_log_mouse_evstat(int event, int button, int x, int y);
+void	mx_add_mouse_evstat(t_evstat *ev, int event, int button, int x, int y);
+void	mx_add_win_cross_evstat(t_evstat *ev);
+
+typedef long long	t_time;
+
+typedef struct s_loop
+{
+	int				active;
+	int				loop_id;
+	int				last_loop_id;
+	t_time			time_origin;
+	t_time			time_elapsed;
+	t_time			timeout;
+	t_time			last_frame_duration;
+	int				fps;
+	float			real_fps;
+	int				usleep_duration;
+}	t_loop;
+
+void	mx_wait_fps(int frame_per_second);
+t_time	mx_sc_time_ms(void);
+t_time	mx_time_ms(void);
+int		mx_time_loop(t_loop *loop, int fps, int sec_timeout);
+
+/* BUTTON */
+t_but	mx_init_button(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size);
+int		mx_create_button(t_but *bt, char *name);
+void	mx_destroy_button(t_but *bt);
+void	mx_draw_button(t_but *bt, t_evstat *ev);
+
+// DEPRECATED BELOW // TODO
 
 /* OBB ORIENTED BOUNDING BOX */
 //todo

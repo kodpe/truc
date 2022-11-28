@@ -48,7 +48,7 @@ int	mx_create_img(t_img *img, char *name)
 	if (!img->addr)
 		return (1);
 	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
-		mx_vec(img->width, img->height));
+		mx_vec(img->width, img->height)); // ? - 1
 	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width - 1, img->height - 1));
 	mx_log_img(MX_NAME, img);
 	return (0);
@@ -71,7 +71,7 @@ int	mx_create_xpm_img(t_img *img, char *file)
 	if (!img->addr)
 		return (1);
 	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
-		mx_vec(img->width, img->height));
+		mx_vec(img->width, img->height)); // ? - 1
 	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width - 1, img->height - 1));
 	mx_log_img(MX_NAME, img);
 	return (0);
@@ -200,7 +200,7 @@ int	mx_reset_img(t_img *img)
 	if (!img->addr)
 		return (1);
 	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
-		mx_vec(img->width, img->height));
+		mx_vec(img->width, img->height)); // ? - 1
 	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width - 1, img->height - 1));
 	mx_log_img(MX_NAME, img);
 	return (0);

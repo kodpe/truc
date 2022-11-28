@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 20:42:59 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 10:15:15 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/27 21:22:42 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	destroy_profil(t_profil *profil)
 {
-	// if (profil->path)
-		// unlink_sc(profil->path);
+	if (profil->path)
+		unlink_sc(profil->path);
 	free(profil->name);
 	free(profil->file);
 	free(profil->path);
 	free(profil->gps);
 	free(profil->photo_path);
-	// if (profil->photo_xpm_tmp_path)
-		// unlink_sc(profil->photo_xpm_tmp_path);
+	if (profil->photo_xpm_tmp_path)
+		unlink_sc(profil->photo_xpm_tmp_path);
 	free(profil->photo_xpm_tmp_path);
 	mx_destroy_img(&profil->img);
 	mx_destroy_img(&profil->photo);

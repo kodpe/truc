@@ -203,3 +203,47 @@ bool	mx_ccl_in_aabb(t_ccl cl, t_aabb box_around)
 		return (true);
 	return (false);
 }
+
+void	mx_draw_pn_border_aabb(t_img *img, t_aabb box, int border_size, t_uint hexcolor)
+{
+	t_2Dpt	origin;
+	t_2Dvec	lenght;
+	int		i;
+
+	if (border_size >= box.lenght.x || border_size >= box.lenght.y)
+	{
+		c_red();
+		mx_log_aabb("mx_draw_lt_border_aabb() err too high borde_size", box);
+		c_reset();
+		return ;
+	}
+	i = 0;
+	while (i < border_size)
+	{
+		origin = mx_pt(box.origin.x + i, box.origin.y + i);
+		lenght = mx_vec(box.lenght.x - 2 * i, box.lenght.y - 2 * i);
+		mx_draw_aabb(img, mx_aabb(origin, lenght), hexcolor);
+		i++;
+	}
+}
+
+void	mx_draw_lt_border_aabb(t_img *img, t_aabb box, int border_size, t_uint hexcolor)
+{
+	t_2Dpt	origin;
+	t_2Dvec	lenght;
+
+	if (border_size >= box.lenght.x || border_size >= box.lenght.y)
+	{
+		c_red();
+		mx_log_aabb("mx_draw_lt_border_aabb() err too high borde_size", box);
+		c_reset();
+		return ;
+	}
+	mx_draw_aabb(img, box, hexcolor);
+	if (border_size < 2)
+		return ;
+	border_size--;
+	origin = mx_pt(box.origin.x + border_size, box.origin.y + border_size);
+	lenght = mx_vec(box.lenght.x - 2 * border_size, box.lenght.y - 2 * border_size);
+	mx_draw_aabb(img, mx_aabb(origin, lenght), hexcolor);
+}

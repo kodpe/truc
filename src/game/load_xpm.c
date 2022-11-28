@@ -6,25 +6,11 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:12:10 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/13 18:03:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 02:36:40 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-
-
-#define XPM_PATH_30W_LANTERN	"assets/30w_xpm/30w_lantern.xpm"
-#define XPM_PATH_30W_LOTUS		"assets/30w_xpm/30w_lotus.xpm"
-#define XPM_PATH_30W_MOUNTAIN	"assets/30w_xpm/30w_mountain.xpm"
-#define XPM_PATH_30W_CASTLE		"assets/30w_xpm/30w_castle.xpm"
-#define XPM_PATH_80W_LANTERN	"assets/80w_xpm/80w_lantern.xpm"
-#define XPM_PATH_80W_LOTUS		"assets/80w_xpm/80w_lotus.xpm"
-#define XPM_PATH_80W_MOUNTAIN	"assets/80w_xpm/80w_mountain.xpm"
-#define XPM_PATH_80W_CASTLE		"assets/80w_xpm/80w_castle.xpm"
-#define XPM_PATH_80W_SAMURAI	"assets/80w_xpm/80w_samurai.xpm"
-#define XPM_PATH_80W_NINJA		"assets/80w_xpm/80w_ninja.xpm"
-#define XPM_PATH_80W_DRAGON		"assets/80w_xpm/80w_dragon.xpm"
-#define XPM_PATH_80W_WITCH		"assets/80w_xpm/80w_witch.xpm"
 
 static void	init_xpm(t_game *ga)
 {
