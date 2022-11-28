@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 21:49:57 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 22:45:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	loop_menu(t_game *ga)
 {
 	if (0 == mx_time_loop(&ga->lp_menu, 5, 0))
 		_init(ga);
+	//* DISPLAY FUNCTION(S)
 	_display(ga, &ga->waitbox.img);
 
-	// ga->waitbox.i += 10;
-	// if (ga->waitbox.i == 30)
-		// ga->waitbox.i = 0;
+	//! HERE LOOP INCREMENT VALUE(S)
 	
+	//* STOP CONDITION(S) : GOTO LOOP OR MLX_LOOP_END (= EXIT )
 	if (ga->evstat.win_cross)
 		return (_destroy(ga));
 	// if (dir_size(PATH_COMDIR) == 2 && ga->profil_opp.path == NULL)

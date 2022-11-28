@@ -1,15 +1,41 @@
-==211946== Memcheck, a memory error detector
-==211946== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==211946== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==211946== Command: ./yokai serveur
-==211946== Parent PID: 211828
-==211946== 
-==211946== 
-==211946== HEAP SUMMARY:
-==211946==     in use at exit: 0 bytes in 0 blocks
-==211946==   total heap usage: 80,690 allocs, 80,690 frees, 291,400,347 bytes allocated
-==211946== 
-==211946== All heap blocks were freed -- no leaks are possible
-==211946== 
-==211946== For lists of detected and suppressed errors, rerun with: -s
-==211946== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==230516== Memcheck, a memory error detector
+==230516== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==230516== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==230516== Command: ./yokai serveur
+==230516== Parent PID: 230377
+==230516== 
+==230516== 
+==230516== HEAP SUMMARY:
+==230516==     in use at exit: 77 bytes in 3 blocks
+==230516==   total heap usage: 1,937 allocs, 1,934 frees, 249,374 bytes allocated
+==230516== 
+==230516== 9 bytes in 1 blocks are definitely lost in loss record 1 of 3
+==230516==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==230516==    by 0x11842F: ft_strdup (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x116E1D: create_server (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x110D5B: main (in /home/sylvain/Documents/truc/yokai)
+==230516== 
+==230516== 15 bytes in 1 blocks are definitely lost in loss record 2 of 3
+==230516==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==230516==    by 0x118522: ft_strjoin (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x118626: ft_strjointri (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x11749A: set_username_code (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x116E34: create_server (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x110D5B: main (in /home/sylvain/Documents/truc/yokai)
+==230516== 
+==230516== 53 bytes in 1 blocks are definitely lost in loss record 3 of 3
+==230516==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==230516==    by 0x118522: ft_strjoin (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x117684: create_comfile (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x116E52: create_server (in /home/sylvain/Documents/truc/yokai)
+==230516==    by 0x110D5B: main (in /home/sylvain/Documents/truc/yokai)
+==230516== 
+==230516== LEAK SUMMARY:
+==230516==    definitely lost: 77 bytes in 3 blocks
+==230516==    indirectly lost: 0 bytes in 0 blocks
+==230516==      possibly lost: 0 bytes in 0 blocks
+==230516==    still reachable: 0 bytes in 0 blocks
+==230516==         suppressed: 0 bytes in 0 blocks
+==230516== 
+==230516== For lists of detected and suppressed errors, rerun with: -s
+==230516== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 1 from 1)

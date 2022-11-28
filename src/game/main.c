@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:08:29 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 21:54:18 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/28 22:48:07 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ static int	_loop_manager(t_game *ga)
 void	_global_mlx_loop(t_game *ga)
 {
 	if (ga->server)
-		goto_loop(ga, 0, LOOP_ID_WAITOPP);
+		goto_loop(ga, LOOP_ID_MENU, LOOP_ID_WAITOPP);
 	if (ga->client)
-		goto_loop(ga, 0, LOOP_ID_STARTGAME);
+		goto_loop(ga, LOOP_ID_MENU, LOOP_ID_STARTGAME);
 
-	// goto_loop(ga, 0, LOOP_ID_MENU);
+	goto_loop(ga, 0, LOOP_ID_MENU);
 
 	mlx_loop_hook(ga->mlx_ptr, &_loop_manager, ga);
 	mx_hook_init(ga->win.ptr, &ga->evstat);

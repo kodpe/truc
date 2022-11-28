@@ -3,7 +3,7 @@
 ---
 ### MVP
 - [x] Multiplayer lobby
-- [ ] mx_reset_image()
+- [x] mx_reset_image()
 - [ ] mouse react over pieces
 - [ ] Multiplayer game
 - [x] Bloquer les signaux C-c C-\
@@ -22,7 +22,7 @@
 - [ ] game tiles
 - [x] Fix CAPSLOCK
 - [x] Border size AABB
-- [ ] Button
+- [x] Button
 
 ---
 ### ADD-ONS
