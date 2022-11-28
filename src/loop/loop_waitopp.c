@@ -105,6 +105,7 @@ static void	_display(t_game *ga, t_img *img)
 		{
 			printf("GG oui je reste appuyé\n");
 			ga->bt.origin = mx_pt(ga->evstat.mouse_pos.x -100, ga->evstat.mouse_pos.y - 25);
+			ga->bt.box_abs.origin = ga->bt.origin;
 			ga->bt.img_away.origin = ga->bt.origin;
 			ga->bt.img_over.origin = ga->bt.origin;
 			ga->bt.img_active.origin = ga->bt.origin;
