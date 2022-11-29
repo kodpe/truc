@@ -30,13 +30,13 @@ static void	_destroy(t_game *ga)
 {
 	LOG
 
+	destroy_profil(&ga->profil_you);
+	destroy_profil(&ga->profil_opp);
 	mx_destroy_img(&ga->txi.img);
 	free(ga->txi.buffer);
 	destroy_xpm(ga);
 	mx_destroy_img(&ga->img_board);
 	mx_destroy_img(&ga->info.img);
-	destroy_profil(&ga->profil_you);
-	destroy_profil(&ga->profil_opp);
 }
 
 static void	_init(t_game *ga)

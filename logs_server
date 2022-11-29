@@ -1,15 +1,15 @@
-==343865== Memcheck, a memory error detector
-==343865== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==343865== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==343865== Command: ./yokai serveur
-==343865== Parent PID: 343864
-==343865== 
-==343865== 
-==343865== HEAP SUMMARY:
-==343865==     in use at exit: 0 bytes in 0 blocks
-==343865==   total heap usage: 6,573 allocs, 6,573 frees, 1,548,496 bytes allocated
-==343865== 
-==343865== All heap blocks were freed -- no leaks are possible
-==343865== 
-==343865== For lists of detected and suppressed errors, rerun with: -s
-==343865== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==372424== Memcheck, a memory error detector
+==372424== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==372424== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==372424== Command: ./yokai serveur
+==372424== Parent PID: 372423
+==372424== 
+==372424== 
+==372424== HEAP SUMMARY:
+==372424==     in use at exit: 0 bytes in 0 blocks
+==372424==   total heap usage: 11,382 allocs, 11,382 frees, 6,541,488 bytes allocated
+==372424== 
+==372424== All heap blocks were freed -- no leaks are possible
+==372424== 
+==372424== For lists of detected and suppressed errors, rerun with: -s
+==372424== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

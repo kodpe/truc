@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 20:42:59 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 21:22:42 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 11:44:43 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	destroy_profil(t_profil *profil)
 	free(profil->photo_xpm_tmp_path);
 	mx_destroy_img(&profil->img);
 	mx_destroy_img(&profil->photo);
+	ft_memset(profil, 0, sizeof(t_profil));
 }
 
 static void	load_profil_photo(t_game *ga, t_profil *profil, t_2Dpt origin)
