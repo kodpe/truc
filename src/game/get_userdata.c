@@ -6,11 +6,68 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:33:40 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 17:44:38 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 18:38:46 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
+
+static void _update_average_turn_time(t_userdata *ud, int one_turn_time)
+{
+	ud->average_turn_time =  one_turn_time; // TODO c cassé
+}
+
+static void	_update_average_game_time(t_userdata *ud)
+{
+	ud->average_game_time = ud->total_game_time / (ud->nb_win + ud->nb_loose);
+}
+
+static int _calc_xp(t_userdata *ud)
+{
+	int	xp;
+
+	xp = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		xp += ud->pieces_catch[i];
+		xp += ud->pieces_moves[i];
+		xp += ud->sp_tiles_use[i];
+	}
+	return (xp);
+}
+
+static int	_calc_lvl(int xp)
+{
+	int	i;
+	
+	i = 0;
+	while (xp > 0)
+	{
+		xp -= ft_power(2, i);
+		i++;
+	}
+	dprintf(2, "LVL [%i]\m", i);
+	return (i);
+}
+
+static int	_calc_winrate(int win, int loose)
+{
+	return (win * 100 / (win + loose));
+}
+
+char	*get_txt_date(t_userdata *ud)
+{
+	char	*date;
+
+	date = ft_calloc(sizeof(char) * 41);
+	if (!date)
+		abort();
+	snprintf(date, 40, "%i:%i %i/%i/%i", \
+		ud->date[0], ud->date[1], ud->date[2], ud->date[3], ud->date[4]);
+	// 15:42 9/2/2022
+	dprintf(2, "DATE [%s]\m", date);
+	return (date);
+}
 
 /*
 	t_userdata *ud and char **sp can be null
