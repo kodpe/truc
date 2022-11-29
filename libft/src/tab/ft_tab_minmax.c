@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:30:38 by sloquet           #+#    #+#             */
-/*   Updated: 2022/01/29 14:33:07 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:44:49 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,29 @@ int	ft_tab_max(const int *tab, const int size)
 {
 	int	i;
 	int	max;
+	int	index_max;
+
+	if (size <= 0)
+		return (-1);
+	max = tab[0];
+	index_max = 0;
+	i = 0;
+	while (i < size)
+	{
+		if (tab[i] > max)
+		{
+			max = tab[i];
+			index_max = i;
+		}
+		i++;
+	}
+	return (index_max);
+}
+
+int	ft_tabf_max(const float *tab, const int size)
+{
+	int	i;
+	float	max;
 	int	index_max;
 
 	if (size <= 0)

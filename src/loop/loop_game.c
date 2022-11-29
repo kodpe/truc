@@ -66,10 +66,6 @@ static void	_init(t_game *ga)
 
 static void	_display(t_game *ga, t_img *img)
 {
-	// if (rand() % 3 == 0) // cool
-		// if (mx_reset_img(img))
-			// abort();
-
 	mx_draw_aabb(&ga->txi.img, ga->txi.img.box_rel, SILVER);
 	mx_draw_img(&ga->txi.img);
 	mx_putstr_cen_img(&ga->txi.img, ga->txi.buffer, SILVER, 0);

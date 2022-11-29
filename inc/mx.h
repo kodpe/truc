@@ -26,7 +26,7 @@
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
 					c_reset();
 
-# define MX_VERBOSE	1
+# define MX_VERBOSE	0
 
 typedef unsigned int	t_uint;
 
@@ -144,6 +144,8 @@ void	mx_fill_img_bg(t_img *front, t_img *backg);
 int		mx_reset_img(t_img *img);
 void	mx_draw_box_img(t_img *img, t_uint hexcolor);
 void	mx_grid_img(t_img *img, t_2Dvec nb_tiles, t_uint hexcolor);
+
+/* STR */
 void	mx_putstr_img(t_img *img, t_2Dpt origin, char *str, t_uint hexcolor);
 void	mx_putstr_cen_img(t_img *img, char *str, t_uint hexcolor, int align_y);
 void	mx_putnbr_img(t_img *img, t_2Dpt origin, int nbr, t_uint hexcolor);
@@ -294,11 +296,11 @@ void	mx_handle_button(t_but *bt, t_evstat *ev);
 // void	mx_draw_button(t_but *bt, t_evstat *ev);
 void	mx_log_button(const char *msg, t_but *bt);
 
-// DEPRECATED BELOW // TODO
 
 /* OBB ORIENTED BOUNDING BOX */
 //todo
 
+// DEPRECATED BELOW // TODO
 typedef struct	s_test
 {
 	void	*mlx_ptr;
@@ -308,10 +310,5 @@ typedef struct	s_test
 	t_img	img3;
 
 }	t_test;
-
-/*	EVENTS	*/
-// void	main_loop(t_test *m);
-
-bool	mx_mouse_aabb(t_2Dpt mouse, t_aabb box);
 
 #endif /* MX_H */

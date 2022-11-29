@@ -99,7 +99,7 @@ static void	_display(t_game *ga, t_img *img)
 
 void	loop_waitopp(t_game *ga)
 {
-	if (0 == mx_time_loop(&ga->lp_waitopp, 50, 0))
+	if (0 == mx_time_loop(&ga->lp_waitopp, 30, 0))
 		_init(ga);
 	//* DISPLAY FUNCTION(S)
 	_display(ga, &ga->waitbox.img);

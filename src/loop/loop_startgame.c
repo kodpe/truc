@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:01:45 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 11:09:21 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:27:20 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	_display(t_game *ga, t_img *img)
 	mx_putstr_cen_img(img, STR_START, SILVER, -12);
 	mx_putnbr_img(img, \
 				mx_pt(img->origin.x + img->width / 2 + 50, \
-				img->origin.y + img->height / 2 - 12), \
+				img->origin.y + img->height / 2 - 7), \
 				ga->waitbox.starting_delay / 5, SILVER);
 }
 

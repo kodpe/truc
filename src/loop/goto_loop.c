@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:45:12 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 10:10:37 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:42:55 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ static void	_setzero_loop(t_game *ga)
 	ga->lp_menu.active = 0;
 	ga->lp_waitopp.active = 0;
 	ga->lp_startgame.active = 0;
+	ga->lp_profil.active = 0;
 	ga->lp_game.active = 0;
 }
 
 void	goto_loop(t_game *ga, int src_id, int dest_id)
 {
 	_setzero_loop(ga);
-	ft_memset(&ga->evstat, 0, sizeof(t_evstat)); // reset evstat
+	ft_memset(&ga->evstat, 0, sizeof(t_evstat)); //! reset of evstat
 
 	if (src_id > 0 && dest_id > 0)
 		mx_clear_win(&ga->win);
@@ -50,6 +51,9 @@ void	goto_loop(t_game *ga, int src_id, int dest_id)
 
 	if (dest_id == LOOP_ID_STARTGAME)
 		return (_active_loop(&ga->lp_startgame, src_id, dest_id));
+
+	if (dest_id == LOOP_ID_PROFIL)
+		return (_active_loop(&ga->lp_profil, src_id, dest_id));
 
 	if (dest_id == LOOP_ID_GAME)
 		return (_active_loop(&ga->lp_game, src_id, dest_id));
@@ -66,6 +70,8 @@ int	loop_manager(t_game *ga)
 {
 	if (ga->lp_menu.active)
 		loop_menu(ga);
+	if (ga->lp_profil.active)
+		loop_profil(ga);
 	if (ga->lp_waitopp.active)
 		loop_waitopp(ga);
 	if (ga->lp_startgame.active)

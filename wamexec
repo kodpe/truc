@@ -62,7 +62,7 @@ terminator \
 echo Done
 #exit
 
-sleep 10
+sleep 3
 echo "             auto close in $1 sec"
 ./close $1 &
 echo Done

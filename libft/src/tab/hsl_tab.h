@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 11:30:21 by zsheep            #+#    #+#             */
-/*   Updated: 2022/03/18 22:21:46 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:53:47 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HSL_TAB_H
 
 # include <stdlib.h>
+# include <stdio.h>
 # include "../write/hsl_write.h"
 # include "../sort/hsl_sort.h"
 
@@ -36,6 +37,7 @@ int		**ft_new_iitab(const int xlen, const int ylen, const int val);
  *		ft_newtab.c
  */
 int		*ft_newtab(const int size);
+float	*ft_newtabf(const int size);
 
 /**
  *		ft_set_iitab.c
@@ -77,10 +79,12 @@ int		ft_tab_third_quar(const int *tab, const int size);
  */
 int		ft_tab_min(const int *tab, const int size);
 int		ft_tab_max(const int *tab, const int size);
+int		ft_tabf_max(const float *tab, const int size);
 
 /**
  *		ft_tabshow.c
  */
 void	ft_tabshow(const int *tab, const int size, const char *name);
+void	ft_tabfshow(const float *tab, const int size, const char *name);
 
 #endif /* HSL_TAB_H */

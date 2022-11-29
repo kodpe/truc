@@ -5,6 +5,7 @@
 		"libft.h": "c",
 		"hsl_box.h": "c",
 		"hsl_stack.h": "c",
-		"game.h": "c"
+		"game.h": "c",
+		"hsl_tab.h": "c"
 	}
 }

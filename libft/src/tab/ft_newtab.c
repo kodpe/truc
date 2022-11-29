@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 09:33:42 by sloquet           #+#    #+#             */
-/*   Updated: 2022/03/17 16:51:23 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:42:10 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ int	*ft_newtab(const int size)
 	int	i;
 
 	tab = (int *)malloc(sizeof(int) * size);
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		tab[i] = 0;
+		i++;
+	}
+	return (tab);
+}
+
+float	*ft_newtabf(const int size)
+{
+	float	*tab;
+	int	i;
+
+	tab = (float *)malloc(sizeof(float) * size);
 	if (!tab)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 09:52:13 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:17:13 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,18 +162,26 @@ typedef struct s_game
 	t_profil	profil_opp;
 	t_profil	profil_you;
 
-//! LOOP MEMU
+	//? ** LOOP MEMU ** //
 	t_loop			lp_menu;
 	t_but			bt_play;
 	t_but			bt_quit;
+	t_but			bt_profil;
 
-//!
-
-	// t_loop			lp_ingame_menu;
-
+	//? ** LOOP WAITOPP ** //
 	t_loop			lp_waitopp;
+
+	//? ** LOOP STARTGAME ** //
 	t_loop			lp_startgame;
+
+	//? ** LOOP PROFIL ** //
+	t_loop			lp_profil;
+
+	//? ** LOOP GAME ** //
 	t_loop			lp_game;
+
+
+//END 
 	t_evstat		evstat;
 
 
@@ -229,12 +237,17 @@ char	**dir_namelist(char *dirpath);
 # define LOOP_ID_MENU		100
 # define LOOP_ID_WAITOPP	101
 # define LOOP_ID_STARTGAME	102
+# define LOOP_ID_PROFIL		103
 # define LOOP_ID_GAME		200
 
 void	loop_menu(t_game *ga);
+void	loop_profil(t_game *ga);
+
 void	loop_waitopp(t_game *ga);
 void	loop_startgame(t_game *ga);
+
 void	loop_game(t_game *ga);
+
 /* LOOP UTILS */
 int		loop_manager(t_game *ga);
 void	goto_loop(t_game *ga, int src_id, int dest_id);
