@@ -145,7 +145,7 @@ int		mx_reset_img(t_img *img);
 void	mx_draw_box_img(t_img *img, t_uint hexcolor);
 void	mx_grid_img(t_img *img, t_2Dvec nb_tiles, t_uint hexcolor);
 void	mx_putstr_img(t_img *img, t_2Dpt origin, char *str, t_uint hexcolor);
-void	mx_putstr_cen_img(t_img *img, char *str, t_uint hexcolor);
+void	mx_putstr_cen_img(t_img *img, char *str, t_uint hexcolor, int align_y);
 void	mx_putnbr_img(t_img *img, t_2Dpt origin, int nbr, t_uint hexcolor);
 void	mx_putnbr_cen_img(t_img *img, int nbr, t_uint hexcolor);
 

@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:45:12 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 09:49:58 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:10:37 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	_setzero_loop(t_game *ga)
 void	goto_loop(t_game *ga, int src_id, int dest_id)
 {
 	_setzero_loop(ga);
+	ft_memset(&ga->evstat, 0, sizeof(t_evstat)); // reset evstat
 
 	if (src_id > 0 && dest_id > 0)
 		mx_clear_win(&ga->win);

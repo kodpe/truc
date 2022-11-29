@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 17:08:29 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 09:59:42 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:01:01 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	_init_mlx(t_game *ga)
 
 void	_global_mlx_loop(t_game *ga)
 {
-	goto_loop(ga, LOOP_START, LOOP_ID_WAITOPP);
+	goto_loop(ga, LOOP_START, LOOP_ID_MENU);
 	mlx_loop_hook(ga->mlx_ptr, &loop_manager, ga);
 	mx_hook_init(ga->win.ptr, &ga->evstat);
 	mlx_loop(ga->mlx_ptr);

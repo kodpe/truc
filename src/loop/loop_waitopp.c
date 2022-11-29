@@ -94,7 +94,7 @@ static void	_display(t_game *ga, t_img *img)
 				mx_pt(img->width / 2 - 15 + ga->waitbox.i, \
 					img->height / 2 + 12), 2, SILVER);
 	mx_draw_img(img);
-	mx_putstr_cen_img(img, STR_WAIT, SILVER);
+	mx_putstr_cen_img(img, STR_WAIT, SILVER, -12);
 }
 
 void	loop_waitopp(t_game *ga)
@@ -110,10 +110,10 @@ void	loop_waitopp(t_game *ga)
 		ga->waitbox.i = 0;
 
 	//* STOP CONDITION(S) : GOTO LOOP OR MLX_LOOP_END (= EXIT )
-	if (ga->evstat.win_cross)
+	if (ga->evstat.win_cross || mx_get_ppkey(&ga->evstat, KEYCODE_ESCAPE))
 	{
 		_destroy(ga);
-		goto_loop(ga, LOOP_ID_WAITOPP, LOOP_EXIT);
+		goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_MENU);
 	}
 	if (dir_size(PATH_COMDIR) == 2 && ga->profil_opp.path == NULL)
 	{

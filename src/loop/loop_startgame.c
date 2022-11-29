@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:01:45 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 10:13:48 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 11:09:21 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	_destroy(t_game *ga)
 	free(ga->profil_opp.name);
 	free(ga->profil_opp.path);
 	mx_destroy_img(&ga->waitbox.img);
-	mlx_loop_end(ga->mlx_ptr);
 }
 
 static void	_init(t_game *ga)
@@ -51,7 +50,7 @@ static void	_display(t_game *ga, t_img *img)
 			mx_pt(img->width / 2 - 15 + ga->waitbox.i, \
 				img->height / 2 + 12), 2, SILVER);
 	mx_draw_img(img);
-	mx_putstr_cen_img(img, STR_START, SILVER);
+	mx_putstr_cen_img(img, STR_START, SILVER, -12);
 	mx_putnbr_img(img, \
 				mx_pt(img->origin.x + img->width / 2 + 50, \
 				img->origin.y + img->height / 2 - 12), \
@@ -62,23 +61,26 @@ void	loop_startgame(t_game *ga)
 {
 	if (0 == mx_time_loop(&ga->lp_startgame, 5, 0))
 		_init(ga);
+	//* DISPLAY FUNCTION(S)
 	_display(ga, &ga->waitbox.img);
 
+	//* HERE LOOP INCREMENT VALUE(S)
 	ga->waitbox.i += 10;
 	if (ga->waitbox.i == 30)
 		ga->waitbox.i = 0;
 	ga->waitbox.starting_delay--;
 
-	if (ga->evstat.win_cross)
-		return (_destroy(ga));
+	//* STOP CONDITION(S) : GOTO LOOP OR MLX_LOOP_END (= EXIT )
 	if (ga->waitbox.starting_delay == 0)
 	{
-		if (assert_comfile(ga->profil_opp.path))
-			return (_destroy(ga));
-		if (assert_comfile(ga->profil_you.path))
-			return (_destroy(ga));
-		// launch game, waitbox is now useless
-		mx_destroy_img(&ga->waitbox.img);
+		if (assert_comfile(ga->profil_opp.path) \
+			|| assert_comfile(ga->profil_you.path))
+		{
+			_destroy(ga);
+			goto_loop(ga, LOOP_ID_STARTGAME, LOOP_EXIT);
+			return ;
+		}
+		mx_destroy_img(&ga->waitbox.img); // we dont destroy com profilvar
 		goto_loop(ga, LOOP_ID_STARTGAME, LOOP_ID_GAME);
 	}
 }

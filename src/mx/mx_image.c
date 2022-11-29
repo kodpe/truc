@@ -225,7 +225,7 @@ void	mx_putstr_img(t_img *img, t_2Dpt origin, char *str, t_uint hexcolor)
 					hexcolor, str);
 }
 
-void	mx_putstr_cen_img(t_img *img, char *str, t_uint hexcolor)
+void	mx_putstr_cen_img(t_img *img, char *str, t_uint hexcolor, int align_y)
 {
 	int	offset;
 
@@ -239,9 +239,11 @@ void	mx_putstr_cen_img(t_img *img, char *str, t_uint hexcolor)
 						RED, "[err:str too long]");
 		return ;
 	}
+	int	font_height = 10; // font witdh = 6 (default mlx font 6 x 10)
+	align_y += font_height / 2;
 	mlx_string_put(img->mlx_ptr, img->win->ptr, \
 					img->origin.x + img->width / 2 - offset / 2, \
-					img->origin.y + img->height / 2 - 12, \
+					img->origin.y + img->height / 2 + align_y, \
 					hexcolor, str);
 }
 
@@ -263,7 +265,7 @@ void	mx_putnbr_cen_img(t_img *img, int nbr, t_uint hexcolor)
 	str = ft_itoa(nbr);
 	if (!str)
 		return ;
-	mx_putstr_cen_img(img, str, hexcolor);
+	mx_putstr_cen_img(img, str, hexcolor, 0);
 	free(str);
 }
 

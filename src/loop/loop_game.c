@@ -12,16 +12,6 @@
 
 #include "game.h"
 
-// int	init_piece(t_game *ga, t_piece *piece)
-// {
-// 	piece->img = mx_init_img(ga->mlx_ptr, &ga->win, mx_pt(0, 0), mx_vec(160, 160));
-// 	piece->type = PIECE_DRAGON;
-// 	piece->xpm = ga->xpm[XPM_80W_DRAGON];
-// 	if (mx_create_img(&piece->img, "piece"))
-// 		return (1);
-// 	return (0);
-// }
-
 void	load_info(t_game *ga)
 {
 	t_2Dpt pos;
@@ -42,13 +32,11 @@ static void	_destroy(t_game *ga)
 
 	mx_destroy_img(&ga->txi.img);
 	free(ga->txi.buffer);
-
 	destroy_xpm(ga);
 	mx_destroy_img(&ga->img_board);
 	mx_destroy_img(&ga->info.img);
 	destroy_profil(&ga->profil_you);
 	destroy_profil(&ga->profil_opp);
-	mlx_loop_end(ga->mlx_ptr); // MLX LOOP END ON SORT
 }
 
 static void	_init(t_game *ga)
@@ -84,7 +72,7 @@ static void	_display(t_game *ga, t_img *img)
 
 	mx_draw_aabb(&ga->txi.img, ga->txi.img.box_rel, SILVER);
 	mx_draw_img(&ga->txi.img);
-	mx_putstr_cen_img(&ga->txi.img, ga->txi.buffer, SILVER);
+	mx_putstr_cen_img(&ga->txi.img, ga->txi.buffer, SILVER, 0);
 	(void)img;
 }
 
@@ -92,16 +80,18 @@ void	loop_game(t_game *ga)
 {
 	if (0 == mx_time_loop(&ga->lp_game, 30, 0))
 		_init(ga);
+	//* DISPLAY FUNCTION(S)
 	_display(ga, NULL);
 
-	ga->waitbox.i += 10;
-	if (ga->waitbox.i == 30)
-		ga->waitbox.i = 0;
+	//* HERE LOOP INCREMENT VALUE(S)
 
-	if (ga->evstat.win_cross)
-		return (_destroy(ga));
-	if (assert_comfile(ga->profil_opp.path))
-		return (_destroy(ga));
-	if (assert_comfile(ga->profil_you.path))
-		return (_destroy(ga));
+	//* STOP CONDITION(S) : GOTO LOOP OR MLX_LOOP_END (= EXIT )
+	if (ga->evstat.win_cross \
+		|| mx_get_ppkey(&ga->evstat, KEYCODE_ESCAPE) \
+		|| assert_comfile(ga->profil_opp.path) \
+		|| assert_comfile(ga->profil_you.path))
+	{
+		_destroy(ga);
+		goto_loop(ga, LOOP_ID_GAME, LOOP_ID_MENU);
+	}
 }
