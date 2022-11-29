@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/28 02:36:37 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:52:13 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@
 # define COM_TRUNC_RECEIVE
 # define COM_IGNORE_EMPTY_RECEIVE
 
-// LOOP //
-# define LOOP_ID_MENU		10
-
-# define LOOP_ID_WAITOPP	1
-# define LOOP_ID_STARTGAME	2
-# define LOOP_ID_GAME		3
-# define LOOP_ID_WANTQUIT	4
 
 #define XPM_PATH_30W_LANTERN	"assets/30w_xpm/30w_lantern.xpm"
 #define XPM_PATH_30W_LOTUS		"assets/30w_xpm/30w_lotus.xpm"
@@ -169,13 +162,18 @@ typedef struct s_game
 	t_profil	profil_opp;
 	t_profil	profil_you;
 
+//! LOOP MEMU
 	t_loop			lp_menu;
+	t_but			bt_play;
+	t_but			bt_quit;
+
+//!
+
 	// t_loop			lp_ingame_menu;
 
 	t_loop			lp_waitopp;
 	t_loop			lp_startgame;
 	t_loop			lp_game;
-	t_loop			lp_wantquit;
 	t_evstat		evstat;
 
 
@@ -203,6 +201,7 @@ typedef struct s_game
 /* COM */
 int		server_exist(void);
 void	create_server(t_game *ga);
+void	sc_check_multiplayer(t_game *ga);
 void	receive_opponent(t_game *ga);
 void	create_client(t_game *ga);
 /* COM UTILS */
@@ -225,13 +224,19 @@ int		dir_size(char *dirpath);
 char	**dir_namelist(char *dirpath);
 
 /* LOOP */
-void	loop_menu(t_game *ga);
+# define LOOP_START			-1
+# define LOOP_EXIT			0
+# define LOOP_ID_MENU		100
+# define LOOP_ID_WAITOPP	101
+# define LOOP_ID_STARTGAME	102
+# define LOOP_ID_GAME		200
 
+void	loop_menu(t_game *ga);
 void	loop_waitopp(t_game *ga);
 void	loop_startgame(t_game *ga);
 void	loop_game(t_game *ga);
-void	loop_wantquit(t_game *ga);
 /* LOOP UTILS */
+int		loop_manager(t_game *ga);
 void	goto_loop(t_game *ga, int src_id, int dest_id);
 
 /* LOOP GAME ONLY */

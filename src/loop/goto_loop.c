@@ -6,57 +6,11 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:45:12 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/27 21:48:31 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:49:58 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-
-// return the current active loop id or -1
-// int	get_active_loop_id(t_game *ga)
-// {
-// 	if (ga->lp_waitopp.active)
-// 		return (LOOP_ID_WAITOPP);
-
-// 	if (ga->lp_startgame.active)
-// 		return (LOOP_ID_STARTGAME);
-
-// 	if (ga->lp_game.active)
-// 		return (LOOP_ID_GAME);
-
-// 	if (ga->lp_wantquit.active)
-// 		return (LOOP_ID_WANTQUIT);
-	
-// 	return (-1);
-// }
-
-// // return the current active loop ptr or NULL
-// t_loop	*get_active_loop_ptr(t_game *ga)
-// {
-// 	if (ga->lp_waitopp.active)
-// 		return (&ga->lp_game);
-
-// 	if (ga->lp_startgame.active)
-// 		return (&ga->lp_startgame);
-
-// 	if (ga->lp_game.active)
-// 		return (&ga->lp_game);
-
-// 	if (ga->lp_wantquit.active)
-// 		return (&ga->lp_wantquit);
-	
-// 	return (NULL);
-// }
-
-static void	_setzero_loop(t_game *ga)
-{
-	ga->lp_menu.active = 0;
-
-	ga->lp_waitopp.active = 0;
-	ga->lp_startgame.active = 0;
-	ga->lp_game.active = 0;
-	ga->lp_wantquit.active = 0;
-}
 
 static void	_active_loop(t_loop *loop, int src_id, int dest_id)
 {
@@ -72,16 +26,24 @@ static void	_active_loop(t_loop *loop, int src_id, int dest_id)
 	loop->usleep_duration = 0;
 }
 
-// change loop
+static void	_setzero_loop(t_game *ga)
+{
+	ga->lp_menu.active = 0;
+	ga->lp_waitopp.active = 0;
+	ga->lp_startgame.active = 0;
+	ga->lp_game.active = 0;
+}
+
 void	goto_loop(t_game *ga, int src_id, int dest_id)
 {
 	_setzero_loop(ga);
 
+	if (src_id > 0 && dest_id > 0)
+		mx_clear_win(&ga->win);
+
 	if (dest_id == LOOP_ID_MENU)
 		return (_active_loop(&ga->lp_menu, src_id, dest_id));
 
-
-//TODO CLEAN NEW_LOOP FROM MENU
 	if (dest_id == LOOP_ID_WAITOPP)
 		return (_active_loop(&ga->lp_waitopp, src_id, dest_id));
 
@@ -91,8 +53,23 @@ void	goto_loop(t_game *ga, int src_id, int dest_id)
 	if (dest_id == LOOP_ID_GAME)
 		return (_active_loop(&ga->lp_game, src_id, dest_id));
 
-	// if (dest_id == LOOP_ID_WANTQUIT)
-		// return (_active_loop(&ga->lp_wantquit, src_id, dest_id));
-
+	if (dest_id == LOOP_EXIT)
+	{
+		mlx_loop_end(ga->mlx_ptr);
+		return ;
+	}
 	abort(); // TODO fatal error loop bad id
+}
+
+int	loop_manager(t_game *ga)
+{
+	if (ga->lp_menu.active)
+		loop_menu(ga);
+	if (ga->lp_waitopp.active)
+		loop_waitopp(ga);
+	if (ga->lp_startgame.active)
+		loop_startgame(ga);
+	if (ga->lp_game.active)
+		loop_game(ga);
+	return (0);
 }

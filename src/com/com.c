@@ -79,6 +79,21 @@ void	create_client(t_game *ga)
 	receive_opponent(ga);
 }
 
+void	sc_check_multiplayer(t_game *ga)
+{
+	LOG
+	log_com(ga);
+	assert(ga->profil_you.name);
+	assert(ga->profil_you.file);
+	assert(ga->profil_you.path);
+	assert_comfile(ga->profil_you.path);
+	assert(ga->server != ga->client);
+	if (ga->server)
+		assert(ga->profil_opp.name == NULL && ga->profil_opp.file == NULL);
+	if (ga->client)
+		assert(ga->profil_opp.name && ga->profil_opp.file);
+}
+
 int	com_send(char *path, char *msg)
 {
 	int	fd;

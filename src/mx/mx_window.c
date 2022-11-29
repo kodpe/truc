@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:13:34 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/25 22:39:02 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:32:23 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ int	mx_create_win(t_win *win, char *name)
 		return (1);
 	win->box = mx_aabb(mx_pt(0, 0), mx_vec(win->width, win->height));
 	mx_log_win(MX_NAME, win);
+	// use fullscreen for reset all window
+	win->fullscreen = mx_init_img(win->mlx_ptr, win, mx_pt(0, 0), \
+								mx_vec(win->width, win->height));
+	if (mx_create_img(&win->fullscreen, "window.fullscreen"))
+		return (1);
+	mx_fill_img(&win->fullscreen, BLACK); // default color
 	return (0);
 }
 
@@ -56,9 +62,15 @@ void	mx_destroy_win(t_win *win)
 	mx_log_win(MX_NAME, win);
 	if (win == NULL)
 		return ;
+	mx_destroy_img(&win->fullscreen);
 	if (win->ptr)
 		mlx_destroy_window(win->mlx_ptr, win->ptr);
 	if (win->name)
 		free(win->name);
 	ft_memset(win, 0, sizeof(t_win));
+}
+
+void	mx_clear_win(t_win *win)
+{
+	mx_draw_img(&win->fullscreen);
 }

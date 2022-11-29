@@ -26,7 +26,7 @@
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
 					c_reset();
 
-# define MX_VERBOSE	0
+# define MX_VERBOSE	1
 
 typedef unsigned int	t_uint;
 
@@ -67,17 +67,7 @@ typedef struct s_aabb
 	t_2Dvec	lenght;
 }	t_aabb;
 
-typedef struct s_win
-{
-	void	*ptr;
-	int		height;
-	int		width;
-	int		x;
-	int		y;
-	char	*name;
-	t_aabb	box;
-	void	*mlx_ptr;
-}	t_win;
+typedef struct s_win	t_win;
 
 typedef struct s_img
 {
@@ -95,6 +85,20 @@ typedef struct s_img
 	void	*mlx_ptr;
 	t_win	*win;
 }	t_img;
+
+typedef struct s_win
+{
+	void	*ptr;
+	int		height;
+	int		width;
+	int		x;
+	int		y;
+	char	*name;
+	t_aabb	box;
+	void	*mlx_ptr;
+	t_img	fullscreen;
+}	t_win;
+
 
 typedef struct s_but
 {
@@ -124,6 +128,7 @@ void	mx_destroy_mlx(void *mlx_ptr);
 t_win	mx_init_win(void *mlx_ptr, int width, int height, int x, int y);
 int		mx_create_win(t_win *win, char *name);
 void	mx_destroy_win(t_win *win);
+void	mx_clear_win(t_win *win);
 
 /* IMAGE */
 t_img	mx_init_img(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size);

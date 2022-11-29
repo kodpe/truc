@@ -69,7 +69,6 @@ static void	_destroy(t_game *ga)
 	free(ga->profil_opp.name);
 	free(ga->profil_opp.path);
 	mx_destroy_img(&ga->waitbox.img);
-	mlx_loop_end(ga->mlx_ptr);
 }
 
 static void	_init(t_game *ga)
@@ -102,23 +101,30 @@ void	loop_waitopp(t_game *ga)
 {
 	if (0 == mx_time_loop(&ga->lp_waitopp, 50, 0))
 		_init(ga);
+	//* DISPLAY FUNCTION(S)
 	_display(ga, &ga->waitbox.img);
 
+	//* HERE LOOP INCREMENT VALUE(S)
 	ga->waitbox.i += 10;
 	if (ga->waitbox.i == 30)
 		ga->waitbox.i = 0;
 
+	//* STOP CONDITION(S) : GOTO LOOP OR MLX_LOOP_END (= EXIT )
 	if (ga->evstat.win_cross)
-		return (_destroy(ga));
+	{
+		_destroy(ga);
+		goto_loop(ga, LOOP_ID_WAITOPP, LOOP_EXIT);
+	}
 	if (dir_size(PATH_COMDIR) == 2 && ga->profil_opp.path == NULL)
 	{
-			receive_opponent(ga);
-			if (assert_comfile(ga->profil_opp.path))
-				return (_destroy(ga));
-			if (assert_comfile(ga->profil_you.path))
-				return (_destroy(ga));
-			// passage a startgame avec new img init
-			mx_destroy_img(&ga->waitbox.img); 
+		_destroy(ga);
+		receive_opponent(ga);
+		if (assert_comfile(ga->profil_opp.path) \
+			|| assert_comfile(ga->profil_you.path))
+		{
+			goto_loop(ga, LOOP_ID_WAITOPP, LOOP_EXIT);
+			return ;
+		}
 			goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_STARTGAME);
 	}
 }
