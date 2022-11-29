@@ -65,9 +65,9 @@ static void	_destroy(t_game *ga)
 	free(ga->profil_you.file);
 	free(ga->profil_you.name);
 	free(ga->profil_you.path);
-	free(ga->profil_opp.file);
-	free(ga->profil_opp.name);
-	free(ga->profil_opp.path);
+	// free(ga->profil_opp.file);
+	// free(ga->profil_opp.name);
+	// free(ga->profil_opp.path);
 	mx_destroy_img(&ga->waitbox.img);
 }
 
@@ -117,14 +117,15 @@ void	loop_waitopp(t_game *ga)
 	}
 	if (dir_size(PATH_COMDIR) == 2 && ga->profil_opp.path == NULL)
 	{
-		_destroy(ga);
 		receive_opponent(ga);
 		if (assert_comfile(ga->profil_opp.path) \
 			|| assert_comfile(ga->profil_you.path))
 		{
+			_destroy(ga);
 			goto_loop(ga, LOOP_ID_WAITOPP, LOOP_EXIT);
 			return ;
 		}
-			goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_STARTGAME);
+		mx_destroy_img(&ga->waitbox.img); // reset img
+		goto_loop(ga, LOOP_ID_WAITOPP, LOOP_ID_STARTGAME);
 	}
 }

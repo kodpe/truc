@@ -48,10 +48,11 @@ void	receive_opponent(t_game *ga)
 {
 	if (dir_size(PATH_COMDIR) != 2)
 	{
-		free(ga->profil_you.file);
-		free(ga->profil_you.name);
 		LOG
 		dprintf(2, "\033[1;31mEXIT PATH_COMDIR != 2\033[0m\n");
+		getchar(); //!
+		free(ga->profil_you.file);
+		free(ga->profil_you.name);
 		exit(2);
 	}
 	ga->profil_opp.file = get_opponent_file(ga->profil_you.file);
