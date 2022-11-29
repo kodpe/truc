@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:26:53 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 12:17:13 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:18:07by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,26 @@ typedef struct s_txt_input
 	int		len;
 }	t_txt_input;
 
+typedef struct s_userdata
+{
+	char	*name;
+	char	*personal_user_photo;
+	int		lvl;
+	int		xp;
+	int		nb_win;
+	int		nb_loose;
+	int		winrate;
+	int		pieces_catch[4];	 	//! F N W D
+	int		pieces_loose[4];		//!"
+	int		pieces_moves[4];		//!"
+	int		sp_tiles_use[4];		// ! L U C M
+	int		witch_formes[8];		// ! F L N U W C D M
+	int		total_game_time;
+	int		average_game_time;
+	int		average_turn_time;
+	int		last_gane_date;
+}	t_userdata;
+
 typedef struct s_game
 {
 	bool	server;
@@ -176,6 +196,7 @@ typedef struct s_game
 
 	//? ** LOOP PROFIL ** //
 	t_loop			lp_profil;
+	t_userdata		ud;
 
 	//? ** LOOP GAME ** //
 	t_loop			lp_game;

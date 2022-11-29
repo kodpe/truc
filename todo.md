@@ -92,19 +92,19 @@ Shiro . Chateau     | C | ``NO``  | Le joueur qui s'empare du chateau de son adv
 
 #### Profil Room
 
-- [ ] name
-- [ ] photo
-- [ ] lvl
-- [ ] xp
-- [ ] nb wins
-- [ ] nb looses
-- [ ] winrate %
+- [x] name
+- [x] photo
+- [x] lvl
+- [x] xp
+- [x] nb wins
+- [x] nb looses
+- [x] winrate %
 - [ ] star graph (4) / pieces prises / pieces perdues / pieces moves / spec. tiles use
 - [ ] star graph (8) / yama uba changes
-- [ ] total game time
-- [ ] average game time
-- [ ] average turn time
-- [ ] last game date
+- [x] total game time
+- [x] average game time
+- [x] average turn time
+- [x] last game date
 
 ##### parsing data file
 ```
