@@ -29,6 +29,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
+# define PATH_USERDATA	"/sgoinfre/goinfre/Perso/sloquett/udat/"
 # define PATH_COMDIR	"/sgoinfre/goinfre/Perso/sloquett/dcom/"
 # define PATH_PHOTO		"/sgoinfre/photos_students/"
 # define PATH_MAGICK	"/sgoinfre/goinfre/Perso/sloquett/tools/magick"
@@ -168,7 +169,7 @@ typedef struct s_userdata
 	int		total_game_time;
 	int		average_game_time;
 	int		average_turn_time;
-	int		last_gane_date;
+	int		date[5];				// y m d h m
 }	t_userdata;
 
 typedef struct s_game
