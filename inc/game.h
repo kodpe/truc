@@ -172,6 +172,11 @@ typedef struct s_userdata
 	int		date[5];				// y m d h m
 }	t_userdata;
 
+void		show_user_data(t_userdata *ud, char **sp);
+t_userdata	get_userdata(char *name);
+void		save_userdata(t_userdata *ud, char *name);
+
+
 typedef struct s_game
 {
 	bool	server;
