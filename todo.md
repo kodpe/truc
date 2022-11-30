@@ -4,8 +4,8 @@
 ### MVP
 - [x] Multiplayer lobby
 - [x] mx_reset_image()
-- [ ] mouse react over pieces
-- [ ] Multiplayer game
+- [x] mouse react over pieces
+- [x] Multiplayer game
 - [x] Bloquer les signaux C-c C-\
 - [x] Ajouter photo de profil
 - [ ] game checkboard
@@ -23,6 +23,8 @@
 - [x] Fix CAPSLOCK
 - [x] Border size AABB
 - [x] Button
+- [ ] textures en miniatures pour le profil
+- [ ] textures pour les boutons
 
 ---
 ### ADD-ONS
@@ -35,12 +37,12 @@
 - [ ] Bounder Border Box
 - [ ] save settings ?
 - [ ] PLAY (pP) / MULTIPLAYER (mM) / SOLO (sS)
-- [ ] PROFIL (pP)
+- [x] PROFIL (pP)
 - [ ] LEADERBOARD / RANKING (lL)
 - [ ] OPTIONS (oO)
 - [ ] HELP (hH)
 - [ ] ABOUT (aA) / CREDITS / AUTHOR / GITHUB / SOURCE CODE
-- [ ] QUIT (qQ) / EXIT
+- [x] QUIT (qQ) / EXIT
 
 ---
 ### RULES
