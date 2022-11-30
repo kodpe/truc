@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 11:30:21 by zsheep            #+#    #+#             */
-/*   Updated: 2022/11/29 14:53:47 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/30 02:35:24 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int		ft_tab_uniq_count(const int *tab, const int size);
  *		ft_tabdup.c
  */
 int		*ft_tabdup(const int *tab, const int size);
+float	*ft_tabfdup(const float *tab, const int size);
+float	*ft_tabdup_itof(const int *tab, const int size);
 int		*ft_tabdup_range(const int *tab, const int start, const int end);
 
 /**

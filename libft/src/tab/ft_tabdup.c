@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 07:25:45 by sloquet           #+#    #+#             */
-/*   Updated: 2022/02/03 07:15:39 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/30 02:35:18 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,44 @@ int	*ft_tabdup(const int *tab, const int size)
 	if (size <= 0)
 		return (NULL);
 	dup = (int *)malloc(sizeof(int) * size);
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		dup[i] = tab[i];
+		i++;
+	}
+	return (dup);
+}
+
+float	*ft_tabfdup(const float *tab, const int size)
+{
+	float	*dup;
+	int	i;
+
+	if (size <= 0)
+		return (NULL);
+	dup = (float *)malloc(sizeof(float) * size);
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		dup[i] = tab[i];
+		i++;
+	}
+	return (dup);
+}
+
+float	*ft_tabdup_itof(const int *tab, const int size)
+{
+	float	*dup;
+	int	i;
+
+	if (size <= 0)
+		return (NULL);
+	dup = (float *)malloc(sizeof(float) * size);
 	if (!dup)
 		return (NULL);
 	i = 0;

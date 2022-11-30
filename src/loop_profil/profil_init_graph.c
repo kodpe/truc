@@ -12,40 +12,22 @@
 
 #include "game.h"
 
-//? C EST JUSTE UNE COPY DE TAB MDR
-float	*_get_values(t_game *ga, int tab_size, int index_data_graph)
+float	*_get_values(t_game *ga, int index_data_graph)
 {
-	t_userdata	*ud = &ga->ud;
-	float 		*tab = ft_newtabf(tab_size);
-	if (!tab)
-		abort();
-
+	t_userdata	*ud;
+	
+	ud = &ga->ud;
 	if (index_data_graph == 7)
-	{
-		for (int i = 0; i < 4; i++)
-			tab[i] = ud->pieces_catch[i];
-	}
+		return (ft_tabdup_itof(ud->pieces_catch, 4));
 	if (index_data_graph == 11)
-	{
-		for (int i = 0; i < 4; i++)
-			tab[i] = ud->pieces_loose[i];
-	}
+		return (ft_tabdup_itof(ud->pieces_loose, 4));
 	if (index_data_graph == 15)
-	{
-		for (int i = 0; i < 4; i++)
-			tab[i] = ud->pieces_moves[i];
-	}
+		return (ft_tabdup_itof(ud->pieces_moves, 4));
 	if (index_data_graph == 19)
-	{
-		for (int i = 0; i < 4; i++)
-			tab[i] = ud->sp_tiles_use[i];
-	}
+		return (ft_tabdup_itof(ud->sp_tiles_use, 4));
 	if (index_data_graph == 23)
-	{
-		for (int i = 0; i < 8; i++)
-			tab[i] = ud->witch_formes[i];
-	}
-	return (tab);
+		return (ft_tabdup_itof(ud->witch_formes, 8));
+	return (NULL);
 }
 
 void	profil_init_graph(t_game *ga, int index_data_graph)
@@ -73,7 +55,7 @@ void	profil_init_graph(t_game *ga, int index_data_graph)
 	bgline = mx_line_xy(0, size.y / 2, size.x, size.y / 2);
 	mx_draw_line(&img, bgline, DARK_GRAY);
 
-	float *tab = _get_values(ga, tab_size, index_data_graph);
+	float *tab = _get_values(ga, index_data_graph);
 	// ft_tabfshow(tab, tab_size, "input values");
 
 	float	max_value = tab[ft_tabf_max(tab, tab_size)];
