@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:22:17 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 12:22:49 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/11/29 21:31:02 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	mx_putstr_img(t_img *img, t_2Dpt origin, char *str, t_uint hexcolor)
 {
 	if (!str)
 		return ;
+	int	font_height = 10; // font witdh = 6 (default mlx font 6 x 10)
 	mlx_string_put(img->mlx_ptr, img->win->ptr, \
-					origin.x, origin.y, \
+					origin.x, origin.y + font_height, \
 					hexcolor, str);
 }
 

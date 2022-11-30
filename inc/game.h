@@ -168,13 +168,15 @@ typedef struct s_userdata
 	int		witch_formes[8];		// ! F L N U W C D M
 	int		total_game_time;
 	int		average_game_time;
-	int		average_turn_time;
-	int		date[5];				// y m d h m
+	int		date[5];				// h:m D/M/Y
+	char	*str_date;
 }	t_userdata;
 
-void		show_user_data(t_userdata *ud, char **sp);
-t_userdata	get_userdata(char *name);
+void		destroy_userdata(t_userdata *ud);
+t_userdata	get_userdata(void);
 void		save_userdata(t_userdata *ud, char *name);
+void		show_userdata(t_userdata *ud, char **sp);
+void		update_userdata(t_userdata *ud, int win, int game_time_sec);
 
 
 typedef struct s_game
@@ -203,6 +205,11 @@ typedef struct s_game
 	//? ** LOOP PROFIL ** //
 	t_loop			lp_profil;
 	t_userdata		ud;
+	t_but			pbt_pc_catch;
+	t_but			pbt_pc_loose;
+	t_but			pbt_pc_moves;
+	t_but			pbt_sp_tiles;
+	t_but			pbt_wi_forme;
 
 	//? ** LOOP GAME ** //
 	t_loop			lp_game;
@@ -267,12 +274,23 @@ char	**dir_namelist(char *dirpath);
 # define LOOP_ID_PROFIL		103
 # define LOOP_ID_GAME		200
 
+//? ** LOOP MEMU ** //
 void	loop_menu(t_game *ga);
-void	loop_profil(t_game *ga);
 
+//? ** LOOP PROFIL ** //
+void	loop_profil(t_game *ga);
+void	profil_init_graph(t_game *ga, int index_data_graph);
+void	profil_init_graph_but(t_game *ga);
+void	profil_init_txt_part(t_game *ga);
+void	profil_graph_actions(t_game *ga);
+
+//? ** LOOP WAITOPP ** //
 void	loop_waitopp(t_game *ga);
+
+//? ** LOOP STARTGAME ** //
 void	loop_startgame(t_game *ga);
 
+//? ** LOOP GAME ** //
 void	loop_game(t_game *ga);
 
 /* LOOP UTILS */
