@@ -55,6 +55,23 @@ void	profil_init_graph(t_game *ga, int index_data_graph)
 	bgline = mx_line_xy(0, size.y / 2, size.x, size.y / 2);
 	mx_draw_line(&img, bgline, DARK_GRAY);
 
+	if (tab_size == 8)
+	{
+		t_line l0 = mx_line_wh(size.x / 2, size.y / 2,
+							   -size.x / 2 / 1.41, -size.y / 2 / 1.41);
+		mx_draw_line(&img, l0, DARK_GRAY);
+		t_line l1 = mx_line_wh(size.x / 2, size.y / 2,
+							   +size.x / 2 / 1.41, -size.y / 2 / 1.41);
+		mx_draw_line(&img, l1, DARK_GRAY);
+		t_line l2 = mx_line_wh(size.x / 2, size.y / 2,
+							   +size.x / 2 / 1.41, +size.y / 2 / 1.41);
+		mx_draw_line(&img, l2, DARK_GRAY);
+		t_line l3 = mx_line_wh(size.x / 2, size.y / 2,
+							   -size.x / 2 / 1.41, +size.y / 2 / 1.41);
+		mx_draw_line(&img, l3, DARK_GRAY);
+	}
+
+
 	float *tab = _get_values(ga, index_data_graph);
 	// ft_tabfshow(tab, tab_size, "input values");
 
