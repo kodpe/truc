@@ -134,6 +134,7 @@ void	mx_clear_win(t_win *win);
 t_img	mx_init_img(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size);
 int		mx_create_img(t_img *img, char *name);
 int		mx_create_xpm_img(t_img *img, char *file);
+int		mx_create_arxpm_img(t_img *img, char **data, char *name);
 void	mx_destroy_img(t_img *img);
 void	mx_move_abs_xy_img(t_img *img, int x, int y);
 void	mx_move_abs_pt_img(t_img *img, t_2Dpt new_origin);

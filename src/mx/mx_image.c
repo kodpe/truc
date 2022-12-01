@@ -78,6 +78,28 @@ int	mx_create_xpm_img(t_img *img, char *file)
 }
 
 #undef MX_NAME
+#define MX_NAME "mx_create_arxpm_img()"
+
+int	mx_create_arxpm_img(t_img *img, char **data, char *name)
+{
+	img->name = ft_strdup(name);
+	if (!img->name)
+		return (1);
+	img->ptr = mlx_xpm_to_image(img->mlx_ptr, data, &img->width, &img->height);
+	if (!img->ptr)
+		return (1);
+	img->addr = mlx_get_data_addr(img->ptr, \
+		&img->bits_per_pixel, &img->size_line, &img->endian);
+	if (!img->addr)
+		return (1);
+	img->box_abs = mx_aabb(mx_pt(img->origin.x, img->origin.y), \
+		mx_vec(img->width, img->height)); // ? - 1
+	img->box_rel = mx_aabb(mx_pt(0, 0), mx_vec(img->width - 1, img->height - 1));
+	mx_log_img(MX_NAME, img);
+	return (0);
+}
+
+#undef MX_NAME
 #define MX_NAME "mx_destroy_img()"
 
 void	mx_destroy_img(t_img *img)

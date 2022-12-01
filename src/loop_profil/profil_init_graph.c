@@ -12,6 +12,38 @@
 
 #include "game.h"
 
+void	_create_graph_icons(t_game *ga, int graph_size, int mode_idg)
+{
+	t_img	img;
+
+	t_2Dpt	origin;
+	t_2Dvec	size;
+
+	int	img_icons_canvas = graph_size + 100;
+	size = mx_vec(img_icons_canvas, img_icons_canvas);
+	origin = mx_pt(ga->win.width / 2 - size.x / 2, \
+					ga->win.height / 2 - size.y / 2);
+	img = mx_init_img(ga->mlx_ptr, &ga->win, origin, size);
+	if (mx_create_img(&img, "icons canvas"))
+		abort();
+	mx_draw_box_img(&img, DARK_GRAY);
+
+	char **data =  ft_fil
+	t_img	icon = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	if (mx_create_arxpm_img(&icon, data, "icon"))
+		abort();
+
+	// if (mode_idg == 7 || mode_idg == 11 || mode_idg == 15)
+
+	// if (mode_idg == 19)
+
+	// if (mode_idg == 23)
+	(void)mode_idg;
+
+	mx_draw_img(&img);
+	mx_destroy_img(&img);
+}
+
 float	*_get_values(t_game *ga, int index_data_graph)
 {
 	t_userdata	*ud;
@@ -41,6 +73,8 @@ void	profil_init_graph(t_game *ga, int index_data_graph)
 		tab_size = 8;
 
 	int	graph_size = 200;
+	_create_graph_icons(ga, graph_size, index_data_graph); // TODO
+
 	size = mx_vec(graph_size, graph_size);
 	origin = mx_pt(ga->win.width / 2 - size.x / 2, \
 					ga->win.height / 2 - size.y / 2);
@@ -58,19 +92,18 @@ void	profil_init_graph(t_game *ga, int index_data_graph)
 	if (tab_size == 8)
 	{
 		t_line l0 = mx_line_wh(size.x / 2, size.y / 2,
-							   -size.x / 2 / 1.41, -size.y / 2 / 1.41);
+				-size.x / 2 / 1.41, -size.y / 2 / 1.41);
 		mx_draw_line(&img, l0, DARK_GRAY);
 		t_line l1 = mx_line_wh(size.x / 2, size.y / 2,
-							   +size.x / 2 / 1.41, -size.y / 2 / 1.41);
+				+size.x / 2 / 1.41, -size.y / 2 / 1.41);
 		mx_draw_line(&img, l1, DARK_GRAY);
 		t_line l2 = mx_line_wh(size.x / 2, size.y / 2,
-							   +size.x / 2 / 1.41, +size.y / 2 / 1.41);
+				+size.x / 2 / 1.41, +size.y / 2 / 1.41);
 		mx_draw_line(&img, l2, DARK_GRAY);
 		t_line l3 = mx_line_wh(size.x / 2, size.y / 2,
-							   -size.x / 2 / 1.41, +size.y / 2 / 1.41);
+				-size.x / 2 / 1.41, +size.y / 2 / 1.41);
 		mx_draw_line(&img, l3, DARK_GRAY);
 	}
-
 
 	float *tab = _get_values(ga, index_data_graph);
 	// ft_tabfshow(tab, tab_size, "input values");
