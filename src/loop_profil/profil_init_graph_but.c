@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 20:40:44 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 21:11:34 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:26:27 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	profil_init_graph_but(t_game *ga)
 	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_button(bt, "PIECES CATCH"))
 		abort();
-	mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
+	// mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
 	mx_draw_lt_border_aabb(&bt->img_over, bt->box_rel, 2, SILVER);
 	mx_draw_pn_border_aabb(&bt->img_active, bt->box_rel, 5, SILVER);
 	mx_draw_img(&bt->img_away);
@@ -41,7 +41,7 @@ void	profil_init_graph_but(t_game *ga)
 	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_button(bt, "PIECES LOOSE"))
 		abort();
-	mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
+	// mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
 	mx_draw_lt_border_aabb(&bt->img_over, bt->box_rel, 2, SILVER);
 	mx_draw_pn_border_aabb(&bt->img_active, bt->box_rel, 5, SILVER);
 	mx_draw_img(&bt->img_away);
@@ -52,7 +52,7 @@ void	profil_init_graph_but(t_game *ga)
 	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_button(bt, "PIECES MOVES"))
 		abort();
-	mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
+	// mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
 	mx_draw_lt_border_aabb(&bt->img_over, bt->box_rel, 2, SILVER);
 	mx_draw_pn_border_aabb(&bt->img_active, bt->box_rel, 5, SILVER);
 	mx_draw_img(&bt->img_away);
@@ -63,7 +63,7 @@ void	profil_init_graph_but(t_game *ga)
 	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_button(bt, "SPECIAL TILES USE"))
 		abort();
-	mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
+	// mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
 	mx_draw_lt_border_aabb(&bt->img_over, bt->box_rel, 2, SILVER);
 	mx_draw_pn_border_aabb(&bt->img_active, bt->box_rel, 5, SILVER);
 	mx_draw_img(&bt->img_away);
@@ -74,7 +74,7 @@ void	profil_init_graph_but(t_game *ga)
 	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_button(bt, "WITCH TRANSFORMATIONS"))
 		abort();
-	mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
+	// mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, DARK_GRAY);
 	mx_draw_lt_border_aabb(&bt->img_over, bt->box_rel, 2, SILVER);
 	mx_draw_pn_border_aabb(&bt->img_active, bt->box_rel, 5, SILVER);
 	mx_draw_img(&bt->img_away);

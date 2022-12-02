@@ -23,7 +23,7 @@
 - [x] Fix CAPSLOCK
 - [x] Border size AABB
 - [x] Button
-- [ ] textures en miniatures pour le profil
+- [x] textures en miniatures pour le profil
 - [ ] textures pour les boutons
 
 ---
@@ -101,8 +101,8 @@ Shiro . Chateau     | C | ``NO``  | Le joueur qui s'empare du chateau de son adv
 - [x] nb wins
 - [x] nb looses
 - [x] winrate %
-- [ ] star graph (4) / pieces prises / pieces perdues / pieces moves / spec. tiles use
-- [ ] star graph (8) / yama uba changes
+- [x] star graph (4) / pieces prises / pieces perdues / pieces moves / spec. tiles use
+- [x] star graph (8) / yama uba changes
 - [x] total game time
 - [x] average game time
 - [x] average turn time

@@ -115,7 +115,7 @@ void	_create_graph_icons(t_game *ga, int graph_size, int mode_idg)
 	img = mx_init_img(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_img(&img, "icons canvas"))
 		abort();
-	mx_draw_box_img(&img, DARK_GRAY);
+	// mx_draw_box_img(&img, DARK_GRAY);
 
 	mx_draw_img(&img);
 	mx_destroy_img(&img);

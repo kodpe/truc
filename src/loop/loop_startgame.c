@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:01:45 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 12:27:20 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:44:56 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ static void	_display(t_game *ga, t_img *img)
 			mx_pt(img->width / 2 - 15 + ga->waitbox.i, \
 				img->height / 2 + 12), 2, SILVER);
 	mx_draw_img(img);
-	mx_putstr_cen_img(img, STR_START, SILVER, -12);
-	mx_putnbr_img(img, \
-				mx_pt(img->origin.x + img->width / 2 + 50, \
-				img->origin.y + img->height / 2 - 7), \
-				ga->waitbox.starting_delay / 5, SILVER);
+
+	char *tmp = ft_itoa(ga->waitbox.starting_delay / 5);
+	char *str = ft_strjointri(STR_START, tmp, " s");
+	free(tmp);
+	mx_putstr_cen_img(img, str, SILVER, -12);
+	free(str);
 }
 
 void	loop_startgame(t_game *ga)

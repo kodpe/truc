@@ -34,7 +34,7 @@
 # define PATH_PHOTO		"/sgoinfre/photos_students/"
 # define PATH_MAGICK	"/sgoinfre/goinfre/Perso/sloquett/tools/magick"
 
-# define STR_START		"Game will start in  s"
+# define STR_START		"Game will start in "
 # define STR_WAIT		"Waiting for an opponent"
 # define STR_WANTQUIT	"Are you sure you want to quit?"
 # define STR_WANTLOSE	"You will lose this game"

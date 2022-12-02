@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 03:00:35 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/29 12:40:37 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:35:41 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	_init_bt_play(t_game *ga, t_but *bt)
 	t_2Dpt	origin;
 	t_2Dvec	size;
 
-	size = mx_vec(200, 100);
+	size = mx_vec(150, 50);
 	origin = mx_pt(ga->win.width / 2 - size.x / 2, \
 					ga->win.height / 2 - size.y / 2);
 	origin = mx_pt_add_vec(origin, mx_vec(0, -100));
@@ -46,10 +46,10 @@ static void	_init_bt_profil(t_game *ga, t_but *bt)
 	t_2Dpt	origin;
 	t_2Dvec	size;
 
-	size = mx_vec(200, 100);
+	size = mx_vec(150, 50);
 	origin = mx_pt(ga->win.width / 2 - size.x / 2, \
 					ga->win.height / 2 - size.y / 2);
-	origin = mx_pt_add_vec(origin, mx_vec(0, 100));
+	origin = mx_pt_add_vec(origin, mx_vec(0, 0));
 
 	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_button(bt, "PROFIL"))
@@ -67,10 +67,10 @@ static void	_init_bt_quit(t_game *ga, t_but *bt)
 	t_2Dpt	origin;
 	t_2Dvec	size;
 
-	size = mx_vec(200, 100);
+	size = mx_vec(150, 50);
 	origin = mx_pt(ga->win.width / 2 - size.x / 2, \
 					ga->win.height / 2 - size.y / 2);
-	origin = mx_pt_add_vec(origin, mx_vec(0, 300));
+	origin = mx_pt_add_vec(origin, mx_vec(0, 100));
 
 	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
 	if (mx_create_button(bt, "QUIT"))
