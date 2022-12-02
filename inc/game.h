@@ -51,6 +51,11 @@
 #define XPM_PATH_30W_LOTUS		"assets/30w_xpm/30w_lotus.xpm"
 #define XPM_PATH_30W_MOUNTAIN	"assets/30w_xpm/30w_mountain.xpm"
 #define XPM_PATH_30W_CASTLE		"assets/30w_xpm/30w_castle.xpm"
+#define XPM_PATH_30W_SAMURAI	"assets/30w_xpm/30w_samurai.xpm"
+#define XPM_PATH_30W_NINJA		"assets/30w_xpm/30w_ninja.xpm"
+#define XPM_PATH_30W_DRAGON		"assets/30w_xpm/30w_dragon.xpm"
+#define XPM_PATH_30W_WITCH		"assets/30w_xpm/30w_witch.xpm"
+
 #define XPM_PATH_80W_LANTERN	"assets/80w_xpm/80w_lantern.xpm"
 #define XPM_PATH_80W_LOTUS		"assets/80w_xpm/80w_lotus.xpm"
 #define XPM_PATH_80W_MOUNTAIN	"assets/80w_xpm/80w_mountain.xpm"

@@ -12,6 +12,95 @@
 
 #include "game.h"
 
+static void _graph_icons_pieces(t_game *ga, t_2Dpt origin, t_2Dvec size)
+{
+	t_img	icon1 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon2 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon3 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon4 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+
+	if (mx_create_xpm_img(&icon1, XPM_PATH_30W_SAMURAI))
+		abort();
+	if (mx_create_xpm_img(&icon2, XPM_PATH_30W_NINJA))
+		abort();
+	if (mx_create_xpm_img(&icon3, XPM_PATH_30W_WITCH))
+		abort();
+	if (mx_create_xpm_img(&icon4, XPM_PATH_30W_DRAGON))
+		abort();
+	icon1.origin = mx_pt(origin.x + size.x / 2 - icon1.width / 2 + 1, origin.y + 10);
+	icon2.origin = mx_pt(origin.x + size.x - icon1.width - 10, origin.y + size.y / 2 - icon2.height / 2);
+	icon3.origin = mx_pt(origin.x + size.x / 2 - icon3.width / 2 + 1, origin.y + size.y - icon2.height - 10);
+	icon4.origin = mx_pt(origin.x + 10, origin.y + size.y / 2 - icon4.height / 2);
+	mx_draw_img(&icon1);
+	mx_draw_img(&icon2);
+	mx_draw_img(&icon3);
+	mx_draw_img(&icon4);
+	mx_destroy_img(&icon1);
+	mx_destroy_img(&icon2);
+	mx_destroy_img(&icon3);
+	mx_destroy_img(&icon4);
+}
+
+static void _graph_icons_tiles(t_game *ga, t_2Dpt origin, t_2Dvec size)
+{
+	t_img	icon1 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon2 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon3 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon4 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+
+	if (mx_create_xpm_img(&icon1, XPM_PATH_30W_CASTLE))
+		abort();
+	if (mx_create_xpm_img(&icon2, XPM_PATH_30W_LOTUS))
+		abort();
+	if (mx_create_xpm_img(&icon3, XPM_PATH_30W_MOUNTAIN))
+		abort();
+	if (mx_create_xpm_img(&icon4, XPM_PATH_30W_LANTERN))
+		abort();
+	icon1.origin = mx_pt(origin.x + size.x / 2 - icon1.width / 2 + 1, origin.y + 10);
+	icon2.origin = mx_pt(origin.x + size.x - icon1.width - 10, origin.y + size.y / 2 - icon2.height / 2);
+	icon3.origin = mx_pt(origin.x + size.x / 2 - icon3.width / 2 + 1, origin.y + size.y - icon2.height - 10);
+	icon4.origin = mx_pt(origin.x + 10, origin.y + size.y / 2 - icon4.height / 2);
+	mx_draw_img(&icon1);
+	mx_draw_img(&icon2);
+	mx_draw_img(&icon3);
+	mx_draw_img(&icon4);
+	mx_destroy_img(&icon1);
+	mx_destroy_img(&icon2);
+	mx_destroy_img(&icon3);
+	mx_destroy_img(&icon4);
+
+}
+
+static void _graph_icons_tiles_corner(t_game *ga, t_2Dpt origin, t_2Dvec size)
+{
+	t_img	icon1 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon2 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon3 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+	t_img	icon4 = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
+
+	if (mx_create_xpm_img(&icon1, XPM_PATH_30W_CASTLE))
+		abort();
+	if (mx_create_xpm_img(&icon2, XPM_PATH_30W_LOTUS))
+		abort();
+	if (mx_create_xpm_img(&icon3, XPM_PATH_30W_MOUNTAIN))
+		abort();
+	if (mx_create_xpm_img(&icon4, XPM_PATH_30W_LANTERN))
+		abort();
+	icon1.origin = mx_pt(origin.x + 20, origin.y + 20);
+	icon2.origin = mx_pt(origin.x + size.x - icon1.width - 20, origin.y + 20);
+	icon3.origin = mx_pt(origin.x + size.x - icon3.width - 20, origin.y + size.y - icon2.height - 20);
+	icon4.origin = mx_pt(origin.x + 20, origin.y + size.y - icon4.height - 20);
+	mx_draw_img(&icon1);
+	mx_draw_img(&icon2);
+	mx_draw_img(&icon3);
+	mx_draw_img(&icon4);
+	mx_destroy_img(&icon1);
+	mx_destroy_img(&icon2);
+	mx_destroy_img(&icon3);
+	mx_destroy_img(&icon4);
+
+}
+
 void	_create_graph_icons(t_game *ga, int graph_size, int mode_idg)
 {
 	t_img	img;
@@ -28,20 +117,14 @@ void	_create_graph_icons(t_game *ga, int graph_size, int mode_idg)
 		abort();
 	mx_draw_box_img(&img, DARK_GRAY);
 
-	char **data =  ft_fil
-	t_img	icon = mx_init_img(ga->mlx_ptr, &ga->win, origin, mx_vec(1, 1));
-	if (mx_create_arxpm_img(&icon, data, "icon"))
-		abort();
-
-	// if (mode_idg == 7 || mode_idg == 11 || mode_idg == 15)
-
-	// if (mode_idg == 19)
-
-	// if (mode_idg == 23)
-	(void)mode_idg;
-
 	mx_draw_img(&img);
 	mx_destroy_img(&img);
+	if (mode_idg != 19)
+		_graph_icons_pieces(ga, origin, size);
+	if (mode_idg == 19)
+		_graph_icons_tiles(ga, origin, size);
+	if (mode_idg == 23)
+		_graph_icons_tiles_corner(ga, origin, size);
 }
 
 float	*_get_values(t_game *ga, int index_data_graph)
@@ -233,4 +316,5 @@ void	profil_init_graph(t_game *ga, int index_data_graph)
 	free(tab);
 	mx_draw_img(&img);
 	mx_destroy_img(&img);
+
 }

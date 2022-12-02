@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:51 by zsheep            #+#    #+#             */
-/*   Updated: 2022/03/17 17:14:11 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/12/02 14:29:00 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		ft_filelen(const char *filepath);
  * 		return null on error
  */
 char	*ft_filename(const char *filepath);
+
+char	**ft_getfile(char *path);
 
 /**
  *      return the line n of the file,

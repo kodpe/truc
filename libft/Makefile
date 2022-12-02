@@ -59,6 +59,7 @@ SRC		=	$(addsuffix .c,				\
 			$(addprefix file/,			\
 			ft_filelen					\
 			ft_filename					\
+			ft_getfile					\
 			ft_gnln						\
 			ft_is_extension				\
 			)							\
