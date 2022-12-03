@@ -33,8 +33,10 @@ static void	_init(t_game *ga)
 	load_profils(ga);
 
 	create_board(ga);
-	create_piece(ga);
+	create_piece(ga, 1, 1, PIECE_WITCH);
 	create_info(ga);
+
+	// create_ai_opponent(ga);
 }
 
 static void	_display(t_game *ga)

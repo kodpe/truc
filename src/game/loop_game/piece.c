@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 22:38:17 by sloquet           #+#    #+#             */
-/*   Updated: 2022/12/03 00:12:41 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/12/03 00:55:39 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,46 @@ void	update_piece(t_game *ga)
 	}
 }
 
-void	create_piece(t_game *ga)
+void	create_piece(t_game *ga, int board_x, int board_y, t_piece_t type)
 {
 	t_2Dpt	case_id;
 	t_2Dpt	origin;
 	t_2Dvec	size;
 	t_but	*bt;
 
-	ga->pc.type = PIECE_DRAGON;
-	case_id = mx_pt(1, 1);
+	ga->pc.type = type;
+	case_id = mx_pt(board_x, board_y);
+
+	bt = &ga->pc.bt;
+	origin = ga->board[case_id.x][case_id.y].bt.origin;
+	size = mx_vec(160, 160);
+	*bt = mx_init_button(ga->mlx_ptr, &ga->win, origin, size);
+	if (mx_create_button(bt, "piece"))
+		abort();
+	mx_draw_lt_border_aabb(&bt->img_away, bt->box_rel, 1, BLUE);
+	mx_draw_lt_border_aabb(&bt->img_over, bt->box_rel, 2, ORCHID);
+	mx_draw_pn_border_aabb(&bt->img_active, bt->box_rel, 5, YELLOW);
+
+	t_img	*xpm = &ga->xpm[ga->pc.type];
+	t_2Dpt	xpmpos = mx_pt(origin.x + 40, origin.y + 40);
+	xpm->origin = xpmpos;
+
+	mx_draw_img(&bt->img_away);
+	mx_draw_img(xpm);
+
+	//link
+	ga->board[case_id.x][case_id.y].piece = &ga->pc;
+}
+#if 0
+void	create_case(t_game *ga, int board_x, int board_y, t_case_type type)
+{
+	t_2Dpt	case_id;
+	t_2Dpt	origin;
+	t_2Dvec	size;
+	t_but	*bt;
+
+	ga->pc.type = type;
+	case_id = mx_pt(board_x, board_y);
 
 	bt = &ga->pc.bt;
 	origin = ga->board[case_id.x][case_id.y].bt.origin;
@@ -81,3 +112,12 @@ void	create_piece(t_game *ga)
 	ga->board[case_id.x][case_id.y].piece = &ga->pc;
 }
 
+void	create_ai_opponent(t_game *ga)
+{
+	int	randx = rand() % 5;
+	int	randy = rand() % 2;
+
+	create_piece(ga, randx, 0, randy, PIECE_DRAGON);
+
+}
+#endif
