@@ -26,7 +26,7 @@
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
 					c_reset();
 
-# define MX_VERBOSE	0
+# define MX_VERBOSE	1
 
 typedef unsigned int	t_uint;
 
@@ -297,11 +297,9 @@ void	mx_handle_button(t_but *bt, t_evstat *ev);
 // void	mx_draw_button(t_but *bt, t_evstat *ev);
 void	mx_log_button(const char *msg, t_but *bt);
 
-
 /* OBB ORIENTED BOUNDING BOX */
-//todo
+//TODO
 
-// DEPRECATED BELOW // TODO
 typedef struct	s_test
 {
 	void	*mlx_ptr;
