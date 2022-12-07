@@ -26,7 +26,7 @@
 					printf("%s:%d %s()\n", __FILE__,__LINE__, __FUNCTION__);\
 					c_reset();
 
-# define MX_VERBOSE	1
+# define MX_VERBOSE	0
 
 typedef unsigned int	t_uint;
 

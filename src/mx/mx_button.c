@@ -18,7 +18,7 @@ t_but	mx_init_button(void *mlx_ptr, t_win *win, t_2Dpt origin, t_2Dvec size)
 
 	ft_memset(&bt, 0, sizeof(t_but));
 	bt.origin = origin;
-	bt.box_abs = mx_aabb(origin, mx_vec(size.x - 1, size.y - 1));
+	bt.box_abs = mx_aabb(origin, mx_vec(size.x, size.y));
 	bt.box_rel = mx_aabb(mx_pt(0, 0), mx_vec(size.x - 1, size.y - 1));
 	bt.img_away = mx_init_img(mlx_ptr, win, origin, size);
 	bt.img_over = mx_init_img(mlx_ptr, win, origin, size);

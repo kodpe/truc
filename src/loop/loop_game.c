@@ -42,13 +42,13 @@ static void	_init(t_game *ga)
 static void	_display(t_game *ga)
 {
 	update_board(ga);
-	update_piece(ga);
+	update_piece(ga, &ga->pc);
 	update_info(ga);
 }
 
 void	loop_game(t_game *ga)
 {
-	if (0 == mx_time_loop(&ga->lp_game, 30, 0))
+	if (0 == mx_time_loop(&ga->lp_game, 60, 0))
 		_init(ga);
 	//* DISPLAY FUNCTION(S)
 	_display(ga);

@@ -22,6 +22,9 @@ typedef struct s_piece
 {
 	t_piece_t	type;
 	t_but		bt;
+	t_img		*xpm;
+	int			active;
+	int			is_press;
 }	t_piece;
 
 typedef struct s_case
@@ -93,7 +96,7 @@ void	destroy_board(t_game *ga);
 void	update_board(t_game *ga);
 
 void	destroy_piece(t_game *ga);
-void	update_piece(t_game *ga);
+void	update_piece(t_game *ga, t_piece *pc);
 void	create_piece(t_game *ga, int board_x, int board_y, t_piece_t type);
 
 void	put_info(t_game *ga, char *new_msg);

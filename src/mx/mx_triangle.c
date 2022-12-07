@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:00:44 by sloquet           #+#    #+#             */
-/*   Updated: 2022/11/12 18:12:18 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/12/07 20:06:36 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ bool	mx_coll_pt_triangle(t_2Dpt pt, t_tri tr)
 	point_area_3 = mx_tri_area(pt, tr.c, tr.a);
 	if (point_area_1 + point_area_2 + point_area_3 == triangle_area)
 		return (true);
+	// int	sum = point_area_1 + point_area_2 + point_area_3;
+	// if (sum > triangle_area - 30 && sum < triangle_area + 30)
+		// return (true);
 	return (false);
 }
 

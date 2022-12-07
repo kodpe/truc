@@ -6,7 +6,7 @@
 /*   By: sloquet <sloquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 22:20:10 by sloquet           #+#    #+#             */
-/*   Updated: 2022/12/03 00:11:24 by sloquet          ###   ########.fr       */
+/*   Updated: 2022/12/07 20:56:28 by sloquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ static void	_basic_update_case(t_game *ga, t_but *bt, t_case *ca)
 	if (fullb->xev_action_in)
 		printf("INSIDE BOARD");
 
-	if (bt->xev_action_out)
-	{
-		mx_draw_img(&bt->img_away);
-	}
+	// if (bt->xev_action_out)
+	// {
+		// mx_draw_img(&bt->img_away);
+	// }
 
 	if (bt->xev_action_in)
 	{
-		mx_draw_img(&bt->img_over);
+		// mx_draw_img(&bt->img_over);
 		if (ca->piece == NULL)
 			put_info(ga, "Cette case est vide.");
 		else
 		{
 			char	*tmp;
-			tmp = ft_itoabtw("La pièce est de type ", ca->piece->type, " !");
+			tmp = ft_itoabtw("La piece est de type ", ca->piece->type, " !");
 			put_info(ga, tmp);
 			free(tmp);
 		}
